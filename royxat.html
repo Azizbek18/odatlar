@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ro'yxatdan o'tish</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./royxat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="logo-con">
+                <img src="./rasmlar/Streak.uz.svg" alt="">
+            </div>
+            <div class="text-con">
+                <h1 class="title">Yangi hisob yaratish</h1>
+                <p class="text">Bugun o'zgarishni boshlang!</p>
+            </div>
+            <div class="input-con">
+                <p class="input-text">To'liq Ism</p>
+                <div class="input-card">
+                    <i class="fa-regular fa-user user"></i>
+                    <input id="fullName" class="input" type="text" placeholder="Ism Kiriting">
+                </div>
+                <p class="input-text">Email</p>
+                <div class="input-card">
+                    <i class="fa-regular fa-envelope email"></i>
+                    <input id="email" class="input" type="email" placeholder="name@example.com">
+                </div>
+                <p class="input-text">Parol</p>
+                <div class="input-card">
+                    <i class="fa-solid fa-lock lock"></i>
+                    <input id="password" class="input" type="password" placeholder="******">
+                </div>
+            </div>
+            <button id="submitBtn" class="btn">Ro'yxatdan o'tish</button>
+            <p class="pastki-havola">
+                Hisobingiz bormi? <a href="login.html">Kirish</a>
+            </p>
+        </div>
+        <div class="card2">
+            <img class="a" src="./rasmlar/Background ambient blobs.svg" alt="">
+            <img class="b" src="./rasmlar/Background+Blur.svg" alt="">
+            <div class="img-card">
+                <img class="radius" src="./rasmlar/Gradient (1).png" alt="">
+                <img src="./rasmlar/royhat.png" alt="">
+                <div class="btn-con">
+                    <button class="kun-btn">🔥1-kun</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./royxat.js"></script>
+</body>
+
+</html>

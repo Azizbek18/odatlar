@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Streak.uz - Darslar</title>
+<link rel="stylesheet" href="darslar.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Mobile Header -->
+  <div class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Menyuni ochish">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-logo">Streak.uz</div>
+    <div style="width:32px"></div>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <div class="sidebar">
+    <button class="sidebar-close" aria-label="Yopish">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div>
+      <div class="logo">
+        <i class="fa-solid fa-bolt"></i> Streak.uz
+      </div>
+
+      <div class="user-welcome">
+        <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" class="user-avatar" />
+        <div>
+          <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+          <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+        </div>
+      </div>
+
+      <ul class="menu-list">
+        <li class="menu-item nav-dashboard"><a href="./dashboard.html"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="nav_dashboard">Boshqaruv</span></a></li>
+        <li class="menu-item nav-rating"><a href="./Leardboard.html"><i class="fa-solid fa-ranking-star"></i> <span data-i18n="nav_rating">Reyting</span></a></li>
+        <li class="menu-item nav-profile active"><a href="./profil.html"><i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profil</span></a></li>
+        <li class="menu-item nav-settings"><a href="./sozlamalar.html"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Sozlamalar</span></a></li>
+      </ul>
+    </div>
+
+    <button class="btn-add-habit">
+      <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+    </button>
+  </div>
+
+<main class="main">
+
+  <div class="hero-banner">
+    <div class="hero-icon">рџЋ“</div>
+    <div class="hero-text">
+      <h2>Darslar</h2>
+      <p>O'zingizga mos kursni tanlang va o'qishda davom eting</p>
+    </div>
+  </div>
+
+  <div class="search-row">
+    <div class="search-box">
+      <span>рџ”Ќ</span>
+      <input type="text" id="searchInput" placeholder="Kurslarni qidirish...">
+    </div>
+    <div class="filter-pills">
+      <button class="pill active" data-filter="all">Barchasi</button>
+      <button class="pill" data-filter="english">English</button>
+      <button class="pill" data-filter="coding">Coding</button>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="left-col">
+
+      <div class="section-title"><span><span class="sparkle">вњ¦</span>Sizuchun tavsiya</span></div>
+      <div class="featured-card">
+        <div class="featured-thumb">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop" alt="BBC English">
+        </div>
+        <div class="featured-body">
+          <div class="badge-row">
+            <span class="badge-match">вњ¦ 94% AI Match</span>
+            <span style="font-size:11px;color:var(--text-muted);font-weight:600;">PREMIUM AI CHOICE</span>
+          </div>
+          <h3>BBC Learning English:<br>Master Fluency</h3>
+          <p>Ushbu kurs sizning darajangiz va qiziqishlaringizga asoslanib AI tomonidan tanlandi</p>
+          <div class="meta-row">
+            <span>рџ“¶ B2 Upper-Intermediate</span>
+            <span>вЏ± 24 soat</span>
+          </div>
+          <div class="featured-actions">
+            <button class="btn-primary" data-course="BBC Learning English: Master Fluency">Darsni boshlash</button>
+            <button class="bookmark-btn" data-bookmark="bbc-fluency">рџ”–</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title"><span>Ingliz tili kurslari</span><a class="see-all" href="./darsbolimi.html">Barchasini ko'rish</a></div>
+      <div class="courses-row" id="englishRow">
+        <div class="course-card" data-category="english" data-title="Grammar Essentials">
+          <div class="course-thumb" style="background-image:url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=300&h=200&fit=crop')">
+            <span class="thumb-tag">FREE</span>
+          </div>
+          <div class="course-body">
+            <div class="course-cat">A1-AZODARAJA</div>
+            <div class="course-title">Grammar Essentials</div>
+            <div class="course-stats">
+              <span>рџ‘¤ 1.2k talaba</span>
+              <span>в­ђ 4.8</span>
+            </div>
+            <button class="btn-secondary" data-course="Grammar Essentials">Kursni ko'rish</button>
+          </div>
+        </div>
+        <div class="course-card" data-category="english" data-title="IELTS Preparation 8.0+">
+          <div class="course-thumb" style="background-image:url('https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&h=200&fit=crop')">
+            <span class="thumb-tag pro">PRO</span>
+          </div>
+          <div class="course-body">
+            <div class="course-cat">B2-CIDARAJA</div>
+            <div class="course-title">IELTS Preparation 8.0+</div>
+            <div class="course-stats">
+              <span>рџ‘¤ 850 talaba</span>
+              <span>в­ђ 4.9</span>
+            </div>
+            <button class="btn-secondary" data-course="IELTS Preparation 8.0+">Kursni ko'rish</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title"><span>Dasturlash kurslari</span><a class="see-all" href="./darsbolimi.html">Barchasini ko'rish</a></div>
+      <div class="courses-row" id="codingRow">
+        <div class="course-card" data-category="coding" data-title="JavaScript Asoslari">
+          <div class="course-thumb" style="background-image:url('https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=300&h=200&fit=crop')">
+            <span class="thumb-tag">FREE</span>
+          </div>
+          <div class="course-body">
+            <div class="course-cat">BOSHLANG'ICH</div>
+            <div class="course-title">JavaScript Asoslari</div>
+            <div class="course-stats">
+              <span>вЏ± 12 soat</span>
+              <span>рџ“љ 45 dars</span>
+            </div>
+            <button class="btn-secondary" data-course="JavaScript Asoslari">Kursni ko'rish</button>
+          </div>
+        </div>
+        <div class="course-card" data-category="coding" data-title="React Advanced Patterns">
+          <div class="course-thumb" style="background-image:url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=300&h=200&fit=crop')">
+            <span class="thumb-tag pro">PRO</span>
+          </div>
+          <div class="course-body">
+            <div class="course-cat">O'RTA DARAJA</div>
+            <div class="course-title">React Advanced Patterns</div>
+            <div class="course-stats">
+              <span>вЏ± 18 soat</span>
+              <span>рџ“љ 62 dars</span>
+            </div>
+            <button class="btn-secondary" data-course="React Advanced Patterns">Kursni ko'rish</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="no-results" id="noResults" style="display:none;">Hech qanday kurs topilmadi рџ•</p>
+
+    </div>
+
+    <div class="right-col">
+      <div class="panel">
+        <div class="panel-title">Mening kurslarim <span class="tag">3 ta faol</span></div>
+        <div class="mycourse" data-progress="33">
+          <div class="mycourse-top"><span>UX/UI Design Fundamentals</span><span class="pct">33%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
+          <div class="mycourse-sub"><span class="lessons-done">8</span>/24 dars tugatildi</div>
+          <button class="btn-tiny" data-total-lessons="24" data-inc="1">Davom ettirish</button>
+        </div>
+        <div class="mycourse" data-progress="70">
+          <div class="mycourse-top"><span>Python for Data Science</span><span class="pct">70%</span></div>
+          <div class="progress-bar"><div class="progress-fill green" style="width:70%"></div></div>
+          <div class="mycourse-sub"><span class="lessons-done">42</span>/60 dars tugatildi</div>
+          <button class="btn-tiny" data-total-lessons="60" data-inc="1">Davom ettirish</button>
+        </div>
+      </div>
+
+      <div class="streak-panel">
+        <div class="streak-top">рџ”Ґ <span id="streakCount">12</span> kunlik Streak!</div>
+        <p>Agar siz 30 kun har kuni o'rganishni davom ettirsangiz, barcha Pro kurslari 1 oyga bepul ochiladi!</p>
+        <div class="streak-progress"><div class="streak-progress-fill" id="streakFill" style="width:40%"></div></div>
+        <div class="streak-days"><span id="streakDaysLabel">12/30</span></div>
+        <button class="btn-white" id="streakBtn">Streakni saqlash</button>
+      </div>
+
+      <div class="panel">
+        <div class="activity-top">рџ’¬ Bugungi faollik</div>
+        <div class="avatars">
+          <div class="avatar" style="background-image:url('https://i.pravatar.cc/40?img=1')"></div>
+          <div class="avatar" style="background-image:url('https://i.pravatar.cc/40?img=2')"></div>
+          <div class="avatar" style="background-image:url('https://i.pravatar.cc/40?img=3')"></div>
+          <div class="avatar more">+2</div>
+        </div>
+        <p>Sizbirga yana 4.231 ta odam bilan birga ushbu dars vaqtini birga o'qiyapsiz.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="sidebar-sync.js?v=20260704-avatar2"></script>
+<script src="darslar.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7000ff" />
+  <title>Streak.uz - Do'stlar &amp; Jamoalar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="friends.css" />
+</head>
+<body>
+  <div class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Menyuni ochish">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="mobile-logo">Streak.uz</div>
+    <div class="mobile-user-avatar">
+      <img src="https://i.pravatar.cc/150?img=11" alt="user" class="user-avatar" />
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <button class="sidebar-close" aria-label="Yopish">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div>
+      <div class="logo">
+        <i class="fa-solid fa-bolt"></i> Streak.uz
+      </div>
+
+      <div class="user-welcome">
+        <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" class="user-avatar" />
+        <div>
+          <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+          <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+        </div>
+      </div>
+
+      <ul class="menu-list">
+        <li class="menu-item nav-dashboard"><a href="./dashboard.html"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="nav_dashboard">Boshqaruv</span></a></li>
+        <li class="menu-item nav-rating"><a href="./Leardboard.html"><i class="fa-solid fa-ranking-star"></i> <span data-i18n="nav_rating">Reyting</span></a></li>
+        <li class="menu-item nav-profile"><a href="./profil.html"><i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profil</span></a></li>
+        <li class="menu-item nav-settings"><a href="./sozlamalar.html"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Sozlamalar</span></a></li>
+      </ul>
+    </div>
+
+    <button class="btn-add-habit">
+      <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+    </button>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main">
+    <div class="topbar">
+      <div></div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Bildirishnomalar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="icon-dot"></span>
+        </button>
+        <img src="https://i.pravatar.cc/150?img=11" alt="user" class="topbar-avatar" />
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-left">
+        <h1 class="hero-title">Do'stlar &amp; Jamoalar</h1>
+        <p class="hero-sub">Birgalikda o'sish osonroq. Bugun do'stlaringiz bilan 1,240 soat umumiy fokusda bo'ldingiz!</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <div class="stat-num">12</div>
+          <div class="stat-label">Guruhlar</div>
+        </div>
+        <div class="stat-card stat-card-highlight">
+          <span class="stat-emoji">рџЏ†</span>
+          <div class="stat-num">42</div>
+          <div class="stat-label">Eng yuqori streak</div>
+        </div>
+        <div class="stat-card">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+          <div class="stat-num">8</div>
+          <div class="stat-label">Takliflar</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="friends">Friends</button>
+      <button class="tab-btn" data-tab="groups">Groups</button>
+      <button class="tab-btn" data-tab="invites">Invites</button>
+    </div>
+
+    <div class="friends-grid">
+
+      <!-- ACTIVE -->
+      <div class="friend-card">
+        <div class="friend-head">
+          <div class="avatar-wrap">
+            <img src="https://i.pravatar.cc/150?img=25" alt="Madina Odilova" class="friend-avatar" />
+            <span class="status-dot online"></span>
+          </div>
+          <div class="friend-name-wrap">
+            <div class="friend-name">Madina Odilova</div>
+            <div class="friend-streak">рџ”Ґ 15 Kun</div>
+          </div>
+          <span class="badge badge-active">ACTIVE</span>
+        </div>
+        <div class="friend-progress">
+          <div class="progress-label-row">
+            <span>рџ’§ Suv ichish</span>
+            <span class="progress-pct">85%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill purple" style="width: 85%;"></div>
+          </div>
+        </div>
+        <div class="friend-tags">
+          <span class="ftag ftag-kitob">рџ“љ Kitob</span>
+          <span class="ftag ftag-sport">рџЏѓ Sport</span>
+        </div>
+      </div>
+
+      <!-- AT-RISK -->
+      <div class="friend-card">
+        <div class="friend-head">
+          <div class="avatar-wrap">
+            <img src="https://i.pravatar.cc/150?img=14" alt="Javohir K." class="friend-avatar" />
+            <span class="status-dot warning"></span>
+          </div>
+          <div class="friend-name-wrap">
+            <div class="friend-name">Javohir K.</div>
+            <div class="friend-streak warning-text">рџ”Ґ 7 Kun</div>
+          </div>
+          <span class="badge badge-risk">AT-RISK</span>
+        </div>
+        <div class="friend-progress">
+          <div class="progress-label-row">
+            <span>рџ§ Meditatsiya</span>
+            <span class="progress-pct">40%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill orange" style="width: 40%;"></div>
+          </div>
+        </div>
+        <button class="nudge-btn">Nudge Friend</button>
+      </div>
+
+      <!-- BROKEN -->
+      <div class="friend-card friend-card-broken">
+        <div class="friend-head">
+          <div class="avatar-wrap">
+            <img src="https://i.pravatar.cc/150?img=33" alt="Zilola" class="friend-avatar grayscale" />
+            <span class="status-dot offline"></span>
+          </div>
+          <div class="friend-name-wrap">
+            <div class="friend-name">Zilola</div>
+            <div class="friend-streak muted-text">рџ’¤ 0 Kun</div>
+          </div>
+          <span class="badge badge-broken">BROKEN</span>
+        </div>
+        <div class="motivate-box">
+          Zilola bilan streak uzildi. Uni motivatsiya qiling!
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <button class="fab" aria-label="Yangi do'st qo'shish">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="sidebar-sync.js?v=20260704-avatar2"></script>
+  <script src="friends.js"></script>
+</body>
+</html>

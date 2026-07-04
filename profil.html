@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6133e8">
+    <title>Profil</title>
+    <!-- Duolingo signature font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="profil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <button class="sidebar-close" aria-label="Yopish">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div>
+            <div class="logo">
+                <i class="fa-solid fa-bolt"></i> Streak.uz
+            </div>
+
+            <div class="user-welcome">
+                <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" class="user-avatar">
+                <div>
+                    <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+                    <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+                </div>
+            </div>
+
+            <ul class="menu-list">
+                <li class="menu-item nav-dashboard"><a href="./dashboard.html"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="nav_dashboard">Boshqaruv</span></a></li>
+                <li class="menu-item nav-rating"><a href="./Leardboard.html"><i class="fa-solid fa-ranking-star"></i> <span data-i18n="nav_rating">Reyting</span></a></li>
+                <li class="menu-item nav-profile"><a href="./profil.html"><i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profil</span></a></li>
+                <li class="menu-item nav-settings"><a href="./sozlamalar.html"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Sozlamalar</span></a></li>
+            </ul>
+        </div>
+
+        <button class="btn-add-habit">
+            <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+        </button>
+    </div>
+
+    <div class="sidebar-backdrop"></div>
+
+    <div class="main-container single-col">
+
+        <div class="content-section">
+            <div class="header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                <button class="menu-toggle" aria-label="Menyu" style="display: none; border: none; background: transparent; color: #2d3436; font-size: 24px; cursor: pointer;"><i class="fa-solid fa-bars"></i></button>
+                <h1 class="page-title" style="margin: 0;" data-i18n="page_title">Profil</h1>
+            </div>
+
+            <div class="creative-card profile-card">
+                <div class="avatar-3d">AZ</div>
+                <div class="profile-info">
+                    <div class="badge-container">
+                        <span class="badge level"><i class="fa-solid fa-star"></i> <span id="badge-level-text" data-level="3">3-daraja</span></span>
+                        <span class="badge title" data-i18n="badge_title">Ko'nikma ustasi</span>
+                    </div>
+                    <h2>Azamat Zoirov</h2>
+                    <p class="bio" data-i18n="bio">Har kuni o'z ustida ishlashni yaxshi ko'radigan dasturchi. Maqsad: Kunlik streakni 30
+                        ga yetkazish!</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="value" style="color: #ff7675;"><i class="fa-solid fa-fire"></i> 6</div>
+                            <div class="label" data-i18n="stat_streak">Streak</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="value" style="color: #74b9ff;"><i class="fa-solid fa-bolt"></i> 12</div>
+                            <div class="label" data-i18n="stat_skills">Ko'nikmalar</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="value" style="color: #a29bfe;"><i class="fa-solid fa-users"></i> 48</div>
+                            <div class="label" data-i18n="stat_friends">Do'stlar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="creative-card">
+                <div class="progress-header">
+                    <div>
+                        <h3 data-i18n="xp_title">Tajriba darajasi</h3>
+                        <p id="xp-subtitle" data-remaining="320">Keyingi darajaga 320 XP qoldi</p>
+                    </div>
+                    <span class="xp-counter" id="xp-counter-text" data-current="680" data-max="1000">680 / 1000 XP</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-fill"></div>
+                </div>
+                <div class="bar-labels">
+                    <span id="bar-label-current" data-level="3">3-daraja</span>
+                    <span id="bar-label-next" data-level="4">4-daraja</span>
+                </div>
+            </div>
+
+            <div class="creative-card achievements-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                    <h3 data-i18n="achievements_title" style="margin: 0;">Yutuqlar</h3>
+                    <a href="yutuq.html" style="color: #7000ff; text-decoration: none; font-weight: 800; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px; transition: transform 0.2s;" onmouseover="this.style.transform='translateX(3px)'" onmouseout="this.style.transform='translateX(0)'" data-i18n="view_all">Barchasini ko'rish <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="achievements-grid">
+                    <div class="badge-item">
+                        <div class="badge-icon-box b-orange"><i class="fa-solid fa-fire"></i></div>
+                        <p data-i18n="ach_first_step">Birinchi Qadam</p>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon-box b-blue"><i class="fa-solid fa-droplet"></i></div>
+                        <p data-i18n="ach_water">Suv Ichish</p>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon-box b-purple"><i class="fa-solid fa-book"></i></div>
+                        <p data-i18n="ach_reader">Kitobxon</p>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon-box b-green"><i class="fa-solid fa-person-running"></i></div>
+                        <p data-i18n="ach_athlete">Sportchi</p>
+                    </div>
+
+                    <div class="badge-item locked">
+                        <div class="badge-icon-box"><i class="fa-solid fa-spa"></i></div>
+                        <p data-i18n="ach_meditation">Meditatsiya Ustasi</p>
+                    </div>
+                    <div class="badge-item locked">
+                        <div class="badge-icon-box"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <p data-i18n="ach_cook">Oshpaz</p>
+                    </div>
+                    <div class="badge-item locked">
+                        <div class="badge-icon-box"><i class="fa-solid fa-sack-dollar"></i></div>
+                        <p data-i18n="ach_saver">Tejamkor</p>
+                    </div>
+                    <div class="badge-item locked">
+                        <div class="badge-icon-box"><i class="fa-solid fa-trophy"></i></div>
+                        <p data-i18n="ach_champion">Chempion</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="sidebar-sync.js"></script>
+    <script src="profil.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streak.uz - Yutuqlar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="yutuq.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Chap tomondagi Sidebar -->
+        <aside class="sidebar">
+            <button class="sidebar-close" aria-label="Yopish">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div>
+                <div class="logo">
+                    <i class="fa-solid fa-bolt"></i> Streak.uz
+                </div>
+
+                <div class="user-welcome">
+                    <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" class="user-avatar" />
+                    <div>
+                        <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+                        <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+                    </div>
+                </div>
+
+                <ul class="menu-list">
+                    <li class="menu-item nav-dashboard"><a href="./dashboard.html"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="nav_dashboard">Boshqaruv</span></a></li>
+                    <li class="menu-item nav-rating"><a href="./Leardboard.html"><i class="fa-solid fa-ranking-star"></i> <span data-i18n="nav_rating">Reyting</span></a></li>
+                    <li class="menu-item nav-profile"><a href="./profil.html"><i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profil</span></a></li>
+                    <li class="menu-item nav-settings"><a href="./sozlamalar.html"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Sozlamalar</span></a></li>
+                </ul>
+            </div>
+
+            <button class="btn-add-habit">
+                <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+            </button>
+        </aside>
+
+        <!-- Asosiy Kontent Qismi -->
+        <main class="main-content">
+            
+            <!-- Yuqori Binafsha Banner -->
+            <section class="banner">
+                <div class="banner-info">
+                    <div class="badge-row">
+                        <span class="pro-badge">PRO DARJA</span>
+                        <span class="xp-count"><i class="fa-solid fa-bolt"></i> 12,450 XP</span>
+                    </div>
+                    <h1>Yutuqlar</h1>
+                    <p>O'z odatlaringizni shakllantiring va yangi cho'qqilarni zabt eting. Har bir qadam — yangi imkoniyat.</p>
+                </div>
+                <div class="level-circle">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="40" class="bg-circle"></circle>
+                        <circle cx="50" cy="50" r="40" class="progress-circle"></circle>
+                    </svg>
+                    <div class="level-text">
+                        <span class="lvl-num">12</span>
+                        <span class="lvl-lbl">LEVEL</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pastki Ikki Ustunli Blok -->
+            <div class="content-grid">
+                
+                <!-- Chap ustun: Progress va Perks -->
+                <div class="left-col">
+                    <div class="card progress-card">
+                        <h3><i class="fa-solid fa-trophy text-purple"></i> Level Progress</h3>
+                        <div class="progress-info">
+                            <span>Keyingi levelga: 550 XP</span>
+                            <span class="target-xp">13000 XP</span>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 85%;"></div>
+                        </div>
+
+                        <div class="perks-section">
+                            <h4>IMTIYOZLAR (PERKS)</h4>
+                            
+                            <div class="perk-item">
+                                <div class="perk-icon rocket"><i class="fa-solid fa-rocket"></i></div>
+                                <div class="perk-desc">
+                                    <h5>2x XP Booster</h5>
+                                    <p>Dushanba kunlari 2 barobar ko'p ball</p>
+                                </div>
+                            </div>
+
+                            <div class="perk-item">
+                                <div class="perk-icon diamond"><i class="fa-solid fa-gem"></i></div>
+                                <div class="perk-desc">
+                                    <h5>Maxfiy Shop</h5>
+                                    <p>Eksklyuziv avatar va mavzular</p>
+                                </div>
+                            </div>
+
+                            <div class="perk-item locked">
+                                <div class="perk-icon lock"><i class="fa-solid fa-award"></i></div>
+                                <div class="perk-desc">
+                                    <h5>Master Badge</h5>
+                                    <p>Level 15 da ochiladi</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Yangi Marra Reklama Bloki -->
+                    <div class="card promo-card">
+                        <h3>Yangi Marra!</h3>
+                        <p>30 kunlik streakni yakunlang</p>
+                    </div>
+                </div>
+
+                <!-- O'ng ustun: Yutuqlar kartalari va Filtr -->
+                <div class="right-col">
+                    <div class="filter-tabs">
+                        <button class="tab-btn active" data-filter="all">All</button>
+                        <button class="tab-btn" data-filter="unlocked">Unlocked</button>
+                        <button class="tab-btn" data-filter="locked">Locked</button>
+                        <button class="tab-btn" data-filter="near">Near</button>
+                    </div>
+
+                    <!-- Kartalar Gridi -->
+                    <div class="achievements-grid" id="achievementsGrid">
+                        
+                        <!-- Early Bird -->
+                        <div class="achieve-card" data-status="unlocked">
+                            <div class="icon-circle sun"><i class="fa-solid fa-sun"></i></div>
+                            <h4>Early Bird</h4>
+                            <span class="status-badge opened">OCHILGAN</span>
+                        </div>
+
+                        <!-- Water Master -->
+                        <div class="achieve-card" data-status="unlocked">
+                            <div class="icon-circle water"><i class="fa-solid fa-droplet"></i></div>
+                            <h4>Water Master</h4>
+                            <span class="status-badge opened">OCHILGAN</span>
+                        </div>
+
+                        <!-- Deep Work -->
+                        <div class="achieve-card featured" data-status="near">
+                            <i class="fa-solid fa-star star-icon"></i>
+                            <div class="icon-circle brain"><i class="fa-solid fa-brain"></i></div>
+                            <h4>Deep Work</h4>
+                            <div class="card-progress">
+                                <div class="c-bar" style="width: 85%;"></div>
+                            </div>
+                            <span class="progress-lbl">85% TAYYOR</span>
+                        </div>
+
+                        <!-- Fire Streak -->
+                        <div class="achieve-card locked-card" data-status="locked">
+                            <div class="icon-circle fire"><i class="fa-solid fa-fire"></i></div>
+                            <h4>Fire Streak</h4>
+                            <span class="status-badge closed">YOPIQ</span>
+                        </div>
+
+                        <!-- Book Worm -->
+                        <div class="achieve-card" data-status="unlocked">
+                            <div class="icon-circle book"><i class="fa-solid fa-book-open"></i></div>
+                            <h4>Book Worm</h4>
+                            <span class="status-badge opened">OCHILGAN</span>
+                        </div>
+
+                        <!-- Iron Body -->
+                        <div class="achieve-card locked-card" data-status="locked">
+                            <div class="icon-circle iron"><i class="fa-solid fa-lock"></i></div>
+                            <h4>Iron Body</h4>
+                            <span class="status-badge closed">YOPIQ</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+     <script src="sidebar-sync.js"></script>
+     <script src="yutuq.js"></script>
+</body>
+</html>

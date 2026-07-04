@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Streak.uz</title>
+    <link rel="stylesheet" href="./dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+
+    <!-- =================== SIDEBAR =================== -->
+    <div class="sidebar">
+        <button class="sidebar-close" aria-label="Yopish">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div>
+            <div class="logo">
+                <i class="fa-solid fa-bolt"></i> Streak.uz
+            </div>
+
+            <div class="user-welcome">
+                <div class="user-avatar-fallback">
+                    <i class="fa-solid fa-user"></i>
+                    <img src="" alt="Avatar" class="user-avatar" hidden>
+                </div>
+                <div>
+                    <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+                    <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+                </div>
+            </div>
+
+            <ul class="menu-list">
+                <li class="menu-item nav-dashboard active is-active"><a href="./dashboard.html"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="nav_dashboard">Boshqaruv</span></a></li>
+                <li class="menu-item nav-courses"><a href="./darslar.html"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="nav_courses">Darslar</span></a></li>
+                <li class="menu-item nav-flashcards"><a href="./flashcards.html"><i class="fa-solid fa-layer-group"></i> <span data-i18n="nav_flashcards">Flashcards</span></a></li>
+                <li class="menu-item nav-ai-tasks"><a href="./ai.html"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="nav_ai_tasks">AI reja</span></a></li>
+                <li class="menu-item nav-ai-generator"><a href="./aigenerator.html"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="nav_ai_generator">AI generator</span></a></li>
+                <li class="menu-item nav-ai-analysis"><a href="./aitahlil.html"><i class="fa-solid fa-brain"></i> <span data-i18n="nav_ai_analysis">AI tahlil</span></a></li>
+                <li class="menu-item nav-reports"><a href="./hisobotlar.html"><i class="fa-solid fa-chart-line"></i> <span data-i18n="nav_reports">Hisobotlar</span></a></li>
+                <li class="menu-item nav-friends"><a href="./friends.html"><i class="fa-solid fa-users"></i> <span data-i18n="nav_friends">Do'stlar</span></a></li>
+                <li class="menu-item nav-achievements"><a href="./yutuq.html"><i class="fa-solid fa-medal"></i> <span data-i18n="nav_achievements">Yutuqlar</span></a></li>
+                <li class="menu-item nav-rating"><a href="./Leardboard.html"><i class="fa-solid fa-ranking-star"></i> <span data-i18n="nav_rating">Reyting</span></a></li>
+                <li class="menu-item nav-profile"><a href="./profil.html"><i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profil</span></a></li>
+                <li class="menu-item nav-settings"><a href="./sozlamalar.html"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Sozlamalar</span></a></li>
+            </ul>
+        </div>
+
+        <button class="btn-add-habit">
+            <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+        </button>
+    </div>
+
+    <div class="sidebar-backdrop"></div>
+
+    <!-- =================== MAIN CONTENT =================== -->
+    <div class="main-content">
+
+        <!-- TOP BAR: greeting + gamification stats -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" aria-label="Menyu"><i class="fa-solid fa-bars"></i></button>
+                <div class="greeting-block">
+                    <h1 id="dashboard-greeting">Xayrli tong, Jasur! 👋</h1>
+                    <p>Bugun yana bir qadam oldinga. Keling, boshladik!</p>
+                </div>
+            </div>
+
+            <div class="topbar-stats">
+                <div class="stat-pill stat-fire" title="Streak">
+                    <i class="fa-solid fa-fire"></i>
+                    <span id="topbar-streak">47</span>
+                </div>
+                <div class="stat-pill stat-gem" title="Tanga">
+                    <i class="fa-solid fa-gem"></i>
+                    <span id="topbar-gems">540</span>
+                </div>
+                <div class="stat-pill stat-xp" title="Bugungi XP">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span id="topbar-xp">120 XP</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- HERO STREAK BANNER -->
+        <section class="hero-streak">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-badge"><i class="fa-solid fa-fire"></i> ALOHIDA STREAK</span>
+                    <h2>🔥 47 kun streak davom etmoqda!</h2>
+                    <p>Siz ajoyib ketyapsiz! Faqat 2 ta odat qoldi — bugungi maqsadni bajaring va streak'ni davom ettiring.</p>
+                    <div class="hero-actions">
+                        <button class="btn-3d-primary" id="hero-continue-btn">
+                            <i class="fa-solid fa-play"></i> Davom ettirish
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Circular progress ring -->
+                <div class="hero-ring">
+                    <svg class="progress-ring" viewBox="0 0 160 160" width="100%" height="100%">
+                        <circle class="ring-bg" cx="80" cy="80" r="68"></circle>
+                        <circle class="ring-fill" cx="80" cy="80" r="68" id="ring-fill"></circle>
+                    </svg>
+                    <div class="ring-center">
+                        <div class="ring-count" id="ring-count">2/4</div>
+                        <div class="ring-label">bugungi odat</div>
+                    </div>
+                    <!-- Mascot -->
+                    <div class="mascot" title="Streak buddy">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS GRID: today's quick stats -->
+        <section class="quick-stats">
+            <div class="quick-stat-card qs-purple">
+                <div class="qs-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <div class="qs-info">
+                    <div class="qs-value">68%</div>
+                    <div class="qs-label">Bugungi maqsad</div>
+                </div>
+            </div>
+            <div class="quick-stat-card qs-blue">
+                <div class="qs-icon"><i class="fa-solid fa-calendar-week"></i></div>
+                <div class="qs-info">
+                    <div class="qs-value">7/7</div>
+                    <div class="qs-label">Haftalik streak</div>
+                </div>
+            </div>
+            <div class="quick-stat-card qs-green">
+                <div class="qs-icon"><i class="fa-solid fa-trophy"></i></div>
+                <div class="qs-info">
+                    <div class="qs-value">3-daraja</div>
+                    <div class="qs-label">Reyting liygasi</div>
+                </div>
+            </div>
+            <div class="quick-stat-card qs-orange">
+                <div class="qs-icon"><i class="fa-solid fa-medal"></i></div>
+                <div class="qs-info">
+                    <div class="qs-value">12</div>
+                    <div class="qs-label">Yutuqlar</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DASHBOARD GRID: habits + side panel -->
+        <div class="dashboard-grid">
+
+            <!-- HABITS SECTION -->
+            <section class="habits-section">
+                <div class="section-header">
+                    <div>
+                        <h2><i class="fa-solid fa-list-check section-icon"></i> Bugungi Odatlar</h2>
+                        <p class="section-sub">Har bir odatni bajaring va XP oling!</p>
+                    </div>
+                    <a href="./hisobotlar.html?focus=habits" class="link-view-all">Barchasini ko'rish <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="habits-grid">
+                    <!-- Habit 1: Bajarilgan (purple) -->
+                    <div class="card purple done" data-habit-index="0">
+                        <div class="card-top-accent"></div>
+                        <div class="card-header">
+                            <div class="card-icon-wrap purple-bg">
+                                <span class="card-icon">⭐</span>
+                            </div>
+                            <span class="card-badge"><i class="fa-solid fa-clock"></i> 15 min</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>Ingliz tili</h3>
+                            <p>Lug'at yodlash</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="habit-progress-bg">
+                                <div class="habit-progress-fill" style="width: 100%; background: var(--primary);"></div>
+                            </div>
+                            <span class="status-text"><i class="fa-solid fa-circle-check"></i> Bajarildi</span>
+                        </div>
+                    </div>
+
+                    <!-- Habit 2: Jarayonda (blue) -->
+                    <div class="card blue" data-habit-index="1">
+                        <div class="card-top-accent"></div>
+                        <div class="card-header">
+                            <div class="card-icon-wrap blue-bg">
+                                <span class="card-icon">💻</span>
+                            </div>
+                            <span class="card-badge"><i class="fa-solid fa-clock"></i> 2 soat</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>Dasturlash</h3>
+                            <p>JavaScript o'rganish</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="habit-progress-bg">
+                                <div class="habit-progress-fill" style="width: 50%; background: var(--blue);"></div>
+                            </div>
+                            <button class="btn-3d-small blue-3d">Bajar</button>
+                        </div>
+                    </div>
+
+                    <!-- Habit 3: Boshlanmagan (green) -->
+                    <div class="card green" data-habit-index="2">
+                        <div class="card-top-accent"></div>
+                        <div class="card-header">
+                            <div class="card-icon-wrap green-bg">
+                                <span class="card-icon">🏃</span>
+                            </div>
+                            <span class="card-badge"><i class="fa-solid fa-clock"></i> 30 min</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>Sport</h3>
+                            <p>Yugurish</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="habit-progress-bg">
+                                <div class="habit-progress-fill" style="width: 0%;"></div>
+                            </div>
+                            <button class="btn-3d-small green-3d">Bajar</button>
+                        </div>
+                    </div>
+
+                    <!-- Habit 4: Bajarilgan (orange) -->
+                    <div class="card orange done" data-habit-index="3">
+                        <div class="card-top-accent"></div>
+                        <div class="card-header">
+                            <div class="card-icon-wrap orange-bg">
+                                <span class="card-icon">📚</span>
+                            </div>
+                            <span class="card-badge"><i class="fa-solid fa-clock"></i> 20 bet</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>Kitob mutolaasi</h3>
+                            <p>"Atomic Habits"</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="habit-progress-bg">
+                                <div class="habit-progress-fill" style="width: 100%; background: var(--orange);"></div>
+                            </div>
+                            <span class="status-text"><i class="fa-solid fa-circle-check"></i> Bajarildi</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SIDE PANEL -->
+            <aside class="side-panel">
+
+                <!-- Daily Quest Card -->
+                <div class="panel-card quest-card">
+                    <div class="panel-card-header">
+                        <h3><i class="fa-solid fa-compass"></i> Kunlik vazifa</h3>
+                        <span class="quest-timer" id="quest-timer"><i class="fa-solid fa-clock"></i> 8 soat</span>
+                    </div>
+                    <p class="quest-desc">3 ta odatni bajaring va bonus XP oling!</p>
+                    <div class="quest-progress">
+                        <div class="quest-progress-bar" id="quest-bar"></div>
+                    </div>
+                    <div class="quest-meta">
+                        <span><i class="fa-solid fa-bolt"></i> <span id="quest-current">2</span>/3</span>
+                        <span class="quest-reward"><i class="fa-solid fa-gem"></i> +50 bonus</span>
+                    </div>
+                </div>
+
+                <!-- Friends Section -->
+                <div class="panel-card friends-card">
+                    <div class="panel-card-header">
+                        <h3><i class="fa-solid fa-users"></i> Do'stlar holati</h3>
+                        <a href="friends.html" class="link-mini">Barchasi</a>
+                    </div>
+
+                    <div class="friend-item">
+                        <div class="friend-rank rank-1">1</div>
+                        <img src="./rasmlar/Sardor.png" alt="Sardor" class="friend-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MCA1MCI+PGNpcmNsZSBjeD0iMjUiIGN5PSIyNSIgcj0iMjUiIGZpbGw9IiM3MDAwZmYiLz48dGV4dCB4PSIyNSIgeT0iMzIiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlM8L3RleHQ+PC9zdmc+'">
+                        <div class="friend-info">
+                            <h4>Sardor <i class="fa-solid fa-crown crown-gold"></i></h4>
+                            <p><i class="fa-solid fa-fire"></i> 52 streak · 4/5 odat</p>
+                        </div>
+                        <span class="friend-status status-faol">Faol</span>
+                    </div>
+
+                    <div class="friend-item">
+                        <div class="friend-rank rank-2">2</div>
+                        <img src="./rasmlar/Malika.png" alt="Malika" class="friend-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MCA1MCI+PGNpcmNsZSBjeD0iMjUiIGN5PSIyNSIgcj0iMjUiIGZpbGw9IiMzYjgyZjYiLz48dGV4dCB4PSIyNSIgeT0iMzIiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk08L3RleHQ+PC9zdmc+'">
+                        <div class="friend-info">
+                            <h4>Malika</h4>
+                            <p><i class="fa-solid fa-fire"></i> 31 streak · 1/3 odat</p>
+                        </div>
+                        <span class="friend-status status-xavf">Xavf</span>
+                    </div>
+
+                    <div class="friend-item">
+                        <div class="friend-rank rank-3">3</div>
+                        <img src="./rasmlar/Bekzod.png" alt="Bekzod" class="friend-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MCA1MCI+PGNpcmNsZSBjeD0iMjUiIGN5PSIyNSIgcj0iMjUiIGZpbGw9IiNmNTllMGIiLz48dGV4dCB4PSIyNSIgeT0iMzIiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkI8L3RleHQ+PC9zdmc+'">
+                        <div class="friend-info">
+                            <h4>Bekzod</h4>
+                            <p><i class="fa-solid fa-fire"></i> 12 streak · 0/4 odat</p>
+                        </div>
+                        <span class="friend-status status-uzildi">Uzildi</span>
+                    </div>
+
+                    <button class="btn-3d-outline" id="invite-friends-btn">
+                        <i class="fa-solid fa-user-plus"></i> Do'stlarni chorlash
+                    </button>
+                </div>
+
+                <!-- Achievements preview -->
+                <div class="panel-card achievements-card">
+                    <div class="panel-card-header">
+                        <h3><i class="fa-solid fa-medal"></i> Yutuqlar</h3>
+                        <a href="yutuq.html" class="link-mini">Barchasi</a>
+                    </div>
+                    <div class="achievements-grid">
+                        <div class="achievement-badge achieved" title="7 kun streak">
+                            <i class="fa-solid fa-fire"></i>
+                            <span>7 kun</span>
+                        </div>
+                        <div class="achievement-badge achieved" title="30 kun streak">
+                            <i class="fa-solid fa-fire-flame-curved"></i>
+                            <span>30 kun</span>
+                        </div>
+                        <div class="achievement-badge achieved" title="Ilk odat">
+                            <i class="fa-solid fa-star"></i>
+                            <span>Ilk odat</span>
+                        </div>
+                        <div class="achievement-badge locked" title="100 kun streak">
+                            <i class="fa-solid fa-lock"></i>
+                            <span>100 kun</span>
+                        </div>
+                        <div class="achievement-badge locked" title="10 ta odat">
+                            <i class="fa-solid fa-lock"></i>
+                            <span>10 odat</span>
+                        </div>
+                        <div class="achievement-badge locked" title="Reyting 1-o'rin">
+                            <i class="fa-solid fa-lock"></i>
+                            <span>#1 reyting</span>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <p>Streak.uz · Odatlaringizni kuzating, o'zingizni rivojlantiring <i class="fa-solid fa-heart" style="color:#ff7675"></i></p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="sidebar-sync.js?v=20260704-nav2"></script>
+    <script src="./dashboard.js"></script>
+</body>
+</html>

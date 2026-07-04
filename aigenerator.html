@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7000ff" />
+  <title>O'quv — AI Ta'lim Platformasi</title>
+  <link rel="stylesheet" href="aigenerator.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ===== MOBILE HEADER ===== -->
+  <div class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Menyuni ochish">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-logo">Streak.uz</div>
+    <div class="mobile-user-avatar">
+      <img src="https://i.pravatar.cc/150?img=11" alt="user" class="topbar-avatar" />
+    </div>
+  </div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <div class="sidebar">
+    <button class="sidebar-close" aria-label="Yopish">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div>
+      <div class="logo">
+        <i class="fa-solid fa-bolt"></i> Streak.uz
+      </div>
+
+      <div class="user-welcome">
+        <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" class="user-avatar" />
+        <div>
+          <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+          <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+        </div>
+      </div>
+
+      <ul class="menu-list">
+        <li class="menu-item nav-dashboard active"><a href="./dashboard.html"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="nav_dashboard">Boshqaruv</span></a></li>
+        <li class="menu-item nav-rating"><a href="./Leardboard.html"><i class="fa-solid fa-ranking-star"></i> <span data-i18n="nav_rating">Reyting</span></a></li>
+        <li class="menu-item nav-profile"><a href="./profil.html"><i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profil</span></a></li>
+        <li class="menu-item nav-settings"><a href="./sozlamalar.html"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Sozlamalar</span></a></li>
+      </ul>
+    </div>
+
+    <button class="btn-add-habit">
+      <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+    </button>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-tabs">
+        <button class="topbar-tab">Dashboard</button>
+        <button class="topbar-tab active">AI Tasks</button>
+        <button class="topbar-tab">Courses</button>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Bildirishnomalar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="icon-dot"></span>
+        </button>
+        <img src="https://i.pravatar.cc/150?img=11" alt="user" class="topbar-avatar" />
+      </div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div class="content-card">
+
+      <!-- Welcome -->
+      <div class="welcome-section">
+        <div class="welcome-icon">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div class="welcome-text">
+          <h2>Salom! Bugun nima o'rganamiz?</h2>
+          <p>AI siz uchun mashqlarni o'qitishni tuzib beradi.</p>
+        </div>
+      </div>
+
+      <!-- Category Selection -->
+      <div>
+        <div class="section-label">Yo'nalish tanlang</div>
+        <div class="category-grid">
+          <button class="category-btn selected">
+            <div class="cat-icon-wrap">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+            <span class="cat-label">Ingliz tili</span>
+          </button>
+          <button class="category-btn">
+            <div class="cat-icon-wrap">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <span class="cat-label">Dasturlash</span>
+          </button>
+          <button class="category-btn">
+            <div class="cat-icon-wrap">
+              <i class="fa-solid fa-pen-nib"></i>
+            </div>
+            <span class="cat-label">Dizayn</span>
+          </button>
+          <button class="category-btn">
+            <div class="cat-icon-wrap">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <span class="cat-label">Marketing</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Time Selection -->
+      <div>
+        <div class="section-label">Vaqtni tanlang (daqiqa)</div>
+        <div class="time-grid">
+          <button class="time-btn">15</button>
+          <button class="time-btn selected">30</button>
+          <button class="time-btn">60</button>
+        </div>
+      </div>
+
+      <!-- Generate Button -->
+      <button class="generate-btn">
+        <i class="fa-solid fa-plus"></i>
+        Vazifani generatsiya qilish
+      </button>
+
+    </div>
+
+  </main>
+
+  <!-- FAB -->
+  <button class="fab" aria-label="Yangi qo'shish">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  </button>
+
+  <!-- ===== INTERACTIVE JS ===== -->
+  <script src="sidebar-sync.js"></script>
+  <script src="./aigenerator.js"></script>
+</body>
+</html>

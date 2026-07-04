@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streak.uz - Kirish</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <div class="sahifa-konteyner">
+
+        <div class="chap-tomon">
+            <header class="yuqori-qism">
+                <div class="logotip">
+                    Streak.uz<i class="fa-solid fa-fire olov-ikonka"></i>
+                </div>
+            </header>
+
+            <div class="asosiy-matn">
+                <h1 class="katta-sarlavha">O'z odatlaringizni<br>shakllantiring.</h1>
+                <p class="kichik-matn">
+                    Har kuni kichik qadamlar bilan katta maqsadlarga erishing. Biz bilan o'sishda davom eting.
+                </p>
+            </div>
+
+            <footer class="pastki-qism">
+                <span>&copy; 2026 Streak.uz</span>
+                <a href="#" class="yordam-havola">Yordam</a>
+            </footer>
+        </div>
+
+        <div class="ong-tomon">
+            <div class="forma-kartochka">
+
+                <div class="forma-sarlavha">
+                    <h2>Xush kelibsiz! <span class="qo-l-ishorasi">👋</span></h2>
+                    <p>Hisobingizga kiring va davom eting.</p>
+                </div>
+
+                <form id="loginForm">
+                    <div class="kiritish-guruhi">
+                        <label>Email yoki Foydalanuvchi nomi</label>
+                        <div class="kiritish-maydoni">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="email" id="email" placeholder="Emailingizni kiriting" required>
+                        </div>
+                    </div>
+
+                    <div class="kiritish-guruhi">
+                        <label>Parol</label>
+                        <div class="kiritish-maydoni">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="password" placeholder="Parolingizni kiriting" required>
+                            <i class="fa-regular fa-eye ko-z-ikonka" id="togglePassword"></i>
+                        </div>
+                        <a href="#" class="parol-unutildi">Parolni unutdingizmi?</a>
+                    </div>
+
+                    <div id="errorMessage"
+                        style="color: #dc2626; font-size: 13px; margin-bottom: 15px; text-align: center; display: none; font-weight: 500;">
+                    </div>
+
+                    <button type="submit" class="kirish-tugmasi">Kirish</button>
+                </form>
+
+                <div class="ajratuvchi">
+                    <span>Yoki shu orqali</span>
+                </div>
+
+                <div class="ijtimoiy-tarmoqlar">
+                    <button class="tarmoq-tugmasi">
+                        <img src="./SVG.svg" alt="Google" width="16"> Google
+                    </button>
+                </div>
+
+                <p class="pastki-havola">
+                    Hali ro'yxatdan o'tmaganmisiz? <a href="./royxat.html">Ro'yxatdan o'tish</a>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

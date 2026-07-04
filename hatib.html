@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6133e8" />
+  <title>Streak.uz - Ko'nikma sozlamalari</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="habit-settings.css" />
+</head>
+<body>
+
+  <!-- Demo uchun fon: sahifaning orqa qismi -->
+  <div class="page-backdrop">
+    <aside class="sidebar">
+      <a href="#" class="logo">Streak.uz</a>
+      <nav class="nav">
+        <a href="#" class="nav-link">Boshqaruv</a>
+        <a href="#" class="nav-link active">Odatlarim</a>
+        <a href="#" class="nav-link">Do'stlar</a>
+        <a href="#" class="nav-link">AI Murabbiy</a>
+        <a href="#" class="nav-link">Do'kon</a>
+        <a href="#" class="nav-link">Sozlamalar</a>
+      </nav>
+      <button class="add-habit-btn">+ Yangi odat</button>
+    </aside>
+  </div>
+
+  <!-- ============ KO'NIKMA SOZLAMALARI MODALI ============ -->
+  <div class="modal-overlay active" id="habitModalOverlay">
+    <div class="modal" id="habitModal">
+
+      <div class="modal-header">
+        <h2 class="modal-title">Ko'nikma sozlamalari</h2>
+        <button class="modal-close" id="modalCloseBtn" aria-label="Yopish">&times;</button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="tab-switch">
+          <button class="tab-btn active" data-tab="new">Yangi qo'shish</button>
+          <button class="tab-btn" data-tab="existing">Mavjudlarni sozlash</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tayyor shablonlar</label>
+          <div class="template-grid">
+            <button type="button" class="template-card" data-template="Suv ichish">
+              <span class="template-emoji">💧</span>
+              <span class="template-name">Suv ichish</span>
+            </button>
+            <button type="button" class="template-card" data-template="Mutolaa">
+              <span class="template-emoji">📚</span>
+              <span class="template-name">Mutolaa</span>
+            </button>
+            <button type="button" class="template-card" data-template="Meditatsiya">
+              <span class="template-emoji">🧘</span>
+              <span class="template-name">Meditatsiya</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="habitName" class="form-label">Ko'nikma nomi</label>
+          <input type="text" id="habitName" class="form-input" placeholder="Masalan: Erta uyg'onish" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Belgini tanlang</label>
+          <div class="emoji-grid" id="emojiGrid">
+            <button type="button" class="emoji-option" data-emoji="🧘">🧘</button>
+            <button type="button" class="emoji-option" data-emoji="🍎">🍎</button>
+            <button type="button" class="emoji-option" data-emoji="💻">💻</button>
+            <button type="button" class="emoji-option" data-emoji="🎨">🎨</button>
+            <button type="button" class="emoji-option" data-emoji="🎸">🎸</button>
+            <button type="button" class="emoji-option" data-emoji="🌱">🌱</button>
+            <button type="button" class="emoji-option" data-emoji="💡">💡</button>
+            <button type="button" class="emoji-option" data-emoji="🌿">🌿</button>
+            <button type="button" class="emoji-option" data-emoji="🏀">🏀</button>
+            <button type="button" class="emoji-option" data-emoji="🎻">🎻</button>
+            <button type="button" class="emoji-option" data-emoji="🧎">🧎</button>
+            <button type="button" class="emoji-option" data-emoji="🎯">🎯</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="goal-label-row">
+            <label for="goalSlider" class="form-label">Kunlik maqsad</label>
+            <span class="goal-value" id="goalValue">30 daqiqa</span>
+          </div>
+          <input type="range" id="goalSlider" class="goal-slider" min="5" max="180" step="5" value="30" />
+        </div>
+
+        <div class="form-group">
+          <div class="unit-toggle">
+            <button type="button" class="unit-btn active" data-unit="vaqt">Vaqt (daqiqa)</button>
+            <button type="button" class="unit-btn" data-unit="soni">Soni (marta)</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-create" id="createBtn">Ko'nikmani yaratish</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="sidebar-sync.js"></script>
+  <script src="habit-settings.js"></script>
+</body>
+</html>

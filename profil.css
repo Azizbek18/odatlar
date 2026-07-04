@@ -1,0 +1,930 @@
+/* ============================================================
+   Streak.uz — Duolingo-style Profile CSS
+   Ranglar o'zgarilmadi, faqat dizayn Duolingo uslubida
+   ============================================================ */
+
+:root {
+    --bg-color: #f3f4f9;
+    --sidebar-bg: #ffffff;
+    --primary-color: #7000ff;
+    --primary-strong: #5900cc;
+    --primary-light: #e8dbff;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --surface: #ffffff;
+    --surface-soft: #f8f7ff;
+    --border: rgba(112, 0, 255, 0.1);
+    --green-accent: #00b894;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Nunito", "Nunito Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg-color);
+    background:
+        radial-gradient(circle at top left, rgba(255, 157, 46, 0.06), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(112, 0, 255, 0.05), transparent 30%),
+        var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    min-height: 100vh;
+}
+
+.btn-img {
+    width: 20px;
+    color: white;
+}
+
+.btn-img2 {
+    width: 20px;
+    background-color: black;
+}
+
+/* ============================================================
+   SIDEBAR — Duolingo Style (consistent with Leaderboard)
+   ============================================================ */
+
+.sidebar {
+    width: 280px;
+    background: var(--sidebar-bg);
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 2.5px solid #e8e0fa;
+    box-shadow: 6px 0 30px rgba(0, 0, 0, 0.03);
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 8px rgba(112, 0, 255, 0.15);
+    letter-spacing: -0.5px;
+}
+
+.user-welcome {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    background: var(--surface-soft);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    border: 2.5px solid var(--border);
+    box-shadow: 0 2px 0 0 #d4c9f5;
+}
+
+.user-welcome img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 3px 10px rgba(112, 0, 255, 0.15);
+}
+
+.user-welcome h4 {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.user-welcome p {
+    font-size: 12px;
+    color: #ff7675;
+    font-weight: 700;
+}
+
+.menu-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+/* Duolingo 3D menu items */
+.menu-item a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 16px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-item.active a {
+    background: var(--primary-color);
+    color: white;
+    border-bottom: 4px solid var(--primary-strong);
+    box-shadow: 0 4px 0 0 var(--primary-strong), 0 6px 16px rgba(112, 0, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+.menu-item.active a:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 0 var(--primary-strong);
+}
+
+.menu-item:not(.active) a:hover {
+    background: var(--surface-soft);
+    transform: translateX(4px);
+    color: var(--primary-color);
+    border-bottom-color: rgba(112, 0, 255, 0.06);
+}
+
+/* Duolingo 3D "Yangi odat" button */
+.btn-add-habit {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 16px;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-bottom: 4px solid var(--primary-strong);
+    box-shadow: 0 4px 0 0 var(--primary-strong), 0 6px 20px rgba(112, 0, 255, 0.2);
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+}
+
+.btn-add-habit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 0 var(--primary-strong), 0 8px 24px rgba(112, 0, 255, 0.3);
+}
+
+.btn-add-habit:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 0 var(--primary-strong);
+    border-bottom-width: 2px;
+}
+
+/* ============================================================
+   MAIN CONTAINER
+   ============================================================ */
+
+.main-container {
+    margin-left: 280px;
+    padding: 32px 36px 40px;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    width: calc(100% - 280px);
+}
+
+.content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+    color: var(--text-main);
+}
+
+/* ============================================================
+   CREATIVE CARDS — Duolingo 3D Card Style
+   ============================================================ */
+
+.creative-card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 28px;
+    border: 3px solid #e8e0fa;
+    border-bottom: 5px solid #d4c9f5;
+    box-shadow: 0 4px 0 0 #d4c9f5, 0 8px 24px rgba(0, 0, 0, 0.04);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.creative-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 0 0 #d4c9f5, 0 16px 36px rgba(112, 0, 255, 0.1);
+}
+
+/* ============================================================
+   PROFILE CARD
+   ============================================================ */
+
+.profile-card {
+    background: linear-gradient(145deg, #f0f9ff 0%, var(--surface) 40%, var(--surface-soft) 100%);
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+}
+
+/* Duolingo-style 3D avatar */
+.avatar-3d {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), #9b6bf0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 36px;
+    font-weight: 900;
+    border: 5px solid #fff;
+    border-bottom: 7px solid #d4c9f5;
+    box-shadow: 0 4px 0 0 #d4c9f5, 0 8px 20px rgba(112, 0, 255, 0.2);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    flex-shrink: 0;
+}
+
+.avatar-3d:hover {
+    transform: scale(1.06) rotate(-3deg);
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+/* Duolingo-style badge pills */
+.badge-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.badge {
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    background: white;
+    border-bottom: 2px solid transparent;
+    letter-spacing: 0.2px;
+}
+
+.badge.level {
+    color: #2ecc71;
+    border: 2px solid #2ecc71;
+    border-bottom: 3px solid #27ae60;
+    box-shadow: 0 2px 0 0 #27ae60;
+}
+
+.badge.title {
+    color: var(--primary-color);
+    border: 2px solid var(--primary-light);
+    border-bottom: 3px solid #c9bdf5;
+    box-shadow: 0 2px 0 0 #c9bdf5;
+}
+
+.profile-info h2 {
+    font-size: 26px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+}
+
+.profile-info .bio {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+/* ============================================================
+   STATS GRID — Duolingo Stat Boxes
+   ============================================================ */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 2.5px dashed #ddd5f8;
+    padding-top: 22px;
+    text-align: center;
+}
+
+.stat-box {
+    position: relative;
+    padding: 8px 4px;
+}
+
+.stat-box:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 2.5px;
+    background: #e8e0fa;
+    border-radius: 999px;
+}
+
+.stat-box .value {
+    font-size: 22px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    letter-spacing: -0.3px;
+}
+
+.stat-box .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 800;
+    margin-top: 4px;
+    letter-spacing: 0.8px;
+}
+
+/* ============================================================
+   XP PROGRESS BAR — Duolingo Style
+   ============================================================ */
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+}
+
+.progress-header h3 {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.2px;
+}
+
+.progress-header p {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.xp-counter {
+    background: var(--primary-light);
+    color: var(--primary-color);
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 12px;
+    border-bottom: 2.5px solid #c9bdf5;
+    box-shadow: 0 2px 0 0 #c9bdf5;
+    letter-spacing: 0.2px;
+}
+
+/* Duolingo 3D progress bar */
+.bar-container {
+    background: #ede9ff;
+    height: 20px;
+    border-radius: 999px;
+    position: relative;
+    border: 2px solid #ddd5f8;
+    border-bottom: 3px solid #c9bdf5;
+    box-shadow: inset 0 2px 6px rgba(112, 0, 255, 0.08);
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), #9b6bf0);
+    border-radius: 999px;
+    width: 68%;
+    border-bottom: 2px solid var(--primary-strong);
+    box-shadow: 0 2px 0 0 var(--primary-strong), inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Shimmer effect on the bar */
+.bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+    );
+    border-radius: 999px;
+    animation: duo-shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes duo-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+.bar-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+/* ============================================================
+   ACHIEVEMENTS — Duolingo Badge Grid
+   ============================================================ */
+
+.achievements-card h3 {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 22px;
+    letter-spacing: -0.2px;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* Duolingo 3D badge boxes */
+.badge-icon-box {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    border: 3px solid transparent;
+    border-bottom: 5px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1), 0 6px 16px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+
+.badge-item:hover .badge-icon-box {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.1), 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.badge-item:active .badge-icon-box {
+    transform: scale(0.98);
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.badge-item p {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.3;
+}
+
+/* Badge color variants with 3D borders */
+.b-orange {
+    background: #ff7675;
+    color: white;
+    border-color: #e66767;
+    border-bottom-color: #d63031;
+    box-shadow: 0 4px 0 0 #d63031, 0 6px 16px rgba(214, 48, 49, 0.15);
+}
+
+.b-orange:hover {
+    box-shadow: 0 6px 0 0 #d63031, 0 10px 24px rgba(214, 48, 49, 0.25);
+}
+
+.b-blue {
+    background: #74b9ff;
+    color: white;
+    border-color: #5fadf7;
+    border-bottom-color: #4a9fe8;
+    box-shadow: 0 4px 0 0 #4a9fe8, 0 6px 16px rgba(74, 159, 232, 0.15);
+}
+
+.b-blue:hover {
+    box-shadow: 0 6px 0 0 #4a9fe8, 0 10px 24px rgba(74, 159, 232, 0.25);
+}
+
+.b-purple {
+    background: #a29bfe;
+    color: white;
+    border-color: #8b83f7;
+    border-bottom-color: #6c5ce7;
+    box-shadow: 0 4px 0 0 #6c5ce7, 0 6px 16px rgba(108, 92, 231, 0.15);
+}
+
+.b-purple:hover {
+    box-shadow: 0 6px 0 0 #6c5ce7, 0 10px 24px rgba(108, 92, 231, 0.25);
+}
+
+.b-green {
+    background: #55efc4;
+    color: white;
+    border-color: #3de0b3;
+    border-bottom-color: #00b894;
+    box-shadow: 0 4px 0 0 #00b894, 0 6px 16px rgba(0, 184, 148, 0.15);
+}
+
+.b-green:hover {
+    box-shadow: 0 6px 0 0 #00b894, 0 10px 24px rgba(0, 184, 148, 0.25);
+}
+
+/* Locked badges */
+.locked {
+    opacity: 0.4;
+    filter: grayscale(0.5);
+}
+
+.locked .badge-icon-box {
+    background: #dfe6e9;
+    color: #b2bec3;
+    border: 2.5px solid #c8d1d6;
+    border-bottom: 4px solid #b2bec3;
+    box-shadow: 0 3px 0 0 #b2bec3;
+}
+
+.locked:hover .badge-icon-box {
+    box-shadow: 0 4px 0 0 #b2bec3;
+}
+
+/* ============================================================
+   SETTINGS PANEL (if present)
+   ============================================================ */
+
+.settings-panel h3 {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 24px;
+    letter-spacing: -0.3px;
+}
+
+.settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Duolingo-style settings items */
+.settings-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-radius: 16px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 3px solid transparent;
+}
+
+.settings-item:hover {
+    background: var(--surface-soft);
+    transform: translateX(4px);
+    border-bottom-color: rgba(112, 0, 255, 0.06);
+}
+
+.settings-link-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Duolingo-style setting icon boxes */
+.setting-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    border-bottom: 3px solid transparent;
+}
+
+.si-purple {
+    background: #f1f0ff;
+    color: var(--primary-color);
+    border-bottom-color: #ddd0ff;
+}
+
+.si-orange {
+    background: #fff4f0;
+    color: #ff7675;
+    border-bottom-color: #ffd6d4;
+}
+
+.si-green {
+    background: #e6fcf5;
+    color: #00b894;
+    border-bottom-color: #b2f0de;
+}
+
+.si-blue {
+    background: #edf7ff;
+    color: #74b9ff;
+    border-bottom-color: #c4e2ff;
+}
+
+.si-red {
+    background: #fff0f0;
+    color: #d63031;
+    border-bottom-color: #ffc8c8;
+}
+
+.settings-divider {
+    height: 2.5px;
+    background: #ede9ff;
+    margin: 16px 0;
+    border-radius: 999px;
+}
+
+.logout {
+    color: #d63031;
+    font-weight: 800;
+}
+
+/* ============================================================
+   SIDEBAR BACKDROP (mobile)
+   ============================================================ */
+
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 12, 30, 0.35);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.sidebar-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ============================================================
+   DUOLINGO ANIMATIONS
+   ============================================================ */
+
+@keyframes duo-bounce-in {
+    0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+    60% { opacity: 1; transform: translateY(-5px) scale(1.01); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes shakeBadge {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px) rotate(-2deg); }
+    40% { transform: translateX(6px) rotate(2deg); }
+    60% { transform: translateX(-4px) rotate(-1deg); }
+    80% { transform: translateX(4px) rotate(1deg); }
+}
+
+@keyframes duo-pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN
+   ============================================================ */
+
+@media (max-width: 1100px) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        width: 240px;
+    }
+
+    .main-container {
+        margin-left: 240px;
+        width: calc(100% - 240px);
+    }
+}
+
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+        padding-top: 0;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 280px;
+        height: 100vh;
+        z-index: 9999;
+        background: var(--sidebar-bg);
+        box-shadow: 8px 0 40px rgba(97, 51, 232, 0.15);
+        border-right: 3px solid #e8e0fa;
+        transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow-y: auto;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .sidebar-backdrop {
+        display: block;
+    }
+
+    .main-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 24px 16px 28px;
+        gap: 20px;
+    }
+
+    .menu-toggle {
+        display: flex !important;
+        border: none;
+        background: transparent;
+        color: #2d3436;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 4px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .achievements-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-box:not(:last-child)::after {
+        display: none;
+    }
+}
+
+/* Kichik smartfonlar uchun */
+@media (max-width: 480px) {
+    .main-container {
+        padding: 16px 12px;
+    }
+
+    .creative-card {
+        padding: 22px 16px;
+        border-radius: 18px;
+    }
+
+    .page-title {
+        font-size: 26px;
+    }
+
+    .user-welcome {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .badge-icon-box {
+        width: 64px;
+        height: 64px;
+        font-size: 24px;
+        border-radius: 16px;
+    }
+
+    .progress-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .settings-link-content {
+        gap: 10px;
+    }
+
+    .settings-item {
+        padding: 14px 14px;
+    }
+}
+
+/* Juda kichik ekranlar uchun */
+@media (max-width: 320px) {
+    .main-container {
+        padding: 12px 10px;
+    }
+
+    .badge-container {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .avatar-3d {
+        width: 80px;
+        height: 80px;
+        font-size: 28px;
+    }
+
+    .profile-info h2 {
+        font-size: 20px;
+    }
+
+    .setting-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .settings-item {
+        font-size: 12px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+}
+
+/* ============================================================
+   SHARED STYLES
+   ============================================================ */
+
+.menu-item a i {
+    font-size: 20px !important;
+    width: 24px !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.sidebar-close {
+    display: none !important;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d4c9f5;
+    border-radius: 999px;
+    border: 2px solid var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}

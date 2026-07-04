@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Streak.uz вЂ” Darsbolimi</title>
+<link rel="stylesheet" href="darslar-v2.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Mobile Header -->
+  <div class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Menyuni ochish">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-logo">Streak.uz</div>
+    <div style="width:32px"></div>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+  <!-- ===== SIDEBAR ===== -->
+  <div class="sidebar">
+    <button class="sidebar-close" aria-label="Yopish">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div>
+      <div class="logo">
+        <i class="fa-solid fa-bolt"></i> Streak.uz
+      </div>
+
+      <div class="user-welcome">
+        <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" class="user-avatar" />
+        <div>
+          <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+          <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+        </div>
+      </div>
+
+      <ul class="menu-list">
+        <li class="menu-item nav-dashboard"><a href="./dashboard.html"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="nav_dashboard">Boshqaruv</span></a></li>
+        <li class="menu-item nav-rating"><a href="./Leardboard.html"><i class="fa-solid fa-ranking-star"></i> <span data-i18n="nav_rating">Reyting</span></a></li>
+        <li class="menu-item nav-profile active"><a href="./profil.html"><i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profil</span></a></li>
+        <li class="menu-item nav-settings"><a href="./sozlamalar.html"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Sozlamalar</span></a></li>
+      </ul>
+    </div>
+
+    <button class="btn-add-habit">
+      <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+    </button>
+  </div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HERO BANNER -->
+  <div class="hero-banner">
+    <h2>Darslar</h2>
+    <p>Eng yaxshi onlayn kurslar platformasi</p>
+    <div class="filter-pills">
+      <button class="pill active">Featured</button>
+      <button class="pill">English</button>
+      <button class="pill">Coding</button>
+      <button class="pill">Design</button>
+      <button class="pill">Marketing</button>
+    </div>
+  </div>
+
+  <!-- SIZ UCHUN TAVSIYA -->
+  <div class="section-title"><span><span class="sparkle">вњ¦</span>Siz uchun tavsiya etilgan</span></div>
+  <div class="featured-card">
+    <div class="featured-thumb" style="background-image:url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&h=400&fit=crop')"></div>
+    <div class="featured-body">
+      <div class="badge-row">
+        <span class="badge-ai">вњ¦ AI tavsiya</span>
+      </div>
+      <h3>BBC Learning English:<br>Global Vocabulary</h3>
+      <p>Improve your English vocabulary with our expert-led courses. Learn new words and phrases to enhance your communication skills.</p>
+      <div class="featured-actions">
+        <button class="btn-primary">Boshlash</button>
+        <button class="btn-outline">рџ”– Saqlash</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOSHLANG'ICH вЂ” Ingliz tili darslari -->
+  <div class="beginner-section">
+    <div class="beginner-label">рџЊџ Sizning Boshlang'ich</div>
+    <div class="section-title" style="margin-bottom:18px;"><span>Ingliz tili darslari</span><a class="see-all" href="./darslar.html">Barchasini ko'rish</a></div>
+    <div class="courses-grid">
+      <div class="course-card">
+        <div class="course-thumb" style="background-image:url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=300&h=200&fit=crop')"></div>
+        <div class="course-body">
+          <div class="course-title">Grammar in Use Intermediate</div>
+          <div class="course-meta"><span class="lessons">рџ“љ 5 ta dars</span><span>в­ђ 4.8</span></div>
+          <button class="btn-sm">Boshlash</button>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background-image:url('https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&h=200&fit=crop')"></div>
+        <div class="course-body">
+          <div class="course-title">IELTS Speaking</div>
+          <div class="course-meta"><span class="lessons">рџ“љ 5 ta dars</span><span>в­ђ 4.9</span></div>
+          <button class="btn-sm">Boshlash</button>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background-image:url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=300&h=200&fit=crop')"></div>
+        <div class="course-body">
+          <div class="course-title">Daily English</div>
+          <div class="course-meta"><span class="lessons">рџ“љ 5 ta dars</span><span>в­ђ 4.7</span></div>
+          <button class="btn-sm">Boshlash</button>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop')"></div>
+        <div class="course-body">
+          <div class="course-title">Business English</div>
+          <div class="course-meta"><span class="lessons">рџ“љ 5 ta dars</span><span>в­ђ 4.6</span></div>
+          <button class="btn-sm">Boshlash</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASTURLASH DARSLARI -->
+  <div class="section-title"><span><span class="sparkle">вњ¦</span>Dasturlash darslari</span><a class="see-all" href="./darslar.html">Barchasini ko'rish</a></div>
+  <div class="prog-card">
+    <div class="prog-thumb" style="background-image:url('https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=900&h=300&fit=crop')"></div>
+    <div class="prog-body">
+      <h3>Python for Beginners</h3>
+      <div class="course-meta"><span class="lessons">рџ“љ 12 ta dars</span><span>вЏ± 8 soat</span><span>рџ‘¤ 2.4k talaba</span></div>
+      <div class="prog-actions">
+        <button class="btn-primary">Boshlash</button>
+        <button class="btn-outline">рџ”– Saqlash</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENING DARSLARIM -->
+  <div class="section-title"><span><span class="sparkle">вњ¦</span>Mening darslarim</span></div>
+  <div class="my-courses-grid">
+    <div class="my-course-card">
+      <div class="my-course-top">
+        <div class="my-course-thumb" style="background-image:url('https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=160&h=160&fit=crop')"></div>
+        <div class="my-course-info">
+          <h4>Python for Beginners</h4>
+          <div class="course-meta"><span>вЏ± 12 ta dars</span><span>в­ђ 4.9</span></div>
+        </div>
+      </div>
+      <div class="my-course-bottom">
+        <div class="progress-row">
+          <span class="progress-label">5/12 dars tugatildi</span>
+          <span class="progress-pct">45%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+        <button class="btn-continue">Davom etish</button>
+      </div>
+    </div>
+
+    <div class="my-course-card">
+      <div class="my-course-top">
+        <div class="my-course-thumb" style="background-image:url('https://images.unsplash.com/photo-1455390582262-044cdead277a?w=160&h=160&fit=crop')"></div>
+        <div class="my-course-info">
+          <h4>IELTS Writing</h4>
+          <div class="course-meta"><span>вЏ± 10 ta dars</span><span>в­ђ 4.8</span></div>
+        </div>
+      </div>
+      <div class="my-course-bottom">
+        <div class="progress-row">
+          <span class="progress-label">6/10 dars tugatildi</span>
+          <span class="progress-pct">60%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+        <button class="btn-continue">Davom etish</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+  <!-- Toastify JS/CSS CDNs -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <script src="sidebar-sync.js?v=20260704-avatar2"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Dynamic Course Title from URL
+      const params = new URLSearchParams(window.location.search);
+      const course = params.get('course');
+      if (course) {
+        const titleEl = document.querySelector('.featured-body h3');
+        if (titleEl) {
+          titleEl.innerHTML = course.replace(': ', ':<br>');
+        }
+      }
+
+      // 2. Toast alert helper
+      function showToast(message, type = 'success') {
+        const bgMap = {
+          success: 'linear-gradient(135deg, #7000ff, #5900cc)',
+          info:    'linear-gradient(135deg, #3b82f6, #1d4ed8)'
+        };
+        Toastify({
+          text: message,
+          duration: 3000,
+          gravity: 'top',
+          position: 'right',
+          style: {
+            background: bgMap[type] || bgMap.success,
+            borderRadius: '12px',
+            fontFamily: '"Nunito", "Inter", sans-serif',
+            fontWeight: '700',
+            fontSize: '14px',
+            boxShadow: '0 4px 15px rgba(112, 0, 255, 0.2)'
+          }
+        }).showToast();
+      }
+
+      // 3. Bind click events
+      document.querySelectorAll('.btn-primary, .btn-sm, .btn-continue').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.featured-card') || btn.closest('.course-card') || btn.closest('.prog-card') || btn.closest('.my-course-card');
+          const title = card ? (card.querySelector('h3, .course-title, h4')?.textContent || 'Dars') : 'Dars';
+          const cleanTitle = title.replace(/\s+/g, ' ').trim();
+          showToast(`рџЋ“ "${cleanTitle}" darsiga muvaffaqiyatli kirdingiz!`, 'success');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

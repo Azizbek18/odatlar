@@ -1,0 +1,1604 @@
+/* ============================================================
+   Streak.uz — Duolingo-style Leaderboard CSS
+   Ranglar o'zgarilmadi, faqat dizayn Duolingo uslubida
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f3f4f9;
+  --surface: #ffffff;
+  --surface-soft: #f8f7ff;
+  --text: #2d3436;
+  --muted: #636e72;
+  --primary: #7000ff;
+  --primary-strong: #5900cc;
+  --primary-dark: #4a00aa;
+  --accent: #ff9d2e;
+  --accent-soft: #fff7e8;
+  --border: rgba(112, 0, 255, 0.1);
+  --shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+
+  /* Duolingo 3D border system */
+  --btn-shadow: 0 4px 0 0 var(--primary-strong);
+  --btn-shadow-hover: 0 2px 0 0 var(--primary-strong);
+  --btn-shadow-active: 0 0px 0 0 var(--primary-strong);
+  --btn-translate-y: -2px;
+  --btn-translate-y-active: 2px;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Nunito", "Nunito Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255, 157, 46, 0.08), transparent 35%),
+    radial-gradient(circle at top right, rgba(97, 51, 232, 0.06), transparent 30%),
+    radial-gradient(circle at bottom center, rgba(112, 0, 255, 0.04), transparent 40%),
+    var(--bg);
+  display: flex;
+  min-height: 100vh;
+  font-size: 14px;
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   SIDEBAR — Duolingo Style
+   ============================================================ */
+
+.sidebar {
+  width: 280px;
+  min-height: 100vh;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 20px;
+  gap: 20px;
+  position: fixed;
+  inset: 0 auto 0 0;
+  border-right: 2px solid #e8e0fa;
+  box-shadow: 6px 0 30px rgba(97, 51, 232, 0.06);
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 2px 8px rgba(112, 0, 255, 0.15);
+  margin-bottom: 8px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 3px solid #e8e0fa;
+  box-shadow: 0 2px 8px rgba(112, 0, 255, 0.1);
+}
+
+.user-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.user-streak {
+  font-size: 12px;
+  color: #f97316;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+/* Duolingo-style nav links */
+.menu-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  list-style: none;
+}
+
+.menu-item a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 14px 18px !important;
+  color: var(--muted) !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  border-radius: 16px !important;
+  border-bottom: 3px solid transparent !important;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+.menu-item:not(.active) a:hover {
+  background: var(--surface-soft) !important;
+  color: var(--primary) !important;
+  transform: translateX(4px) !important;
+  border-bottom-color: rgba(112, 0, 255, 0.08) !important;
+}
+
+/* Duolingo 3D active menu button */
+.menu-item.active a {
+  background: var(--primary) !important;
+  color: white !important;
+  border-bottom: 4px solid var(--primary-strong) !important;
+  box-shadow: 0 4px 0 0 var(--primary-strong), 0 6px 16px rgba(112, 0, 255, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+
+.menu-item.active a:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 0 var(--primary-strong) !important;
+  border-bottom-width: 2px !important;
+}
+
+/* Duolingo 3D "Yangi odat" button */
+.btn-add-habit {
+  background: var(--primary) !important;
+  color: white !important;
+  border: none !important;
+  padding: 16px !important;
+  border-radius: 16px !important;
+  font-weight: 800 !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-bottom: 4px solid var(--primary-strong) !important;
+  box-shadow: 0 4px 0 0 var(--primary-strong), 0 6px 20px rgba(112, 0, 255, 0.2) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+  letter-spacing: 0.2px;
+}
+
+.btn-add-habit:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 0 0 var(--primary-strong), 0 8px 24px rgba(112, 0, 255, 0.3) !important;
+}
+
+.btn-add-habit:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 0 var(--primary-strong) !important;
+  border-bottom-width: 2px !important;
+}
+
+.user-welcome {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 14px !important;
+  background: var(--surface-soft) !important;
+  border-radius: 16px !important;
+  margin-bottom: 8px !important;
+  border: 2px solid var(--border) !important;
+  box-sizing: border-box !important;
+}
+
+.user-welcome img {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 3px solid var(--primary) !important;
+  box-shadow: 0 3px 10px rgba(112, 0, 255, 0.15) !important;
+}
+
+.user-welcome h4,
+.user-welcome .user-name {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  color: var(--text) !important;
+}
+
+.user-welcome p,
+.user-welcome .user-streak {
+  font-size: 12px !important;
+  color: #f97316 !important;
+  font-weight: 700 !important;
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+
+.main {
+  margin-left: 280px;
+  flex: 1;
+  padding: 24px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  max-width: none;
+}
+
+/* ============================================================
+   BANNER — Duolingo Hero Card Style
+   ============================================================ */
+
+.banner {
+  background: linear-gradient(135deg, var(--primary) 0%, #7a3fea 50%, #9b6bf0 100%);
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: #fff;
+  border-bottom: 5px solid var(--primary-strong);
+  box-shadow: 0 6px 0 0 var(--primary-strong), 0 12px 30px rgba(112, 0, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Duolingo decorative circles in banner */
+.banner::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.banner::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  right: 60px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.banner-title {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.banner-sub {
+  font-size: 14px;
+  opacity: 0.92;
+  max-width: 42rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Duolingo 3D pill tabs in banner */
+.banner-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 1;
+}
+
+.btab {
+  padding: 10px 18px;
+  border-radius: 14px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+  font-family: inherit;
+  letter-spacing: 0.1px;
+}
+
+.btab:hover {
+  background: rgba(255, 255, 255, 0.32);
+  transform: translateY(-1px);
+}
+
+/* Duolingo-style active tab (white with shadow) */
+.btab.active {
+  background: #fff;
+  color: var(--primary);
+  border-bottom: 3px solid #e0d6fc;
+  box-shadow: 0 3px 0 0 #e0d6fc, 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.btab.active:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 0 #e0d6fc;
+}
+
+/* ============================================================
+   CATEGORY TABS — Duolingo Chip Style
+   ============================================================ */
+
+.cat-tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.cat-tabs::-webkit-scrollbar {
+  height: 6px;
+}
+
+.cat-tabs::-webkit-scrollbar-thumb {
+  background: rgba(97, 51, 232, 0.24);
+  border-radius: 999px;
+}
+
+.ctab {
+  flex: 0 0 auto;
+  padding: 10px 20px;
+  border-radius: 14px;
+  border: 2.5px solid #ddd5f8;
+  background: #fff;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  border-bottom: 3.5px solid #c9bdf5;
+  font-family: inherit;
+  box-shadow: 0 2px 0 0 #c9bdf5;
+}
+
+.ctab:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 0 #b8a8f0;
+}
+
+/* Duolingo 3D active category tab */
+.ctab.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  border-bottom-color: var(--primary-strong);
+  color: #fff;
+  box-shadow: 0 3px 0 0 var(--primary-strong), 0 4px 12px rgba(112, 0, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.ctab.active:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 0 var(--primary-strong);
+}
+
+/* ============================================================
+   PODIUM — Duolingo Medal/Leaderboard Style
+   ============================================================ */
+
+.podium {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: end;
+  padding: 8px 0 0;
+}
+
+.pod-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.pod-crown {
+  font-size: 36px;
+  margin-bottom: -8px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  animation: crown-bounce 2s ease-in-out infinite;
+}
+
+@keyframes crown-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-4px) rotate(-3deg); }
+  75% { transform: translateY(-2px) rotate(3deg); }
+}
+
+/* Duolingo-style podium cards */
+.pod-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 20px 16px 22px;
+  gap: 10px;
+  position: relative;
+  min-width: 0;
+  border: 3px solid #e8e0fa;
+  border-bottom: 5px solid #d4c9f5;
+  box-shadow: 0 4px 0 0 #d4c9f5, 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+
+.pod-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 8px 0 0 #d4c9f5, 0 16px 32px rgba(112, 0, 255, 0.12);
+}
+
+.second-card,
+.third-card {
+  background: var(--surface-soft);
+  border-color: #e0d6fc;
+  border-bottom-color: #c9bdf5;
+  box-shadow: 0 4px 0 0 #c9bdf5, 0 6px 18px rgba(0, 0, 0, 0.04);
+}
+
+.second-card:hover {
+  box-shadow: 0 8px 0 0 #c9bdf5, 0 14px 28px rgba(112, 0, 255, 0.1);
+}
+
+.third-card:hover {
+  box-shadow: 0 8px 0 0 #c9bdf5, 0 14px 28px rgba(112, 0, 255, 0.1);
+}
+
+/* Gold 1st place card — Duolingo style */
+.first-card {
+  background: linear-gradient(165deg, #fffde8 0%, #fff8d0 50%, #fff3b0 100%);
+  border: 3px solid #ffd234;
+  border-bottom: 5px solid #e6b800;
+  padding: 24px 18px 28px;
+  box-shadow: 0 4px 0 0 #e6b800, 0 8px 24px rgba(255, 210, 52, 0.2);
+}
+
+.first-card:hover {
+  box-shadow: 0 8px 0 0 #e6b800, 0 16px 36px rgba(255, 210, 52, 0.3);
+}
+
+/* Duolingo-style place badges */
+.place-pill {
+  background: linear-gradient(135deg, #ece6ff 0%, #ddd0ff 100%);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 900;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border-bottom: 2px solid #c9bdf5;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.pod-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #e0d6fc;
+  box-shadow: 0 3px 10px rgba(112, 0, 255, 0.1);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pod-card:hover .pod-avatar {
+  transform: scale(1.08);
+}
+
+.pod-avatar-gold {
+  width: 80px;
+  height: 80px;
+  border: 5px solid #ffd234;
+  box-shadow: 0 0 0 4px #fff8d0, 0 4px 16px rgba(255, 210, 52, 0.25);
+}
+
+.pod-card:hover .pod-avatar-gold {
+  transform: scale(1.08);
+}
+
+.pod-name {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--text);
+  text-align: center;
+  word-break: break-word;
+  letter-spacing: -0.2px;
+}
+
+/* Duolingo-style score badge */
+.pod-score {
+  font-size: 20px;
+  font-weight: 900;
+  color: #f97316;
+  background: rgba(249, 115, 22, 0.1);
+  padding: 4px 16px;
+  border-radius: 999px;
+  border-bottom: 2px solid rgba(249, 115, 22, 0.2);
+  letter-spacing: -0.3px;
+}
+
+/* ============================================================
+   LEADERBOARD LIST — Duolingo Row Style
+   ============================================================ */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 14px 18px;
+  border: 2.5px solid #ece8f8;
+  border-bottom: 4px solid #ddd5f8;
+  box-shadow: 0 3px 0 0 #ddd5f8, 0 4px 12px rgba(0, 0, 0, 0.03);
+  min-width: 0;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.list-row:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 0 0 #ddd5f8, 0 10px 24px rgba(112, 0, 255, 0.08);
+}
+
+/* Duolingo "You" highlighted row */
+.active-row {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  border-bottom-color: var(--primary-strong) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 0 0 var(--primary-strong), 0 6px 20px rgba(112, 0, 255, 0.25) !important;
+}
+
+.active-row:hover {
+  box-shadow: 0 6px 0 0 var(--primary-strong), 0 12px 28px rgba(112, 0, 255, 0.3) !important;
+  transform: translateY(-3px);
+}
+
+.list-rank {
+  font-size: 16px;
+  font-weight: 900;
+  color: #b0b0b0;
+  min-width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.active-row .list-rank {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.list-avatar-wrap {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.list-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e0d6fc;
+  display: block;
+  box-shadow: 0 2px 8px rgba(112, 0, 255, 0.08);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.list-row:hover .list-avatar {
+  transform: scale(1.06);
+}
+
+.active-row .list-avatar {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 12px;
+  height: 12px;
+  background: #22c55e;
+  border-radius: 50%;
+  border: 2.5px solid #fff;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.3);
+}
+
+.active-row .online-dot {
+  border-color: var(--primary);
+}
+
+.list-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.list-name {
+  font-size: 15px;
+  font-weight: 800;
+  word-break: break-word;
+  letter-spacing: -0.2px;
+}
+
+.list-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Duolingo-style tag pills */
+.ltag {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border-bottom: 1.5px solid transparent;
+  letter-spacing: 0.2px;
+}
+
+.ltag-code {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border-bottom-color: #93c5fd;
+}
+
+.ltag-sport {
+  background: #dcfce7;
+  color: #15803d;
+  border-bottom-color: #86efac;
+}
+
+.ltag-kitob {
+  background: #fef9c3;
+  color: #854d0e;
+  border-bottom-color: #fde047;
+}
+
+.ltag-ingliz {
+  background: #ede9ff;
+  color: var(--primary);
+  border-bottom-color: #c9bdf5;
+}
+
+.active-row .ltag {
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: #fff !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Duolingo-style score badges */
+.list-score {
+  font-size: 16px;
+  font-weight: 900;
+  color: #f97316;
+  min-width: 60px;
+  text-align: right;
+  flex-shrink: 0;
+  letter-spacing: -0.3px;
+}
+
+.active-row .list-score {
+  color: #fff;
+}
+
+/* Duolingo-style "You" score box */
+.list-score-box {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: 12px;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================
+   RESPONSIVE — Desktop hidden elements
+   ============================================================ */
+
+.mobile-header,
+.sidebar-overlay,
+.menu-toggle {
+  display: none;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+@media (max-width: 1100px) {
+  .podium {
+    grid-template-columns: 1fr;
+  }
+
+  .pod-wrap {
+    width: 100%;
+  }
+
+  .first-wrap {
+    order: -1;
+  }
+
+  .pod-card {
+    max-width: 460px;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    display: block;
+    padding-top: 64px;
+  }
+
+  /* Mobile sticky header */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: var(--surface);
+    border-bottom: 3px solid #e8e0fa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    z-index: 999;
+    box-shadow: 0 3px 0 0 #e0d6fc, 0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  .mobile-logo {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+  }
+
+  .mobile-user-avatar img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid #e0d6fc;
+    object-fit: cover;
+  }
+
+  /* Hamburger button */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10000;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text);
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+    background-color: var(--primary);
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+    background-color: var(--primary);
+  }
+
+  /* Sidebar drawer on mobile */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    z-index: 9999;
+    background: var(--surface);
+    box-shadow: 8px 0 40px rgba(97, 51, 232, 0.15);
+    border-right: 3px solid #e8e0fa;
+    transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 28px 20px;
+    gap: 20px;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  /* Sidebar overlay */
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 12, 30, 0.35);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    opacity: 0;
+    z-index: 9998;
+    pointer-events: none;
+    transition: opacity 0.35s ease, backdrop-filter 0.35s ease;
+  }
+
+  .sidebar-overlay.active {
+    opacity: 1;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    pointer-events: auto;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 20px 16px 24px;
+  }
+
+  .banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px 20px 20px;
+    border-radius: 18px;
+  }
+
+  .banner-tabs {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .sidebar {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .user-card {
+    align-items: flex-start;
+  }
+
+  .banner {
+    padding: 20px 16px 18px;
+    border-radius: 16px;
+  }
+
+  .banner-title {
+    font-size: 20px;
+  }
+
+  .banner-sub {
+    font-size: 13px;
+  }
+
+  .btab {
+    flex: 1 1 0;
+    min-width: 88px;
+    text-align: center;
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  .podium {
+    gap: 10px;
+  }
+
+  .pod-card {
+    max-width: 100%;
+    padding: 16px 14px 20px;
+    border-radius: 16px;
+  }
+
+  .pod-avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .pod-avatar-gold {
+    width: 66px;
+    height: 66px;
+  }
+
+  .pod-score {
+    font-size: 17px;
+  }
+
+  .list-row {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px 14px;
+    border-radius: 14px;
+  }
+
+  .list-info {
+    flex-basis: calc(100% - 68px);
+  }
+
+  .list-score,
+  .list-score-box {
+    margin-left: 0;
+    width: 100%;
+    text-align: left;
+  }
+
+  .ctab {
+    padding: 9px 14px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .main {
+    padding: 14px 12px 18px;
+  }
+
+  .sidebar {
+    padding: 16px 14px;
+  }
+
+  .user-name {
+    font-size: 13px;
+  }
+
+  .user-streak {
+    font-size: 10px;
+  }
+
+  .banner {
+    padding: 16px 14px;
+  }
+
+  .banner-tabs {
+    gap: 6px;
+  }
+
+  .btab {
+    min-width: 80px;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .ctab {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .list-rank {
+    min-width: 20px;
+  }
+
+  .list-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .list-info {
+    flex-basis: calc(100% - 60px);
+  }
+
+  .pod-name,
+  .list-name {
+    font-size: 13px;
+  }
+}
+
+/* ============================================================
+   MODAL — Duolingo Style
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 12, 30, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  z-index: 10001;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Duolingo modal card */
+.modal {
+  background: var(--surface);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 3px solid #e8e0fa;
+  border-bottom: 5px solid #d4c9f5;
+  box-shadow: 0 6px 0 0 #d4c9f5, 0 20px 60px rgba(26, 26, 46, 0.2);
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.active .modal {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 24px 18px;
+  border-bottom: 2.5px solid var(--border);
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.modal-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  border-bottom: 3px solid #d4c9f5;
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s ease;
+  box-shadow: 0 2px 0 0 #d4c9f5;
+}
+
+.modal-close:hover {
+  background: #ede9ff;
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.modal-close:active {
+  transform: translateY(1px);
+  box-shadow: 0 0px 0 0 #d4c9f5;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 24px 26px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 0.1px;
+}
+
+.form-optional {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Duolingo-style inputs */
+.form-input,
+.form-textarea {
+  border: 2.5px solid #e0d6fc;
+  border-bottom: 3.5px solid #c9bdf5;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: "Nunito", "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface-soft);
+  transition: border-color 0.12s ease, background-color 0.12s ease, box-shadow 0.12s ease;
+  width: 100%;
+  box-shadow: 0 2px 0 0 #c9bdf5;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  border-bottom-color: var(--primary-strong);
+  background: #fff;
+  box-shadow: 0 3px 0 0 var(--primary-strong), 0 0 0 3px rgba(112, 0, 255, 0.08);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 68px;
+}
+
+/* Duolingo-style category grid */
+.category-select {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cat-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 2.5px solid #e0d6fc;
+  border-bottom: 3.5px solid #c9bdf5;
+  background: var(--surface-soft);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  box-shadow: 0 2px 0 0 #c9bdf5;
+}
+
+.cat-option:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.cat-option.selected {
+  border-color: var(--primary);
+  border-bottom-color: var(--primary-strong);
+  background: linear-gradient(135deg, #f3eeff 0%, #ede5ff 100%);
+  color: var(--primary);
+  box-shadow: 0 3px 0 0 var(--primary-strong), 0 4px 12px rgba(112, 0, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.cat-option.selected:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 0 var(--primary-strong);
+}
+
+.cat-emoji {
+  font-size: 18px;
+}
+
+/* Duolingo-style goal stepper */
+.goal-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.goal-btn {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 2.5px solid #e0d6fc;
+  border-bottom: 3.5px solid #c9bdf5;
+  background: var(--surface-soft);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--primary);
+  cursor: pointer;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  box-shadow: 0 2px 0 0 #c9bdf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goal-btn:hover {
+  background: #f3eeff;
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.goal-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0px 0 0 #c9bdf5;
+  border-bottom-width: 2px;
+}
+
+.goal-input {
+  text-align: center;
+  font-weight: 800 !important;
+}
+
+.form-error {
+  font-size: 13px;
+  font-weight: 700;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 2px solid #fecaca;
+  border-bottom: 3px solid #fca5a5;
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 2px 0 0 #fca5a5;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+/* Duolingo-style cancel button */
+.btn-cancel {
+  flex: 1;
+  padding: 14px 0;
+  border-radius: 14px;
+  border: 2.5px solid #e0d6fc;
+  border-bottom: 3.5px solid #c9bdf5;
+  background: #fff;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  box-shadow: 0 3px 0 0 #c9bdf5;
+}
+
+.btn-cancel:hover {
+  background: var(--surface-soft);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.btn-cancel:active {
+  transform: translateY(2px);
+  box-shadow: 0 0px 0 0 #c9bdf5;
+  border-bottom-width: 2px;
+}
+
+/* Duolingo-style submit button */
+.btn-submit {
+  flex: 1.4;
+  padding: 14px 0;
+  border-radius: 14px;
+  border: none;
+  background: var(--primary);
+  border-bottom: 4px solid var(--primary-strong);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  box-shadow: 0 4px 0 0 var(--primary-strong), 0 6px 16px rgba(112, 0, 255, 0.2);
+  letter-spacing: 0.2px;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 var(--primary-strong), 0 8px 20px rgba(112, 0, 255, 0.25);
+}
+
+.btn-submit:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 0 var(--primary-strong);
+  border-bottom-width: 2px;
+}
+
+.btn-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-submit-loader svg {
+  animation: modal-spin 0.8s linear infinite;
+}
+
+@keyframes modal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================
+   TOAST — Duolingo Style
+   ============================================================ */
+
+.app-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: #1a1a2e;
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 3px solid #111;
+  box-shadow: 0 4px 0 0 #111, 0 10px 30px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10002;
+  max-width: 90vw;
+  text-align: center;
+  font-family: "Nunito", "Nunito Sans", sans-serif;
+}
+
+.app-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.app-toast.error {
+  background: #dc2626;
+  border-bottom-color: #991b1b;
+}
+
+@media (max-width: 560px) {
+  .category-select {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .modal {
+    max-width: 94vw;
+  }
+}
+
+/* ============================================================
+   Streak.uz — Unified Sidebar Styles
+   ============================================================ */
+
+:root {
+  --primary-color: #7000ff;
+  --primary-light: #e8dbff;
+  --text-main: #2d3436;
+  --text-muted: #636e72;
+}
+
+.btn-img {
+  width: 20px !important;
+  color: white !important;
+}
+
+.btn-img2 {
+  width: 20px !important;
+  background-color: black !important;
+}
+
+.sidebar {
+  width: 280px;
+  background: var(--surface) !important;
+  padding: 28px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  border-right: 2.5px solid #e8e0fa !important;
+  box-shadow: 6px 0 30px rgba(0, 0, 0, 0.03) !important;
+  position: fixed !important;
+  height: 100vh !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 999 !important;
+  box-sizing: border-box !important;
+}
+
+/* Sidebar menu icon consistency */
+.menu-item a i {
+  font-size: 20px !important;
+  width: 24px !important;
+  text-align: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.sidebar-close {
+  display: none !important;
+}
+
+/* Sidebar open state on mobile */
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%) !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .sidebar.open,
+  .sidebar.active {
+    transform: translateX(0) !important;
+  }
+}
+
+/* Offset for main container on desktop */
+@media (min-width: 901px) {
+  .main-content,
+  .main,
+  .main-container {
+    margin-left: 280px !important;
+    width: calc(100% - 280px) !important;
+  }
+}
+
+/* ============================================================
+   DUOLINGO SPECIAL ANIMATIONS & EFFECTS
+   ============================================================ */
+
+/* Bounce-in animation for podium cards */
+@keyframes duo-bounce-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Stagger animation for list rows */
+@keyframes duo-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animations */
+.pod-wrap:nth-child(1) { animation: duo-bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both; }
+.pod-wrap:nth-child(2) { animation: duo-bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0s both; }
+.pod-wrap:nth-child(3) { animation: duo-bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both; }
+
+.list-row {
+  animation: duo-slide-up 0.35s ease-out both;
+}
+
+/* Subtle pulse for active row */
+@keyframes duo-pulse-glow {
+  0%, 100% { box-shadow: 0 4px 0 0 var(--primary-strong), 0 6px 20px rgba(112, 0, 255, 0.25); }
+  50% { box-shadow: 0 4px 0 0 var(--primary-strong), 0 6px 28px rgba(112, 0, 255, 0.35); }
+}
+
+.active-row {
+  animation: duo-pulse-glow 3s ease-in-out infinite;
+}
+
+/* Fun wiggle on hover for score */
+.list-score:hover,
+.pod-score:hover {
+  animation: duo-wiggle 0.4s ease;
+}
+
+@keyframes duo-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+/* Smooth scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4c9f5;
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}

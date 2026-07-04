@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7000ff" />
+  <title>Streak.uz — Flashcards & Takrorlash</title>
+  <link rel="stylesheet" href="flashcards.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ===== MOBILE HEADER ===== -->
+  <div class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Menyuni ochish">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-logo">Streak.uz</div>
+    <div class="mobile-user-avatar">
+      <img src="https://i.pravatar.cc/150?img=11" alt="user" class="topbar-avatar" />
+    </div>
+  </div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <div class="sidebar">
+    <button class="sidebar-close" aria-label="Yopish">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div>
+      <div class="logo">
+        <i class="fa-solid fa-bolt"></i> Streak.uz
+      </div>
+
+      <div class="user-welcome">
+        <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" class="user-avatar" />
+        <div>
+          <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+          <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+        </div>
+      </div>
+
+      <ul class="menu-list">
+        <li class="menu-item nav-dashboard"><a href="./dashboard.html"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="nav_dashboard">Boshqaruv</span></a></li>
+        <li class="menu-item nav-rating"><a href="./Leardboard.html"><i class="fa-solid fa-ranking-star"></i> <span data-i18n="nav_rating">Reyting</span></a></li>
+        <li class="menu-item nav-profile active"><a href="./profil.html"><i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profil</span></a></li>
+        <li class="menu-item nav-settings"><a href="./sozlamalar.html"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Sozlamalar</span></a></li>
+      </ul>
+    </div>
+
+    <button class="btn-add-habit">
+      <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+    </button>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div></div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Bildirishnomalar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="icon-dot"></span>
+        </button>
+        <img src="https://i.pravatar.cc/150?img=11" alt="user" class="topbar-avatar" />
+      </div>
+    </div>
+
+    <!-- HERO BANNER -->
+    <section class="hero">
+      <h1>Flashcards & Takrorlash</h1>
+      <p>Bilimlaringizni uzoq muddatli saqlash uchun, Spaced repetition algoritmi sizga eng kerakli vaqtida takrorlashni ta'minlaydi.</p>
+    </section>
+
+    <!-- ACTION CARD -->
+    <div class="action-card">
+      <div class="action-left">
+        <div class="greeting">Boshingiz baxt</div>
+        <h3>Tayyor misiz?</h3>
+        <p class="sub">Bugun takrorlash uchun <strong>23 ta kartani</strong> kuting oqida</p>
+      </div>
+      <button class="action-btn">
+        <i class="fa-solid fa-play"></i>
+        Takrorlashni boshlash
+      </button>
+      <div class="memory-level">
+        <div class="memory-ring-wrap">
+          <svg viewBox="0 0 100 100">
+            <circle class="memory-ring-bg" cx="50" cy="50" r="43"/>
+            <circle class="memory-ring-fill" cx="50" cy="50" r="43"/>
+          </svg>
+          <span class="memory-percent">85%</span>
+        </div>
+        <div class="memory-label">
+          <strong>Xotira Darajasi</strong><br>
+          85% → 92%
+        </div>
+      </div>
+    </div>
+
+    <!-- MENING TO'PLAMLARIM -->
+    <div class="section-header">
+      <h2>Mening To'plamlarim</h2>
+      <span class="see-all">Barchasi <i class="fa-solid fa-chevron-right" style="font-size:11px;"></i></span>
+    </div>
+
+    <div class="collections-grid">
+
+      <!-- English Vocabulary -->
+      <div class="collection-card" data-set="English Vocabulary">
+        <div class="card-head">
+          <div class="card-icon-box blue">A</div>
+          <div>
+            <div class="card-title">English Vocabulary</div>
+            <div class="card-desc">Advanced level words from daily reading habits</div>
+          </div>
+        </div>
+        <div class="card-progress-section">
+          <span class="card-progress-info">12 ta kart</span>
+          <div class="card-progress-track">
+            <div class="card-progress-fill blue" style="width: 75%;"></div>
+          </div>
+          <span class="card-mastery-percent blue">75%</span>
+        </div>
+        <div class="card-count">60 / 80 KARTALARI</div>
+      </div>
+
+      <!-- Python Mastery -->
+      <div class="collection-card" data-set="Python Mastery">
+        <div class="card-head">
+          <div class="card-icon-box orange">P</div>
+          <div>
+            <div class="card-title">Python Mastery</div>
+            <div class="card-desc">Key concepts, decorators, and data structures</div>
+          </div>
+        </div>
+        <div class="card-progress-section">
+          <span class="card-progress-info">5 ta kart</span>
+          <div class="card-progress-track">
+            <div class="card-progress-fill orange" style="width: 40%;"></div>
+          </div>
+          <span class="card-mastery-percent orange">40%</span>
+        </div>
+        <div class="card-count">120 / 300 KARTALARI</div>
+      </div>
+
+      <!-- Atomic Habits -->
+      <div class="collection-card" data-set="Atomic Habits">
+        <div class="card-head">
+          <div class="card-icon-box purple"><i class="fa-solid fa-lightbulb" style="font-size:20px;"></i></div>
+          <div>
+            <div class="card-title">Atomic Habits</div>
+            <div class="card-desc">Summary of James Clear's habit formation laws</div>
+          </div>
+        </div>
+        <div class="card-progress-section">
+          <span class="card-progress-info">10 ta kart</span>
+          <div class="card-progress-track">
+            <div class="card-progress-fill green" style="width: 100%;"></div>
+          </div>
+          <span class="card-mastery-percent green">100%</span>
+        </div>
+        <div class="card-count">10 / 10 KARTALARI</div>
+      </div>
+
+    </div>
+
+    <!-- AI TAKLIFLARI -->
+    <div class="ai-section">
+      <div class="ai-header">
+        <span class="ai-header-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+        <h2>AI Takliflari</h2>
+      </div>
+      <p class="ai-desc">
+        O'zingizga moslashgan takrorlashlar uchun AI avtomatik ravishda 12 ta yangi kartani yaratadi.
+        Ular to'plamlaringizga o'zlashtirilgan so'zlarni o'z ichiga oladi.
+      </p>
+
+      <div class="suggestions-grid">
+        <!-- Decorator -->
+        <div class="suggestion-card">
+          <div class="suggestion-icon blue">Decorator</div>
+          <div class="suggestion-info">
+            <h4>'Decorator' tushunchasi</h4>
+            <p>Python dars 4-ta bo'lim</p>
+          </div>
+          <div class="suggestion-arrow">
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+        <!-- Inevitability -->
+        <div class="suggestion-card">
+          <div class="suggestion-icon orange">Inevitability</div>
+          <div class="suggestion-info">
+            <h4>'Inevitability' so'zi</h4>
+            <p>English reading darslar</p>
+          </div>
+          <div class="suggestion-arrow">
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FAB -->
+  <button class="fab" aria-label="Yangi qo'shish">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  </button>
+<script src="sidebar-sync.js"></script>
+<script src="flashcards.js"></script>
+</body>
+</html>

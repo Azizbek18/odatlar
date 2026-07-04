@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7000ff" />
+  <title>Streak.uz - Odat tafsilotlari</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="habit-detail.css" />
+</head>
+<body>
+  <div class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Menyuni ochish">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="mobile-logo">Streak.uz</div>
+    <div class="mobile-user-avatar">
+      <img src="https://i.pravatar.cc/150?img=11" alt="user" class="user-avatar" />
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <button class="sidebar-close" aria-label="Yopish">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div>
+      <div class="logo">
+        <i class="fa-solid fa-bolt"></i> Streak.uz
+      </div>
+
+      <div class="user-welcome">
+        <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" class="user-avatar" />
+        <div>
+          <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+          <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+        </div>
+      </div>
+
+      <ul class="menu-list">
+        <li class="menu-item nav-dashboard"><a href="./dashboard.html"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="nav_dashboard">Boshqaruv</span></a></li>
+        <li class="menu-item nav-rating"><a href="./Leardboard.html"><i class="fa-solid fa-ranking-star"></i> <span data-i18n="nav_rating">Reyting</span></a></li>
+        <li class="menu-item nav-profile"><a href="./profil.html"><i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profil</span></a></li>
+        <li class="menu-item nav-settings"><a href="./sozlamalar.html"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Sozlamalar</span></a></li>
+      </ul>
+    </div>
+
+    <button class="btn-add-habit">
+      <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+    </button>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main">
+    <div class="topbar">
+        <a href="./dashboard.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
+        Streak.uz
+      </a>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Bildirishnomalar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="icon-dot"></span>
+        </button>
+        <img src="https://i.pravatar.cc/150?img=11" alt="user" class="topbar-avatar" />
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-icon">рџ“–</div>
+        <div>
+          <h1 class="hero-title">Deep Reading</h1>
+          <p class="hero-sub">Kunlik o'z-o'zini rivojlantirish odati</p>
+        </div>
+      </div>
+      <div class="hero-streak">
+        <div class="hero-streak-flame">рџ”Ґ</div>
+        <div>
+          <div class="hero-streak-num">47</div>
+          <div class="hero-streak-label">kunlik streak</div>
+        </div>
+        <button class="hero-streak-btn">Bugun belgilash</button>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card task-card">
+        <h2 class="card-title">Bugungi vazifa</h2>
+        <div class="progress-wrap">
+          <svg class="progress-ring" viewBox="0 0 140 140">
+            <circle class="progress-bg" cx="70" cy="70" r="60"></circle>
+            <circle class="progress-fg" cx="70" cy="70" r="60"
+                    stroke-dasharray="377"
+                    stroke-dashoffset="113"></circle>
+          </svg>
+          <div class="progress-center">
+            <div class="progress-pct">70%</div>
+            <div class="progress-time">21 / 30 daq</div>
+          </div>
+        </div>
+        <button class="continue-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          Davom ettirish
+        </button>
+      </section>
+
+      <section class="card history-card">
+        <div class="card-head">
+          <h2 class="card-title">Streak tarixi</h2>
+          <div class="legend">
+            <span class="legend-dot light"></span> Kam
+            <span class="legend-dot dark"></span> Ko'p
+          </div>
+        </div>
+        <div class="heatmap" id="heatmap"></div>
+        <div class="heatmap-months">
+          <span>Avgust</span>
+          <span>Sentabr</span>
+          <span>Oktabr</span>
+        </div>
+      </section>
+
+      <section class="card impact-card">
+        <h2 class="card-title">Umumiy natija</h2>
+        <div class="impact-grid">
+          <div class="impact-item purple">
+            <div class="impact-label">Jami soatlar</div>
+            <div class="impact-value">124.5</div>
+          </div>
+          <div class="impact-item orange">
+            <div class="impact-label">O'rtacha / kun</div>
+            <div class="impact-value">6.2 soat</div>
+          </div>
+          <div class="impact-item purple">
+            <div class="impact-label">Eng uzun streak</div>
+            <div class="impact-value">52 kun</div>
+          </div>
+          <div class="impact-item orange">
+            <div class="impact-label">Muvaffaqiyat</div>
+            <div class="impact-value">94%</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card days-card">
+        <h2 class="card-title">So'nggi 7 kun</h2>
+        <ul class="days-list">
+          <li class="day-row">
+            <span class="day-dot done"></span>
+            <div class="day-info">
+              <div class="day-date">26-okt, 2025</div>
+              <div class="day-meta">35 daqiqa bajarildi</div>
+            </div>
+            <span class="day-badge up">+3%</span>
+          </li>
+          <li class="day-row">
+            <span class="day-dot done"></span>
+            <div class="day-info">
+              <div class="day-date">25-okt, 2025</div>
+              <div class="day-meta">28 daqiqa bajarildi</div>
+            </div>
+            <span class="day-badge up">+5%</span>
+          </li>
+          <li class="day-row">
+            <span class="day-dot done"></span>
+            <div class="day-info">
+              <div class="day-date">24-okt, 2025</div>
+              <div class="day-meta">30 daqiqa bajarildi</div>
+            </div>
+            <span class="day-badge up">+2%</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card ai-card">
+        <div class="ai-card-head">
+          <span class="ai-icon">вњЁ</span>
+          <h2 class="card-title light">AI Murabbiy maslahati</h2>
+        </div>
+        <p class="ai-text">Siz soat 19:00 da eng samarali bo'lasiz. "Deep Reading" odatini shu vaqt atrofiga
+          o'tkazib ko'ring вЂ” bu cho'qqi holatingizga to'g'ri keladi.</p>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="sidebar-sync.js?v=20260704-avatar2"></script>
+  <script src="habit-detail.js"></script>
+</body>
+</html>

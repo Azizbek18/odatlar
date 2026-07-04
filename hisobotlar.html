@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streak.uz - Interaktiv Dashboard</title>
+    <link rel="stylesheet" href="hisobotlar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Mobile Header -->
+  <div class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Menyuni ochish">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-logo">Streak.uz</div>
+    <div style="width:32px"></div>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- =================== SIDEBAR =================== -->
+  <div class="sidebar">
+      <button class="sidebar-close" aria-label="Yopish">
+          <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div>
+          <div class="logo">
+              <i class="fa-solid fa-bolt"></i> Streak.uz
+          </div>
+
+          <div class="user-welcome">
+              <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" class="user-avatar">
+              <div>
+                  <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+                  <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+              </div>
+          </div>
+
+          <ul class="menu-list">
+              <!-- menu items injected dynamically by sidebar-sync.js -->
+          </ul>
+      </div>
+
+      <button class="btn-add-habit">
+          <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+      </button>
+  </div>
+
+  <main class="main-content">
+        
+        <section class="hero-banner">
+            <div class="banner-text">
+                <h1>Haftalik Hisobot</h1>
+                <p>Sizning momentumingiz va yutuqlaringiz tahlili</p>
+            </div>
+            <div class="time-filter">
+                <button class="filter-btn active" data-time="hafta">Hafta</button>
+                <button class="filter-btn" data-time="oy">Oy</button>
+                <button class="filter-btn" data-time="yil">Yil</button>
+            </div>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="card-header">
+                    <div class="card-icon purple-bg"><i class="fa-regular fa-circle-check"></i></div>
+                    <span class="badge trend-up">+12%</span>
+                </div>
+                <div class="card-value" id="stat-days">24</div>
+                <div class="card-label">Bajarilgan kunlar</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-header">
+                    <div class="card-icon orange-bg"><i class="fa-regular fa-clock"></i></div>
+                    <span class="badge trend-up" id="stat-time-trend">+2s</span>
+                </div>
+                <div class="card-value" id="stat-time">48s</div>
+                <div class="card-label">Umumiy vaqt</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-header">
+                    <div class="card-icon red-bg"><i class="fa-solid fa-fire"></i></div>
+                    <span class="badge trend-alert">Rekord!</span>
+                </div>
+                <div class="card-value" id="stat-streak">14</div>
+                <div class="card-label">Hozirgi Streak</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-header">
+                    <div class="card-icon yellow-bg"><i class="fa-solid fa-chart-simple"></i></div>
+                    <span class="badge trend-rank">Top 5%</span>
+                </div>
+                <div class="card-value" id="stat-leaderboard">#12</div>
+                <div class="card-label">Leaderboard</div>
+            </div>
+        </section>
+
+        <div class="main-layout">
+            
+            <div class="left-column">
+                <div class="content-card">
+                    <div class="card-title-container">
+                        <h3 class="card-title" id="chart-title">Streak Dinamikasi</h3>
+                        <span class="legend-dot" id="chart-legend">Bu hafta</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="streakChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="card-title">Odatlar Tahlili</h3>
+                    
+                    <div class="habit-item">
+                        <div class="habit-info">
+                            <span class="habit-name"><i class="fa-solid fa-droplet icon-blue"></i> Suv ichish</span>
+                            <span class="habit-percentage text-green" id="p-suv">~100%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress bg-purple" id="bar-suv" style="width: 100%;"></div></div>
+                    </div>
+
+                    <div class="habit-item">
+                        <div class="habit-info">
+                            <span class="habit-name"><i class="fa-solid fa-book icon-orange"></i> Kitob o'qish</span>
+                            <span class="habit-percentage text-orange" id="p-kitob">~75%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress bg-orange" id="bar-kitob" style="width: 75%;"></div></div>
+                    </div>
+
+                    <div class="habit-item">
+                        <div class="habit-info">
+                            <span class="habit-name"><i class="fa-solid fa-spa icon-green"></i> Meditatsiya</span>
+                            <span class="habit-percentage text-green" id="p-med">~90%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress bg-purple" id="bar-med" style="width: 90%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="content-card">
+                    <h3 class="card-title">Aktivlik Xaritasi</h3>
+                    <div class="calendar-grid" id="calendarGrid">
+                        </div>
+                    <div class="info-alert">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <p id="alert-text">Siz kechki payt 20:00 da eng faolsiz.</p>
+                    </div>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-header">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <h3>AI Xulosasi</h3>
+                    </div>
+                    <p class="ai-text" id="ai-text-content">
+                        Ajoyib hafta, Aziz! Sen "Kitob o'qish" odatida 14 kunlik streakka erishding. Tahlillar shuni ko'rsatadiki, meditatsiyani kechroq bajarganingda muvaffaqiyat ehtimoli 20% ga oshmoqda. Keyingi hafta ushbu rejimni sinab ko'rishingni maslahat beraman.
+                    </p>
+                    <button class="ai-btn" id="aiBtn">To'liq maslahatni ko'rish</button>
+                </div>
+
+                <div class="content-card">
+                    <span class="sub-title">KUNLIK AKTIVLIK (SOAT)</span>
+                    <div class="bar-chart" id="dailyBarChart">
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="sidebar-sync.js"></script>
+    <script src="hisobotlar.js"></script>
+</body>
+</html>

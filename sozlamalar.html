@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sozlamalar</title>
+    <link rel="stylesheet" href="sozlamalar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <button class="sidebar-close" aria-label="Yopish">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div>
+            <div class="logo">
+                <i class="fa-solid fa-bolt"></i> Streak.uz
+            </div>
+
+            <div class="user-welcome">
+                <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" class="user-avatar">
+                <div>
+                    <h4 id="welcome-greeting" class="user-name" data-name="Foydalanuvchi">Salom, Foydalanuvchi!</h4>
+                    <p><i class="fa-solid fa-fire"></i> <span id="sidebar-streak-text" class="user-streak" data-days="0">0 kunlik streak</span></p>
+                </div>
+            </div>
+
+            <ul class="menu-list">
+                <li class="menu-item nav-dashboard"><a href="./dashboard.html"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="nav_dashboard">Boshqaruv</span></a></li>
+                <li class="menu-item nav-rating"><a href="./Leardboard.html"><i class="fa-solid fa-ranking-star"></i> <span data-i18n="nav_rating">Reyting</span></a></li>
+                <li class="menu-item nav-profile"><a href="./profil.html"><i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profil</span></a></li>
+                <li class="menu-item nav-settings"><a href="./sozlamalar.html"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Sozlamalar</span></a></li>
+            </ul>
+        </div>
+
+        <button class="btn-add-habit">
+            <i class="fa-solid fa-plus"></i> <span data-i18n="btn_add_habit">Yangi odat</span>
+        </button>
+    </div>
+
+    <div class="sidebar-backdrop"></div>
+
+    <div class="main-container single-col">
+        <div class="content-section">
+
+            <!-- Sarlavha va qidiruv -->
+            <div class="settings-header">
+                <div class="settings-header-top">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <button class="menu-toggle" aria-label="Menyu" style="display: none; border: none; background: transparent; color: #2d3436; font-size: 24px; cursor: pointer;"><i class="fa-solid fa-bars"></i></button>
+                        <div>
+                            <h1 class="page-title" style="margin: 0;" data-i18n="settings_title">Sozlamalar</h1>
+                            <p class="page-subtitle" data-i18n="settings_subtitle">Hisobingizni va ilovangizni sozlang</p>
+                        </div>
+                    </div>
+                    <button class="quick-theme-btn" id="quick-theme-btn" title="Mavzu">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+
+                <!-- Qidiruv paneli -->
+                <div class="settings-search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="settings-search" class="settings-search"
+                        placeholder="Sozlamalarni qidiring..."
+                        data-i18n-placeholder="search_placeholder">
+                    <button class="search-clear" id="search-clear" aria-label="Tozalash">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Foydalanuvchi profil kartochkasi -->
+            <div class="creative-card user-profile-card" id="user-profile-card">
+                <div class="profile-card-left">
+                    <div class="profile-avatar-wrap">
+                        <img src="rasmlar/Foydalanuvchi rasmi (1).png" alt="Avatar" id="settings-avatar" class="profile-avatar">
+                        <div class="profile-avatar-badge"><i class="fa-solid fa-bolt"></i></div>
+                    </div>
+                    <div class="profile-card-info">
+                        <h2 id="settings-user-name">Foydalanuvchi</h2>
+                        <p id="settings-user-email" class="profile-email">email@example.com</p>
+                        <div class="profile-mini-stats">
+                            <div class="mini-stat">
+                                <i class="fa-solid fa-fire"></i>
+                                <span id="settings-streak">0</span>
+                                <small data-i18n="streak_label">streak</small>
+                            </div>
+                            <div class="mini-stat">
+                                <i class="fa-solid fa-trophy"></i>
+                                <span id="settings-level">1</span>
+                                <small data-i18n="level_label">daraja</small>
+                            </div>
+                            <div class="mini-stat">
+                                <i class="fa-solid fa-calendar-check"></i>
+                                <span id="settings-habits">0</span>
+                                <small data-i18n="habits_label">odatlar</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-edit-profile" id="btn-edit-profile">
+                    <i class="fa-solid fa-pen"></i>
+                    <span data-i18n="btn_edit">Tahrirlash</span>
+                </button>
+            </div>
+
+            <!-- AKKAUNT BO'LIMI -->
+            <div class="settings-category" data-category="account">
+                <div class="category-header">
+                    <div class="category-icon cat-purple"><i class="fa-solid fa-user-circle"></i></div>
+                    <div>
+                        <h3 data-i18n="cat_account">Akkaunt</h3>
+                        <p data-i18n="cat_account_desc">Shaxsiy ma'lumotlar va xavfsizlik</p>
+                    </div>
+                </div>
+                <div class="creative-card settings-panel">
+                    <div class="settings-list">
+                        <a href="#" class="settings-item" data-setting="personal" data-keywords="shaxsiy ma'lumotlar ism familiya bio profil personal info name">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-purple"><i class="fa-solid fa-user-gear"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_personal">Shaxsiy ma'lumotlar</span>
+                                    <small data-i18n="settings_personal_desc">Ism, bio va profil rasmi</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                        <a href="#" class="settings-item" data-setting="security" data-keywords="xavfsizlik parol 2fa security password two-factor">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-green"><i class="fa-solid fa-shield-halved"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_security">Xavfsizlik</span>
+                                    <small data-i18n="settings_security_desc">Parol va ikki bosqichli tasdiqlash</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                        <a href="#" class="settings-item" data-setting="privacy" data-keywords="maxfiylik profil ko'rinishi privacy visibility public">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-teal"><i class="fa-solid fa-eye"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_privacy">Maxfiylik</span>
+                                    <small data-i18n="settings_privacy_desc">Profil ko'rinishi va ma'lumotlar</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TIL VA MAVZU -->
+            <div class="settings-category" data-category="appearance">
+                <div class="category-header">
+                    <div class="category-icon cat-pink"><i class="fa-solid fa-palette"></i></div>
+                    <div>
+                        <h3 data-i18n="cat_appearance">Til va mavzu</h3>
+                        <p data-i18n="cat_appearance_desc">Interfeys tilini va ko'rinishini sozlang</p>
+                    </div>
+                </div>
+                <div class="creative-card settings-panel">
+                    <div class="settings-list">
+                        <a href="#" class="settings-item" data-setting="language" data-keywords="til language o'zbek rus english uz ru en">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-blue"><i class="fa-solid fa-earth-americas"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_language">Til</span>
+                                    <small id="settings-language-label">O'zbekcha</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                        <a href="#" class="settings-item" data-setting="theme" data-keywords="mavzu tema theme dark light auto qorong'i ochiq">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-indigo"><i class="fa-solid fa-circle-half-stroke"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_theme">Mavzu</span>
+                                    <small id="settings-theme-label">Tizim</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                        <a href="#" class="settings-item" data-setting="font" data-keywords="shrift font o'lcham size kichik katta">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-orange"><i class="fa-solid fa-text-height"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_font">Shrift o'lchami</span>
+                                    <small id="settings-font-label">O'rtacha</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BILDIRISHNOMALAR VA ODATLAR -->
+            <div class="settings-category" data-category="preferences">
+                <div class="category-header">
+                    <div class="category-icon cat-orange"><i class="fa-solid fa-sliders"></i></div>
+                    <div>
+                        <h3 data-i18n="cat_preferences">Bildirishnomalar va odatlar</h3>
+                        <p data-i18n="cat_preferences_desc">Eslatmalar va odat sozlamalari</p>
+                    </div>
+                </div>
+                <div class="creative-card settings-panel">
+                    <div class="settings-list">
+                        <a href="#" class="settings-item" data-setting="notifications" data-keywords="bildirishnoma notifications push email streak eslatma">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-orange"><i class="fa-solid fa-bell"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_notifications">Bildirishnomalar</span>
+                                    <small data-i18n="settings_notifications_desc">Push, email va streak eslatmalari</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                        <a href="#" class="settings-item" data-setting="habits" data-keywords="odatlar eslatma vaqti hafta boshi habits reminder time week">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-yellow"><i class="fa-solid fa-clock"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_habits">Odatlar sozlamalari</span>
+                                    <small data-i18n="settings_habits_desc">Eslatma vaqti va hafta boshi</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                        <div class="settings-item settings-item-inline" data-keywords="tovush sound vibration tebranish">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-red"><i class="fa-solid fa-volume-high"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_sound">Ovozli bildirishnoma</span>
+                                    <small data-i18n="settings_sound_desc">Bildirishnomalar uchun ovoz</small>
+                                </div>
+                            </div>
+                            <label class="switch"><input type="checkbox" id="toggle-sound"><span class="slider"></span></label>
+                        </div>
+                        <div class="settings-item settings-item-inline" data-keywords="animatsiya animation effects">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-cyan"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_animations">Animatsiyalar</span>
+                                    <small data-i18n="settings_animations_desc">Silliq o'tishlar va effektlar</small>
+                                </div>
+                            </div>
+                            <label class="switch"><input type="checkbox" id="toggle-animations" checked><span class="slider"></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MA'LUMOTLAR -->
+            <div class="settings-category" data-category="data">
+                <div class="category-header">
+                    <div class="category-icon cat-blue"><i class="fa-solid fa-database"></i></div>
+                    <div>
+                        <h3 data-i18n="cat_data">Ma'lumotlar</h3>
+                        <p data-i18n="cat_data_desc">Eksport, import va keshni boshqarish</p>
+                    </div>
+                </div>
+                <div class="creative-card settings-panel">
+                    <div class="settings-list">
+                        <a href="#" class="settings-item" data-setting="export" data-keywords="eksport export yuklab olish download backup zaxira">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-green"><i class="fa-solid fa-file-export"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_export">Ma'lumotlarni eksport qilish</span>
+                                    <small data-i18n="settings_export_desc">Barcha ma'lumotlarni yuklab olish</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-download chevron" style="font-size: 14px;"></i>
+                        </a>
+                        <a href="#" class="settings-item" data-setting="import" data-keywords="import import yuklash upload restore">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-blue"><i class="fa-solid fa-file-import"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_import">Ma'lumotlarni import qilish</span>
+                                    <small data-i18n="settings_import_desc">Zaxira nusxadan tiklash</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-upload chevron" style="font-size: 14px;"></i>
+                        </a>
+                        <a href="#" class="settings-item" data-setting="cache" data-keywords="kesh cache tozalash clear temporary">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-orange"><i class="fa-solid fa-broom"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_cache">Keshni tozalash</span>
+                                    <small data-i18n="settings_cache_desc">Vaqtinchalik fayllarni o'chirish</small>
+                                </div>
+                            </div>
+                            <span class="cache-size" id="cache-size">— KB</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YORDAM -->
+            <div class="settings-category" data-category="support">
+                <div class="category-header">
+                    <div class="category-icon cat-green"><i class="fa-solid fa-circle-question"></i></div>
+                    <div>
+                        <h3 data-i18n="cat_support">Yordam va qo'llab-quvvatlash</h3>
+                        <p data-i18n="cat_support_desc">Savollar, fikr-mulohaza va ma'lumot</p>
+                    </div>
+                </div>
+                <div class="creative-card settings-panel">
+                    <div class="settings-list">
+                        <a href="#" class="settings-item" data-setting="faq" data-keywords="savol FAQ yordam question help">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-purple"><i class="fa-solid fa-circle-question"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_faq">Tez-tez so'raladigan savollar</span>
+                                    <small data-i18n="settings_faq_desc">Eng ko'p beriladigan savollar</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                        <a href="#" class="settings-item" data-setting="feedback" data-keywords="fikr mulohaza feedback xabar yuborish send">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-pink"><i class="fa-solid fa-comment-dots"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_feedback">Fikr-mulohaza yuborish</span>
+                                    <small data-i18n="settings_feedback_desc">Taklif va shikoyatlaringiz</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                        <a href="#" class="settings-item" data-setting="contact" data-keywords="aloqa bog'lanish contact email support">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-blue"><i class="fa-solid fa-envelope"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_contact">Biz bilan bog'lanish</span>
+                                    <small data-i18n="settings_contact_desc">Qo'llab-quvvatlash xizmati</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                        <a href="#" class="settings-item" data-setting="about" data-keywords="ilova haqida about version versiya">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-gray"><i class="fa-solid fa-circle-info"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_about">Ilova haqida</span>
+                                    <small data-i18n="settings_about_desc">Versiya, litsenziya va huquqlar</small>
+                                </div>
+                            </div>
+                            <span class="version-badge" id="app-version">v1.0.0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- XAVF ZONASI -->
+            <div class="settings-category danger-zone" data-category="danger">
+                <div class="category-header">
+                    <div class="category-icon cat-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div>
+                        <h3 data-i18n="cat_danger">Xavf zonasi</h3>
+                        <p data-i18n="cat_danger_desc">Ehtiyot bo'ling — bu amallarni qaytarib bo'lmaydi</p>
+                    </div>
+                </div>
+                <div class="creative-card settings-panel danger-panel">
+                    <div class="settings-list">
+                        <a href="#" class="settings-item logout" data-setting="logout" data-keywords="chiqish logout tizimdan">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-red"><i class="fa-solid fa-right-from-bracket"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_logout">Tizimdan chiqish</span>
+                                    <small data-i18n="settings_logout_desc">Hisobingizdan chiqing</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                        <a href="#" class="settings-item danger" data-setting="delete" data-keywords="o'chirish delete account akkaunt remove">
+                            <div class="settings-link-content">
+                                <div class="setting-icon si-red-dark"><i class="fa-solid fa-user-xmark"></i></div>
+                                <div class="settings-text">
+                                    <span data-i18n="settings_delete">Akkauntni o'chirish</span>
+                                    <small data-i18n="settings_delete_desc">Barcha ma'lumotlar o'chiriladi</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right chevron"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pastki axborot -->
+            <div class="settings-footer">
+                <p>Streak.uz <span id="footer-version">v1.0.0</span> · <span data-i18n="made_with">Yaratildi</span> <i class="fa-solid fa-heart" style="color:#ff7675"></i> <span data-i18n="in_uzbekistan">O'zbekistonda</span></p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="sidebar-sync.js"></script>
+    <script src="sozlamalar.js"></script>
+</body>
+
+</html>
