@@ -27,6 +27,16 @@ function getScoreKey(range) {
     return TIME_RANGE_TO_KEY[range] || 'streak';
 }
 
+// Foydalanuvchidan kelgan matnni xavfsiz chiqarish uchun (XSS oldini olish)
+function escapeHtml(str) {
+    return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // Sidebar va mobile-header foydalanuvchi ma'lumotlarini dinamik yangilash
 function updateSidebarUser(users) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -133,8 +143,8 @@ function renderPodium(topThree, scoreKey) {
         <div class="pod-wrap second-wrap">
             <div class="pod-card second-card">
                 <div class="place-pill">2-o'rin</div>
-                <img src="${second.avatar_url || DEFAULT_AVATAR}" alt="${second.full_name}" class="pod-avatar"/>
-                <div class="pod-name">${second.full_name}</div>
+                <img src="${escapeHtml(second.avatar_url || DEFAULT_AVATAR)}" alt="${escapeHtml(second.full_name)}" class="pod-avatar"/>
+                <div class="pod-name">${escapeHtml(second.full_name)}</div>
                 <div class="pod-score">🔥<span>${getDisplayScore(second)}</span></div>
             </div>
         </div>` : '<div class="pod-wrap second-wrap"></div>'}
@@ -143,8 +153,8 @@ function renderPodium(topThree, scoreKey) {
         <div class="pod-wrap first-wrap">
             <div class="pod-crown">👑</div>
             <div class="pod-card first-card">
-                <img src="${first.avatar_url || DEFAULT_AVATAR}" alt="${first.full_name}" class="pod-avatar pod-avatar-gold"/>
-                <div class="pod-name">${first.full_name}</div>
+                <img src="${escapeHtml(first.avatar_url || DEFAULT_AVATAR)}" alt="${escapeHtml(first.full_name)}" class="pod-avatar pod-avatar-gold"/>
+                <div class="pod-name">${escapeHtml(first.full_name)}</div>
                 <div class="pod-score">🔥<span>${getDisplayScore(first)}</span></div>
             </div>
         </div>` : ''}
@@ -153,8 +163,8 @@ function renderPodium(topThree, scoreKey) {
         <div class="pod-wrap third-wrap">
             <div class="pod-card third-card">
                 <div class="place-pill">3-o'rin</div>
-                <img src="${third.avatar_url || DEFAULT_AVATAR}" alt="${third.full_name}" class="pod-avatar"/>
-                <div class="pod-name">${third.full_name}</div>
+                <img src="${escapeHtml(third.avatar_url || DEFAULT_AVATAR)}" alt="${escapeHtml(third.full_name)}" class="pod-avatar"/>
+                <div class="pod-name">${escapeHtml(third.full_name)}</div>
                 <div class="pod-score">🔥<span>${getDisplayScore(third)}</span></div>
             </div>
         </div>` : '<div class="pod-wrap third-wrap"></div>'}
@@ -188,7 +198,7 @@ function renderList(others, scoreKey) {
 
         const tagsHTML = user.tags ? user.tags.map(tag => {
             const tagClass = getTagClass(tag);
-            return `<span class="ltag ${tagClass}">${tag}</span>`;
+            return `<span class="ltag ${tagClass}">${escapeHtml(tag)}</span>`;
         }).join('') : '';
 
         const row = document.createElement('div');
@@ -197,11 +207,11 @@ function renderList(others, scoreKey) {
         row.innerHTML = `
             <span class="list-rank">${rank}</span>
             <div class="list-avatar-wrap">
-                <img src="${user.avatar_url || DEFAULT_AVATAR}" alt="${user.full_name}" class="list-avatar"/>
+                <img src="${escapeHtml(user.avatar_url || DEFAULT_AVATAR)}" alt="${escapeHtml(user.full_name)}" class="list-avatar"/>
                 ${user.is_online || isMe ? '<span class="online-dot"></span>' : ''}
             </div>
             <div class="list-info">
-                <div class="list-name">${user.full_name}</div>
+                <div class="list-name">${escapeHtml(user.full_name)}</div>
                 <div class="list-tags">${tagsHTML}</div>
             </div>
             ${isMe ? 

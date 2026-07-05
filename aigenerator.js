@@ -4,7 +4,7 @@
 
 // ---- Sidebar / mobile menu toggle ----
 const menuToggle = document.getElementById("menuToggle");
-const sidebar = document.getElementById("sidebar");
+const sidebar = document.querySelector(".sidebar");
 const overlay = document.getElementById("sidebarOverlay");
 
 menuToggle?.addEventListener("click", () => {

@@ -182,7 +182,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Qo'ng'iroqcha tugmasi
-    document.getElementById('notificationBtn').addEventListener('click', () => {
-        alert("Yangi bildirishnomalar mavjud emas.");
-    });
+    const notificationBtn = document.getElementById('notificationBtn');
+    if (notificationBtn) {
+        notificationBtn.addEventListener('click', () => {
+            alert("Yangi bildirishnomalar mavjud emas.");
+        });
+    }
 });

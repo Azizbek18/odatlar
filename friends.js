@@ -40,30 +40,40 @@ function getInitials(name) {
   return parts.map(p => p[0]).join('').slice(0, 2).toUpperCase();
 }
 
+// Foydalanuvchidan kelgan matnni xavfsiz chiqarish uchun (XSS oldini olish)
+function escapeHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 const AVATARS = Array.from({ length: 70 }, (_, i) => `https://i.pravatar.cc/150?img=${i + 1}`);
 
 // ─── Card renderers ─────────────────────────────────────────
 function renderActive(p) {
   const tagsHTML = p.tags.map(t =>
-    `<span class="ftag ${t.cls}">${t.label}</span>`
+    `<span class="ftag ${t.cls}">${escapeHtml(t.label)}</span>`
   ).join('');
 
   return `
     <div class="friend-card" data-id="${p.id}">
       <div class="friend-head">
         <div class="avatar-wrap">
-          <img src="${p.avatar}" alt="${p.full_name}" class="friend-avatar" />
+          <img src="${escapeHtml(p.avatar)}" alt="${escapeHtml(p.full_name)}" class="friend-avatar" />
           <span class="status-dot online"></span>
         </div>
         <div class="friend-name-wrap">
-          <div class="friend-name">${p.full_name}</div>
+          <div class="friend-name">${escapeHtml(p.full_name)}</div>
           <div class="friend-streak">🔥 ${p.streak} Kun</div>
         </div>
         <span class="badge badge-active">ACTIVE</span>
       </div>
       <div class="friend-progress">
         <div class="progress-label-row">
-          <span>${p.habit}</span>
+          <span>${escapeHtml(p.habit)}</span>
           <span class="progress-pct">${p.progress}%</span>
         </div>
         <div class="progress-track">
@@ -79,18 +89,18 @@ function renderRisk(p) {
     <div class="friend-card" data-id="${p.id}">
       <div class="friend-head">
         <div class="avatar-wrap">
-          <img src="${p.avatar}" alt="${p.full_name}" class="friend-avatar" />
+          <img src="${escapeHtml(p.avatar)}" alt="${escapeHtml(p.full_name)}" class="friend-avatar" />
           <span class="status-dot warning"></span>
         </div>
         <div class="friend-name-wrap">
-          <div class="friend-name">${p.full_name}</div>
+          <div class="friend-name">${escapeHtml(p.full_name)}</div>
           <div class="friend-streak warning-text">🔥 ${p.streak} Kun</div>
         </div>
         <span class="badge badge-risk">AT-RISK</span>
       </div>
       <div class="friend-progress">
         <div class="progress-label-row">
-          <span>${p.habit}</span>
+          <span>${escapeHtml(p.habit)}</span>
           <span class="progress-pct">${p.progress}%</span>
         </div>
         <div class="progress-track">
@@ -102,16 +112,16 @@ function renderRisk(p) {
 }
 
 function renderBroken(p) {
-  const firstName = p.full_name.split(' ')[0];
+  const firstName = escapeHtml(p.full_name.split(' ')[0]);
   return `
     <div class="friend-card friend-card-broken" data-id="${p.id}">
       <div class="friend-head">
         <div class="avatar-wrap">
-          <img src="${p.avatar}" alt="${p.full_name}" class="friend-avatar grayscale" />
+          <img src="${escapeHtml(p.avatar)}" alt="${escapeHtml(p.full_name)}" class="friend-avatar grayscale" />
           <span class="status-dot offline"></span>
         </div>
         <div class="friend-name-wrap">
-          <div class="friend-name">${p.full_name}</div>
+          <div class="friend-name">${escapeHtml(p.full_name)}</div>
           <div class="friend-streak muted-text">💤 0 Kun</div>
         </div>
         <span class="badge badge-broken">BROKEN</span>
@@ -320,9 +330,9 @@ async function loadGroups() {
         const name = m.profiles ? m.profiles.full_name : 'Foydalanuvchi';
         return `
           <div class="group-member-item">
-            <span class="member-avatar-mini">${getInitials(name)}</span>
+            <span class="member-avatar-mini">${escapeHtml(getInitials(name))}</span>
             <div class="member-info-mini">
-              <span class="member-name">${name}</span>
+              <span class="member-name">${escapeHtml(name)}</span>
               <span class="member-role">${m.role === 'admin' ? '👑 Admin' : 'A\'zo'}</span>
             </div>
           </div>`;
@@ -335,12 +345,12 @@ async function loadGroups() {
               <div class="group-avatar-icon">👥</div>
             </div>
             <div class="friend-name-wrap">
-              <div class="friend-name">${group.name}</div>
+              <div class="friend-name">${escapeHtml(group.name)}</div>
               <div class="friend-streak">${members.length} a'zo</div>
             </div>
             <span class="badge badge-active" style="background:#4f46e5;">JAMOA</span>
           </div>
-          <div class="group-desc">${group.description || 'Guruh tavsifi yo\'q.'}</div>
+          <div class="group-desc">${escapeHtml(group.description) || 'Guruh tavsifi yo\'q.'}</div>
           <div class="group-members-list">
             <h4 class="members-title">A'zolar</h4>
             <div class="members-sub-grid">
