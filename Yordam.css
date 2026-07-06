@@ -1,0 +1,604 @@
+@import url("mobile-300.css");
+/* -------------------------------------------------------------
+   Yordam.css - Akordeon va Dinamik Interaktiv Stillar
+------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #F8FAFC;
+    color: #1E293B;
+    padding-bottom: 3rem;
+}
+
+@keyframes starPop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3) rotate(8deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #E2E8F0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0284C7;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #64748B;
+    font-size: 1.15rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: #F1F5F9;
+}
+
+.avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Container */
+.help-container {
+    max-width: 78rem;
+    width: 100%;
+    margin: 1.5rem auto 0 auto;
+    padding: 0 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Banner */
+.help-banner {
+    background-color: #0284C7;
+    background-image: linear-gradient(135deg, #0284C7 0%, #0369a1 100%);
+    color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: left;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.15);
+}
+
+.help-banner h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.help-banner p {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin-top: 0.25rem;
+}
+
+/* Support Channels */
+.support-channels {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.channel-card {
+    background-color: #ffffff;
+    border: 1px solid #E2E8F0;
+    border-radius: 0.75rem;
+    padding: 1rem 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.channel-card:hover {
+    transform: translateY(-2px);
+    border-color: #0284C7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.channel-card i {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    transition: transform 0.2s;
+}
+
+.channel-card:hover i {
+    transform: scale(1.1);
+}
+
+.channel-card h3 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1E293B;
+}
+
+.channel-card p {
+    font-size: 0.7rem;
+    color: #94A3B8;
+    margin-top: 0.2rem;
+}
+
+.text-blue {
+    color: #0284C7;
+}
+
+/* Bento Cards */
+.card {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.form-header h3,
+.card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0F172A;
+}
+
+.form-header p {
+    font-size: 0.75rem;
+    color: #64748B;
+    margin-top: 0.25rem;
+}
+
+.support-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #94A3B8;
+    text-transform: uppercase;
+}
+
+/* Category Grid */
+.category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.cat-btn {
+    padding: 0.625rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background-color: #ffffff;
+    border: 1px solid #E2E8F0;
+    border-radius: 0.5rem;
+    color: #475569;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: all 0.2s ease;
+}
+
+.cat-btn:hover {
+    background-color: #F8FAFC;
+}
+
+.cat-btn i {
+    font-size: 0.85rem;
+    color: #64748B;
+}
+
+.cat-btn.active {
+    border-color: #0284C7;
+    background-color: #F0F9FF;
+    color: #0284C7;
+    font-weight: 600;
+}
+
+.cat-btn.active i {
+    color: #0284C7;
+}
+
+/* Star Rating */
+.star-rating {
+    display: flex;
+    gap: 0.35rem;
+    font-size: 1.25rem;
+    color: #CBD5E1;
+    cursor: pointer;
+}
+
+.star-rating i {
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.star-rating i.active {
+    color: #F59E0B;
+    font-weight: 900;
+    animation: starPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Fields */
+.textarea-field {
+    width: 100%;
+    height: 5rem;
+    padding: 0.75rem;
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    outline: none;
+    resize: none;
+    transition: all 0.2s;
+}
+
+.textarea-field:focus {
+    border-color: #0284C7;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.08);
+}
+
+/* Upload Zone */
+.upload-zone {
+    border: 2px dashed #E2E8F0;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    text-align: center;
+    color: #64748B;
+    cursor: pointer;
+    background-color: #F8FAFC;
+    transition: all 0.2s ease;
+}
+
+.upload-zone:hover {
+    background-color: #F1F5F9;
+    border-color: #0284C7;
+    color: #0284C7;
+}
+
+.upload-zone i {
+    font-size: 1.5rem;
+    color: #94A3B8;
+    margin-bottom: 0.25rem;
+    transition: transform 0.2s;
+}
+
+.upload-zone:hover i {
+    transform: translateY(-2px);
+    color: #0284C7;
+}
+
+.upload-zone p {
+    font-size: 0.75rem;
+}
+
+.hidden-file {
+    display: none;
+}
+
+/* Buttons */
+.submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #0284C7;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.submit-btn:hover {
+    background-color: #0369a1;
+}
+
+.submit-btn:active {
+    transform: scale(0.99);
+}
+
+/* Tickets */
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.view-all {
+    font-size: 0.75rem;
+    color: #0284C7;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.tickets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #F1F5F9;
+    transition: background 0.2s;
+}
+
+.ticket-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.ticket-left {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.icon-circle {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.bg-green-light {
+    background-color: #D1FAE5;
+}
+
+.text-green {
+    color: #065F46;
+}
+
+.bg-orange-light {
+    background-color: #FFF7ED;
+}
+
+.text-orange {
+    color: #C2410C;
+}
+
+.ticket-left h4 {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #334155;
+}
+
+.ticket-left p {
+    font-size: 0.7rem;
+    color: #94A3B8;
+}
+
+.status-badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.badge-success {
+    background-color: #E6F4EA;
+    color: #137333;
+}
+
+.badge-warning {
+    background-color: #FEF7E0;
+    color: #B06000;
+}
+
+/* Silliq Accordion */
+.accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #F1F5F9;
+    padding-bottom: 0.5rem;
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0.5rem 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #334155;
+    text-align: left;
+    cursor: pointer;
+}
+
+.accordion-trigger i {
+    font-size: 0.75rem;
+    color: #94A3B8;
+    transition: transform 0.25rem cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-content p {
+    font-size: 0.75rem;
+    color: #64748B;
+    padding: 0.4rem 0 0.5rem 0;
+    line-height: 1.45;
+}
+
+.accordion-item.open .accordion-trigger i {
+    transform: rotate(180deg);
+    color: #0284C7;
+}
+
+.accordion-item.open .accordion-trigger span {
+    color: #0284C7;
+    font-weight: 600;
+}
+
+/* Toast */
+.toast {
+    text-align: center;
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.toast.success {
+    background-color: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Footer */
+.footer {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    font-size: 0.75rem;
+    color: #94A3B8;
+    text-decoration: none;
+}
+
+.copyright {
+    font-size: 0.75rem;
+    color: #94A3B8;
+}
+
+/* --- PREMIUM ANIMATSIYALAR BLOKI (Yordam.css uchun) --- */
+@keyframes starGlow {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.35) rotate(10deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.star-rating i {
+    transition: color 0.15s ease, transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.star-rating i.active {
+    animation: starGlow 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Accordion silliq yozilish drayveri */
+.accordion-content {
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-trigger i {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-item.open .accordion-trigger i {
+    transform: rotate(180deg);
+}
+
+.channel-card {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.channel-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(2, 132, 199, 0.06);
+}
+
+.upload-zone i {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.upload-zone:hover i {
+    transform: translateY(-3px);
+}

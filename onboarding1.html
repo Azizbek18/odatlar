@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Onboarding</title>
+    <!-- FontAwesome Ikonkalari uchun -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tashqi CSS -->
+    <link rel="shortcut icon" href="images/onboarding.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="./onboarding1.css">
+    <link rel="stylesheet" href="responsive.css?v=2.0">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+
+<body>
+    <!-- Firework zarrachalari uchadigan konteyner -->
+    <div id="fireworks-container"></div>
+
+    <div class="onboarding-container">
+        <!-- Yuqori: O'tkazib yuborish tugmasi -->
+        <div class="top-bar">
+            <button class="skip-btn" onclick="skipToLast()">O'tkazib yuborish</button>
+        </div>
+
+        <!-- 1-Slayd -->
+        <div class="slide active" id="onboarding1">
+            <div class="icon-box icon-lunch"></div>
+            <h1>Tushlikda yolg'iz emas!</h1>
+            <p>Har kuni tushlikda siz bilan bir xil qiziqishlarga ega odamlar bor. Ular sizni kutmoqda.</p>
+        </div>
+
+        <!-- 2-Slayd -->
+        <div class="slide" id="onboarding2">
+            <div class="icon-box icon-hobby"></div>
+            <h1>Qiziqishlaringizni baham ko'ring</h1>
+            <p>Musobaqalar, to'garaklar va uchrashuvlar. Siz yoqtirgan ishlarni birga qiling.</p>
+        </div>
+
+        <!-- 3-Slayd -->
+        <div class="slide" id="onboarding3">
+            <div class="icon-box icon-connect"></div>
+            <h1>Bugun yangi do'stlar toping!</h1>
+            <p>Faqat bir necha bosqichda profilingizni yarating va hamjamiyatga qo'shiling.</p>
+        </div>
+
+        <!-- Pastki: Nuqtalar va Keyingisi tugmasi -->
+        <div class="bottom-bar">
+            <div class="dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <button class="next-btn" id="nextBtn" onclick="nextSlide()">Keyingisi →</button>
+        </div>
+    </div>
+
+    <!-- PREMIUM MODAL OYNA -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-card">
+            <div class="modal-icon">🎉</div>
+            <h2>Yangi do'stlar👀 ortishda omad😉</h2>
+            <button class="close-modal-btn" onclick="closeModal()">Chiqish</button>
+        </div>
+    </div>
+
+    <!-- Slayder va Firework boshqaruvi uchun JS -->
+    <script src="./onboarding1.js"></script>
+</body>
+
+</html>

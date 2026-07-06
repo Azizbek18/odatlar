@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <script src="auth-guard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Asosiy.css?v=2.0">
+    <link rel="stylesheet" href="chat.css?v=2.0">
+    <link rel="stylesheet" href="responsive.css?v=2.0">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+
+<body>
+
+    <aside class="side-navigation">
+        <div class="side-logo">
+            <span class="side-logo-icon">🍽️</span>
+            <span class="side-logo-text">Birgalikda</span>
+        </div>
+        <nav>
+            <a class="birinchisi" href="Asosiy.html">
+                <div class="container">
+                    <img src="images/Icon.svg" alt="Asosiy">
+                </div>
+                <div class="container-2">
+                    Asosiy
+                </div>
+            </a>
+            <a class="ikkinchisi" href="xarita.html">
+                <div class="container">
+                    <img src="images/Icon (1).svg" alt="Xarita">
+                </div>
+                <div class="container-2">
+                    Xarita
+                </div>
+            </a>
+            <a class="uchinchisi" href="Asosiy.html#leaders-list">
+                <div class="container">
+                    <img src="images/Icon (2).svg" alt="Reyting">
+                </div>
+                <div class="container-2">
+                    Reyting
+                </div>
+            </a>
+            <a class="beshinchisi" href="statistika.html">
+                <div class="container">
+                    <img src="images/Icon (4).svg" alt="Statistika">
+                </div>
+                <div class="container-2">
+                    Statistika
+                </div>
+            </a>
+            <a class="oltinchisi" href="Sozlamalar.html" id="sozlamalar-link">
+                <div class="container">
+                    <img src="images/Icon (5).svg" alt="Sozlamalar">
+                </div>
+                <div class="container-2">
+                    Sozlamalar
+                </div>
+            </a>
+            <a class="yettinchisi" href="takliflar.html">
+                <div class="container">
+                    <img src="images/Icon (6).svg" alt="Takliflar">
+                </div>
+                <div class="container-2">
+                    Takliflar
+                </div>
+            </a>
+        </nav>
+        <div class="margin-announce-box">
+            <button type="button" class="btn-announce ripple" id="btn-announce-lunch">
+                <i class="fa-solid fa-plus"></i>
+                <span>E'lon qo'shish</span>
+            </button>
+        </div>
+        <div class="container-0">
+            <a href="Yordam.html" id="yordam-link">
+                <div class="container">
+                    <img src="images/Icon (7).svg" alt="Yordam">
+                </div>
+                <div class="container-2">
+                    Yordam
+                </div>
+            </a>
+            <a href="kirish.html" id="logout-link">
+                <div class="container">
+                    <img src="images/Icon (8).svg" alt="Chiqish">
+                </div>
+                <div class="container-2">
+                    Chiqish
+                </div>
+            </a>
+        </div>
+    </aside>
+
+    <main class="chat-container" style="position: relative;">
+        <!-- Top Sub-Navigation Header -->
+        <div class="chat-sub-nav"
+            style="display:flex; gap:16px; padding: 16px 24px; background: #f8fafc; border-bottom: 1px solid var(--border-color); align-items: center;">
+            <a href="takliflar.html" class="sub-nav-btn active-sub"
+                style="text-decoration:none; padding:8px 16px; border-radius:30px; background:#e0f2fe; color:#0369a1; font-weight:600; font-size:13px; transition: all 0.2s ease; border: 1px solid rgba(3, 105, 161, 0.2); display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-list-ul"></i> Muloqotlar ro'yxati
+            </a>
+            <a href="matching.html" class="sub-nav-btn"
+                style="text-decoration:none; padding:8px 16px; border-radius:30px; background:#f1f5f9; color:#475569; font-weight:600; font-size:13px; transition: all 0.2s ease; border: 1px solid rgba(71, 85, 105, 0.1); display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-circle-nodes"></i> Yangi matching jarayoni
+            </a>
+        </div>
+
+        <header class="chat-header">
+            <div class="user-info">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Partner"
+                    class="avatar">
+                <div class="user-status">
+                    <h4>Tushlik hamkori</h4>
+                    <div class="status-online">Hozir online • <span style="color:var(--text-muted)">UI Designer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-timer">
+                <div class="timer" id="meeting-timer">
+                    <i class="fa-regular fa-clock"></i> <span id="timer-display">01:24:30</span>
+                    <span class="timer-text">Uchrashuv vaqti</span>
+                </div>
+                <div class="header-actions">
+                    <i class="fa-solid fa-phone" id="phone-btn" style="cursor:pointer;" title="Qo'ng'iroq qilish"></i>
+                    <i class="fa-solid fa-ellipsis-vertical" id="more-options-btn" style="cursor:pointer;"
+                        title="Qo'shimcha sozlamalar"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- More Options Dropdown Menu -->
+        <div id="chat-more-dropdown"
+            style="position:absolute; top:135px; right:24px; background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.1); display:none; flex-direction:column; width:200px; z-index:10000; font-family:'Inter',sans-serif; overflow:hidden;">
+            <a href="#" class="dropdown-item" id="opt-location"
+                style="padding:12px 16px; color:#334155; text-decoration:none; font-size:13px; font-weight:500; display:flex; align-items:center; gap:8px; border-bottom:1px solid #f1f5f9; transition: background 0.2s ease;">
+                <i class="fa-solid fa-map-pin" style="color:#005a87; width:16px;"></i> Joylashuvni ko'rish
+            </a>
+            <a href="#" class="dropdown-item" id="opt-finish"
+                style="padding:12px 16px; color:#16a34a; text-decoration:none; font-size:13px; font-weight:500; display:flex; align-items:center; gap:8px; transition: background 0.2s ease;">
+                <i class="fa-solid fa-check-double" style="width:16px;"></i> Chatni yakunlash
+            </a>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="ai-suggestion">
+                <div class="ai-icon">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <div class="ai-text">
+                    <h5>Muloqotni boshlash uchun g'oya</h5>
+                    <p>Suhbatlashish uchun uning sohasiga oid savollar berishingiz mumkin!</p>
+                </div>
+            </div>
+
+            <div class="date-divider">
+                <span>Bugun</span>
+            </div>
+        </div>
+
+        <footer class="chat-footer">
+            <div class="quick-replies">
+                <button class="reply-btn">Stol ustida ko'k noutbuk bor.</button>
+                <button class="reply-btn">Men yetib keldim.</button>
+                <button class="reply-btn">Siz qayerdasiz?</button>
+            </div>
+
+            <div class="input-wrapper">
+                <button class="attach-btn"><i class="fa-solid fa-plus"></i></button>
+                <div class="input-box">
+                    <input type="text" id="chatInput" placeholder="Xabar yozing...">
+                    <i class="fa-regular fa-face-smile" id="emoji-btn" style="cursor:pointer;"></i>
+                </div>
+                <button class="send-btn" id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+
+            <div class="footer-notice">
+                <i class="fa-regular fa-clock"></i> Chat 01:24:30 dan so'ng yopiladi va barcha xabarlar o'chiriladi.
+            </div>
+        </footer>
+    </main>
+
+    <aside class="right-panel">
+        <div>
+            <div class="profile-card">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Avatar"
+                    class="large-avatar">
+                <h3>Hamkor nomi</h3>
+                <p>Kompaniya / Lavozim</p>
+            </div>
+
+            <div class="info-box" id="info-location-box">
+                <h5>Uchrashuv joyi</h5>
+                <div class="meeting-place" style="transition: all 0.3s ease; border-radius: 8px;">
+                    <div class="place-icon">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div class="place-details">
+                        <h6>Belgilangan kafe</h6>
+                        <p>Toshkent shahrida</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box" id="info-interests-box">
+                <h5>Qiziqishlar</h5>
+                <div class="tags-container">
+                    <span class="tag">Tajriba almashish</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="cancel-btn" id="cancel-meeting-btn">
+            <i class="fa-solid fa-ban"></i> Uchrashuvni bekor qilish
+        </button>
+        <button class="cancel-btn" id="finish-meeting-btn"
+            style="background:#16a34a; border-color:#16a34a; margin-top:8px;">
+            <i class="fa-solid fa-check-circle"></i> Uchrashuvni yakunlash
+        </button>
+    </aside>
+
+    <script src="chat.js?v=2.4"></script>
+    <script src="sidebar.js?v=2.0"></script>
+</body>
+
+</html>

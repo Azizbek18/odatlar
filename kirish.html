@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Tizimga kirish</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="kirish.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="responsive.css?v=2.0">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+
+<body>
+
+    <div class="left-panel">
+        <div class="logo">
+            🍽️ Birgalikda
+        </div>
+
+        <div class="welcome-text">
+            <h1>Qaytib keldingiz! 👋</h1>
+            <p>Tushlik vaqtini yanada qiziqarli va samarali o'tkazish uchun yangi hamkorlar sizni kutmoqda.</p>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="time-row">
+                    <div>
+                        <div class="time-label">Hozirgi vaqt</div>
+                        <div class="time-value" id="live-clock">11:53</div>
+                    </div>
+                    <i class="fa-regular fa-clock" style="font-size: 24px; opacity: 0.8;"></i>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="online-title">
+                    <span class="online-dot"></span> Jonli statistika
+                </div>
+                <div class="stats-grid">
+                    <div class="mini-card">
+                        <div class="num">47</div>
+                        <div class="label">Faol foydalanuvchilar</div>
+                    </div>
+                    <div class="mini-card">
+                        <div class="num">13</div>
+                        <div class="label">Bugungi uchrashuvlar</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Xush kelibsiz!</h2>
+                <p>Iltimos, tizimga kirish uchun ma'lumotlaringizni kiriting.</p>
+            </div>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email">Elektron pochta</label>
+                    <input type="email" id="email" class="input-control" placeholder="example@gmail.com" required>
+                </div>
+
+                <div class="input-group">
+                    <div class="label-row">
+                        <label for="password">Parol</label>
+                        <a href="Yordam.html#support-form" class="forgot-pass">Parolni unutdingizgmi?</a>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" class="input-control" placeholder="••••••••" required>
+                        <i class="fa-regular fa-eye toggle-password" id="toggle-pwd-icon"></i>
+                    </div>
+                </div>
+
+                <label class="remember-me">
+                    <input type="checkbox" id="remember">
+                    Meni eslab qol
+                </label>
+
+                <button type="submit" class="submit-btn">Tizimga kirish</button>
+            </form>
+
+            <div class="footer-text">
+                Hali ro'yxatdan o'tmaganmisiz? <a href="royhat.html">Hisob yaratish</a>
+            </div>
+        </div>
+
+        <div class="lang-selector">
+            <span class="active">UZ</span>
+            <span>RU</span>
+            <span>EN</span>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="kirish.js"></script>
+</body>
+
+</html>

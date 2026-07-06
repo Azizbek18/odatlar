@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <script>
+        window.onerror = function(message, source, lineno, colno, error) {
+            const errDiv = document.createElement('div');
+            errDiv.style.cssText = 'position:fixed; bottom:20px; left:20px; right:20px; background:#ef4444; color:#fff; padding:16px; border-radius:12px; font-family:monospace; font-size:12px; z-index:999999; box-shadow:0 10px 30px rgba(0,0,0,0.3); line-height:1.5; pointer-events:auto;';
+            errDiv.innerHTML = `<strong>JavaScript Error:</strong> ${message}<br><small style="opacity:0.8;">Source: ${source}:${lineno}:${colno}</small>`;
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = '✕';
+            closeBtn.style.cssText = 'position:absolute; top:8px; right:12px; background:none; border:none; color:white; font-size:16px; cursor:pointer; font-weight:bold;';
+            closeBtn.onclick = () => errDiv.remove();
+            errDiv.appendChild(closeBtn);
+            document.body.appendChild(errDiv);
+            return false;
+        };
+    </script>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <script src="auth-guard.js"></script>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tushlik E'loni</title>
+    <!-- Google Fonts va Ikonkalar uchun ulanish -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <!-- Tashqi CSS faylimiz -->
+    <link rel="stylesheet" href="tushlik.css?v=1.4">
+    <!-- Leaflet CSS & JS with fallback CDNs -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" onerror="this.onerror=null;this.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css';" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        if (typeof L === 'undefined') {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"><\/script>');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="responsive.css?v=1.4">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+<body>
+
+    <div id="toast-container"></div>
+
+    <div class="modal-container">
+
+        <div class="form-section">
+            <div class="form-header">
+                <h2>Tushlik e'loni</h2>
+                <button class="close-btn"><span class="material-icons-outlined">close</span></button>
+            </div>
+
+            <form>
+                <div class="input-group">
+                    <label><span class="material-icons-outlined label-icon">schedule</span> Vaqt oralig'i</label>
+                    <div class="time-picker-wrapper">
+                        <div class="select-wrapper">
+                            <select id="time-start">
+                                <option value="12:00">12:00</option>
+                                <option value="12:30">12:30</option>
+                                <option value="13:00" selected>13:00</option>
+                                <option value="13:30">13:30</option>
+                                <option value="14:00">14:00</option>
+                                <option value="14:30">14:30</option>
+                                <option value="15:00">15:00</option>
+                                <option value="15:30">15:30</option>
+                                <option value="16:00">16:00</option>
+                            </select>
+                            <span class="material-icons-outlined select-arrow">expand_more</span>
+                        </div>
+                        <div class="select-wrapper">
+                            <select id="time-end">
+                                <option value="12:00">12:00</option>
+                                <option value="12:30">12:30</option>
+                                <option value="13:00">13:00</option>
+                                <option value="13:30">13:30</option>
+                                <option value="14:00">14:00</option>
+                                <option value="14:30" selected>14:30</option>
+                                <option value="15:00">15:00</option>
+                                <option value="15:30">15:30</option>
+                                <option value="16:00">16:00</option>
+                            </select>
+                            <span class="material-icons-outlined select-arrow">expand_more</span>
+                        </div>
+                    </div>
+                </div>
+
+    
+                <div class="input-group">
+                    <label><span class="material-icons-outlined label-icon">corporate_fare</span> Bino / Manzil</label>
+                    <div class="input-wrapper full-width" style="display: flex; gap: 8px;">
+                        <input type="text" id="building-input" placeholder="Tushlik joyi (Masalan: Evos, IT Park - Blok A)" value="IT Park - Blok A" style="flex: 1;">
+                        <button type="button" id="map-search-btn" style="background: var(--primary-gradient); color: white; border: none; padding: 0 16px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 13px; transition: var(--fx-transition);">Qidirish</button>
+                    </div>
+                    <div id="mini-map" style="height: 120px; border-radius: 12px; margin-top: 8px; border: 1.5px solid #e2e8f0; z-index: 1;"></div>
+                    <p style="font-size: 10.5px; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><span class="material-icons-outlined" style="font-size: 13px;">info</span> Joyni yozib qidiring yoki xaritani bosing</p>
+                </div>
+                <div class="input-group">
+                    <label><span class="material-icons-outlined label-icon">sentiment_satisfied</span> Muhit</label>
+                    <div class="badge-group">
+                        <button type="button" class="badge-btn active">Rasmiy</button>
+                        <button type="button" class="badge-btn">Erkin</button>
+                        <button type="button" class="badge-btn">Jamoaviy</button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label><span class="material-icons-outlined label-icon">groups</span> Kishilar soni</label>
+                    <div class="people-options">
+                        <button type="button" class="people-card active">
+                            <span class="material-icons-outlined">person</span>
+                            <span>1-on-1</span>
+                        </button>
+                        <button type="button" class="people-card">
+                            <span class="material-icons-outlined">group</span>
+                            <span>2-3 kishi</span>
+                        </button>
+                        <button type="button" class="people-card">
+                            <span class="material-icons-outlined">diversity_3</span>
+                            <span>4+ kishi</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="preview-section">
+            <h3 class="preview-title">JONLI KO'RINISH</h3>
+    
+            <div class="live-card">
+                <span class="status-dot"></span>
+                <div class="card-header">
+                    <div class="avatar-box">
+                        <span class="material-icons-outlined">person</span>
+                    </div>
+                    <div class="user-info">
+                        <h4>Siz</h4>
+                        <p id="preview-time">13:00 - 14:30</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="location-info">
+                        <span class="material-icons-outlined">location_on</span>
+                        <span id="preview-location">IT Park - Blok A</span>
+                    </div>
+                    <div class="card-badges">
+                        <span class="mini-badge blue-text" id="preview-mood">RASMIY</span>
+                        <span class="mini-badge purple-bg" id="preview-people">1-ON-1</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-footer">
+                <p class="info-text">E'lon qo'yilgandan so'ng 15 daqiqa davomida barcha hamkasblaringizga ko'rinadi.</p>
+                <button class="submit-btn">
+                    E'lon qo'yish 
+                    <span class="material-icons-outlined">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="tushlik.js?v=2.3"></script>
+    <script src="sidebar.js?v=1.4"></script>
+</body>
+</html>

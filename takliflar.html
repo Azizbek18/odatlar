@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <script src="auth-guard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Muloqotlar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Asosiy.css?v=1.4">
+    <link rel="stylesheet" href="takliflar.css?v=1.4">
+    <link rel="stylesheet" href="responsive.css?v=1.4">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+
+<body>
+
+    <!-- Chap panelli menyu (Asosiy bilan bir xil) -->
+    <aside class="side-navigation">
+        <div class="side-logo">
+            <span class="side-logo-icon">🍽️</span>
+            <span class="side-logo-text">Birgalikda</span>
+        </div>
+        <nav>
+            <a class="birinchisi" href="Asosiy.html">
+                <div class="container">
+                    <img src="images/Icon.svg" alt="">
+                </div>
+                <div class="container-2">
+                    Asosiy
+                </div>
+            </a>
+            <a class="ikkinchisi" href="xarita.html">
+                <div class="container">
+                    <img src="images/Icon (1).svg" alt="">
+                </div>
+                <div class="container-2">
+                    Xarita
+                </div>
+            </a>
+            <a class="uchinchisi" href="Asosiy.html#leaders-list">
+                <div class="container">
+                    <img src="images/Icon (2).svg" alt="">
+                </div>
+                <div class="container-2">
+                    Reyting
+                </div>
+            </a>
+            <a class="beshinchisi" href="statistika.html">
+                <div class="container">
+                    <img src="images/Icon (4).svg" alt="">
+                </div>
+                <div class="container-2">
+                    Statistika
+                </div>
+            </a>
+            <a class="oltinchisi" href="Sozlamalar.html">
+                <div class="container">
+                    <img src="images/Icon (5).svg" alt="">
+                </div>
+                <div class="container-2">
+                    Sozlamalar
+                </div>
+            </a>
+            <a class="yettinchisi is-active" href="takliflar.html">
+                <div class="container">
+                    <img src="images/Icon (6).svg" alt="">
+                </div>
+                <div class="container-2">
+                    Takliflar
+                </div>
+            </a>
+        </nav>
+        <div class="margin-announce-box">
+            <button type="button" class="btn-announce ripple" id="btn-announce-lunch">
+                <i class="fa-solid fa-plus"></i>
+                <span>E'lon qo'shish</span>
+            </button>
+        </div>
+        <div class="container-0">
+            <a href="Yordam.html" id="yordam-link">
+                <div class="container">
+                    <img src="images/Icon (7).svg" alt="">
+                </div>
+                <div class="container-2">
+                    Yordam
+                </div>
+            </a>
+            <a href="kirish.html" id="logout-link">
+                <div class="container">
+                    <img src="images/Icon (8).svg" alt="">
+                </div>
+                <div class="container-2">
+                    Chiqish
+                </div>
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="main-container">
+            <section class="hero-banner">
+                <div class="hero-left">
+                    <div class="hero-icon-wrapper">
+                        <i class="fa-solid fa-users-gear"></i>
+                    </div>
+                    <div class="hero-text">
+                        <h2>Ulanishlar</h2>
+                        <p>Tushlik hamkorlaringiz va professional tarmog'ingizni boshqaring. Yangi tanishuvlar
+                            professional rivojlanish garovidir.</p>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-box">
+                        <span class="stat-num">1,240</span>
+                        <span class="stat-label">Umumiy muloqotlar</span>
+                    </div>
+                    <div class="stat-box highlight">
+                        <span class="stat-num">12</span>
+                        <span class="stat-label">Yangi takliflar</span>
+                    </div>
+                </div>
+            </section>
+
+            <nav class="tabs-nav">
+                <button class="tab-btn active" data-tab="connections">
+                    <i class="fa-solid fa-user-group"></i> Ulanishlar (12)
+                </button>
+                <button class="tab-btn" data-tab="takliflar">
+                    <i class="fa-regular fa-envelope"></i> Takliflar (3)
+                </button>
+                <button class="tab-btn" data-tab="tavsiyalar">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Tavsiyalar
+                </button>
+            </nav>
+
+            <section class="filter-bar">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Ism yoki mutaxassislik bo'yicha qidirish...">
+                </div>
+                <div class="filter-actions">
+                    <button class="btn-filter" id="filter-btn">
+                        <i class="fa-solid fa-sliders"></i> Filtrlar
+                    </button>
+                    <button class="btn-add" id="add-friend-btn">
+                        <i class="fa-solid fa-user-plus"></i> Yangi do'st qo'shish
+                    </button>
+                </div>
+            </section>
+
+            <section class="cards-grid" id="cards-container">
+            </section>
+
+        </div> <!-- Closes main-container -->
+    </main>
+
+    <script src="./takliflar.js"></script>
+    <script src="sidebar.js?v=1.4"></script>
+</body>
+
+</html>

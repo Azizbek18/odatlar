@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Premium Tariflar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Premium.css">
+    <link rel="shortcut icon" href="images/Premuim.avif" type="image/x-icon">
+    <link rel="stylesheet" href="responsive.css?v=2.0">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+<body>
+
+
+    <header class="navbar">
+        <div class="logo">Birgalikda</div>
+        <nav class="nav-links">
+            <a href="Asosiy.html">Bosh sahifa</a>
+            <a href="xarita.html">Xarita</a>
+            <a href="Premuim.html" class="active">Premium</a>
+        </nav>
+        <div class="nav-actions">
+            <button class="nav-btn" onclick="window.location.href='Bildirishnomalar.html'">
+                <i class="fa-regular fa-bell"></i>
+            </button>
+            <div class="avatar">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                    alt="Avatar">
+            </div>
+        </div>
+    </header>
+
+    <main class="premium-container">
+        <div class="premium-banner">
+            <div class="banner-badge">
+                <i class="fa-solid fa-gem"></i> Birgalikda Premium
+            </div>
+            <p class="banner-desc">Professional networking uchun yangi darajaga chiqing. Cheksiz uchrashuvlar va
+                eksklyuziv imkoniyatlar.</p>
+
+            <div class="billing-switcher">
+                <span class="switch-label text-white">Oylik</span>
+                <label class="switch">
+                    <input type="checkbox" id="billing-toggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-label text-white">Yillik <span class="discount-badge">-25%</span></span>
+            </div>
+        </div>
+
+        <div class="current-tariff-alert">
+            <i class="fa-solid fa-circle-info text-blue"></i>
+            <span>Hozirgi tarifingiz: <strong class="uppercase">Bepul</strong>. 30 kundan keyin tugaydi.</span>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="card-header">
+                    <h3 class="tariff-name">FREE</h3>
+                    <p class="tariff-tagline">Boshlanish uchun ideal</p>
+                </div>
+                <div class="price-zone">
+                    <span class="price-num">0</span>
+                    <span class="price-period">/oy</span>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-circle-check text-green"></i> Kuniga 3 ta uchrashuv</li>
+                    <li><i class="fa-solid fa-circle-check text-green"></i> Asosiy filterlar</li>
+                    <li><i class="fa-solid fa-circle-xmark text-slate"></i> Eksklyuziv tadbirlar yo'q</li>
+                </ul>
+                <button type="button" class="tariff-btn btn-disabled">Hozirgi tarif</button>
+            </div>
+
+            <div class="pricing-card featured-card">
+                <div class="popular-badge">ENG MASHHUR</div>
+                <div class="card-header">
+                    <h3 class="tariff-name">PRO <span class="badge-pro-inline">PRO BADGE</span></h3>
+                    <p class="tariff-tagline">Networking ustalari uchun</p>
+                </div>
+                <div class="price-zone">
+                    <span class="currency-symbol"></span>
+                    <span class="price-num" id="pro-price">29,000</span>
+                    <span class="price-period">/oy</span>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-circle-check text-blue"></i> Cheksiz uchrashuvlar</li>
+                    <li><i class="fa-solid fa-circle-check text-blue"></i> Premium filterlar (Sohalar bo'yicha)</li>
+                    <li><i class="fa-solid fa-circle-check text-blue"></i> Uchrashuv statistikasi</li>
+                    <li><i class="fa-solid fa-circle-check text-blue"></i> Yashirin rejim imkoniyati</li>
+                </ul>
+                <button type="button" class="tariff-btn btn-primary">Obuna bo'lish</button>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-header">
+                    <h3 class="tariff-name text-orange-title">ORGANIZATION</h3>
+                    <p class="tariff-tagline">Kompaniya va HR'lar uchun</p>
+                </div>
+                <div class="price-zone">
+                    <span class="price-num" id="org-price">19,000</span>
+                    <span class="price-period">/xodim</span>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-chart-pie text-orange-icon"></i> HR Analytics Dashboard</li>
+                    <li><i class="fa-solid fa-user-group text-orange-icon"></i> Xodimlar uchun treninglar</li>
+                    <li><i class="fa-solid fa-id-card text-orange-icon"></i> Kompaniya brendingi</li>
+                </ul>
+                <button type="button" class="tariff-btn btn-secondary">Bog'lanish</button>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-box bg-blue-light">
+                <div class="stat-icon-wrapper bg-blue-icon text-white">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div>
+                    <h4>2.3x</h4>
+                    <p>Uchrashuvlar sifati va natijadorligi</p>
+                </div>
+            </div>
+
+            <div class="stat-box bg-orange-light">
+                <div class="stat-icon-wrapper bg-orange-icon text-white">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <div>
+                    <h4>91%</h4>
+                    <p>Pro foydalanuvchilarning qayta obuna bo'lishi</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="faq-section">
+            <h2 class="faq-title">Ko'p beriladigan savollar</h2>
+
+            <div class="accordion-list">
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger">
+                        <span>Obunani istalgan vaqtda bekor qilsam bo'ladimi?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Ha, albatta. Obunani o'z sozlamalaringiz panelidan istalgan vaqtda hech qanday jarimalarsiz
+                            bekor qilishingiz mumkin. Bekor qilingandan keyin ham joriy to'langan davr yakunigacha
+                            barcha imkoniyatlar faol qoladi.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger">
+                        <span>To'lovlar xavfsizmi?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Barcha to'lovlar xalqaro xavfsizlik standartlariga (PCI-DSS) mos keluvchi xavfsiz shifrlangan
+                            shlyuzlar (Payme, Click, Visa/Mastercard) orqali amalga oshiriladi. Karta ma'lumotlaringiz
+                            bizning serverlarda saqlanmaydi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-left">Birgalikda</div>
+        <div class="footer-links">
+            <a href="Yordam.html">Biz haqimizda</a>
+            <a href="Maxfiylik.html">Maxfiylik siyosati</a>
+            <a href="Yordam.html#support-form">Bog'lanish</a>
+        </div>
+        <p class="copyright">© 2026 Birgalikda. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <script src="Premium.js"></script>
+</body>
+
+</html>

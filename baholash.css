@@ -1,0 +1,436 @@
+@import url("mobile-300.css");
+/* Umumiy stillar */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top left, #ebf3fc 0%, #f7f9fd 40%, #f3e9e7 100%); /* Orqa fondagi chiroyli gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Modal asosiy oynasi */
+.feedback-modal {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(26, 38, 58, 0.06);
+    padding: 40px 32px;
+    text-align: center;
+    border: 1px solid rgba(238, 242, 246, 0.8);
+}
+
+/* Avatar qismi */
+.avatar-container {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 20px auto;
+}
+
+.user-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.status-dot.online {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 14px;
+    height: 14px;
+    background-color: #52c41a; /* Yashil faollik nuqtasi */
+    border: 2.5px solid #ffffff;
+    border-radius: 50%;
+}
+
+/* Matnlar */
+.feedback-modal h2 {
+    color: #111827;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.description {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+/* Yulduzli reyting bloki */
+.rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 32px;
+}
+
+.star-icon {
+    font-size: 32px !important;
+    color: #ffb400; /* To'q sariq rangli yulduzlar */
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.star-icon:hover {
+    transform: scale(1.15);
+}
+
+.star-icon.empty {
+    color: #e5e7eb; /* Bo'sh yulduz rangi */
+}
+
+/* Guruhlangan inputlar */
+.input-group {
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 12px;
+}
+
+/* Tag tugmalar dizayni */
+.tags-wrapper {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #f3f4f6;
+    border: 1px solid transparent;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tag-btn span {
+    font-size: 16px !important;
+    color: #9ca3af;
+}
+
+/* Kursor ustiga kelganda */
+.tag-btn:hover {
+    background-color: #e5e7eb;
+}
+
+/* Aktiv holatdagi badge uslubi (Rasmga mos moviy kontur yoki fon) */
+.tag-btn.active {
+    background-color: #eff6ff;
+    border-color: #bfdbfe;
+    color: #2563eb;
+}
+
+.tag-btn.active span {
+    color: #2563eb;
+}
+
+/* Textarea - Izoh yozish maydoni */
+textarea {
+    width: 100%;
+    height: 100px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #1f2937;
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s;
+}
+
+textarea:focus {
+    border-color: #3b82f6;
+}
+
+textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* LinkedIn Integration blok */
+.linkedin-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f5fa; /* Rasm kabi och kulrang-binafsha tus */
+    padding: 16px;
+    border-radius: 14px;
+    margin-bottom: 28px;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+}
+
+.linkedin-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.linkedin-icon-box {
+    width: 36px;
+    height: 36px;
+    background-color: #0a66c2;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.in-text {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 16px;
+    font-family: sans-serif;
+    margin-bottom: 2px;
+}
+
+.linkedin-text h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.linkedin-text p {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+/* Custom Toggle Switch */
+.switch-control {
+    width: 44px;
+    height: 24px;
+    background-color: #0a66c2; /* Rasmda yoqilgan holatda to'q ko'k */
+    border-radius: 12px;
+    position: relative;
+    padding: 2px;
+    transition: background-color 0.2s;
+}
+
+.switch-handle {
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    right: 2px; /* Dastlab o'ng tomonda - active */
+    transition: right 0.2s ease, left 0.2s ease;
+}
+
+/* O'chirilgan holat klassi */
+.switch-control.off {
+    background-color: #d1d5db;
+}
+.switch-control.off .switch-handle {
+    right: auto;
+    left: 2px;
+}
+
+/* Yuborish tugmasi */
+.submit-btn {
+    width: 100%;
+    background-color: #63b1ef; /* Chiroyli havorang jozibador tugma */
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(99, 177, 239, 0.3);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.submit-btn:hover {
+    background-color: #4ea2e2;
+}
+
+.submit-btn:active {
+    transform: scale(0.99);
+}
+
+.submit-btn span {
+    font-size: 16px !important;
+}
+
+/* Toast Bildirishnoma Usuli */
+#toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
+}
+
+.toast {
+    background-color: #1f2937;
+    color: #ffffff;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateX(120%);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+/* Merged UI styles */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.btn-close:hover {
+    color: #475569;
+    transform: rotate(90deg);
+}
+
+.profile-summary-card {
+    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 24px;
+    background-color: #fafbfc;
+}
+
+.profile-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 2px;
+}
+
+.profile-info .job-text {
+    font-size: 13px;
+    color: #0ea5e9;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.mini-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.m-tag {
+    background-color: #e2e8f0;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+.rating-status-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffb400;
+    margin-top: -24px;
+    margin-bottom: 28px;
+}
+
+.btn-group-toggle {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: #f1f5f9;
+    padding: 4px;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+.toggle-option {
+    background: none;
+    border: none;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+    text-align: center;
+}
+
+.toggle-option.active {
+    background-color: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.tag-btn.danger-tag {
+    color: #ef4444;
+}
+
+.tag-btn.danger-tag.active {
+    background-color: #fef2f2;
+    border-color: #fca5a5;
+    color: #b91c1c;
+}

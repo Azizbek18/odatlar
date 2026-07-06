@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Qidiruv Natijalari</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Qidiruv.css">
+    <link rel="shortcut icon" href="images/Sreaching%20Icon.jpg" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<base target="_blank">
+    <link rel="stylesheet" href="responsive.css?v=2.0">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <div class="logo">
+                <i class="fa-solid fa-utensils logo-icon"></i>
+                Birgalikda
+            </div>
+            <nav class="nav-links">
+                <a href="Asosiy.html" class="active">Bosh sahifa</a>
+                <a href="xarita.html">Xarita</a>
+                <a href="Asosiy.html#leaders-list">Reyting</a>
+            </nav>
+        </div>
+
+        <div class="search-bar-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="global-search" value="" placeholder="Qidiruv..." autocomplete="off">
+            <button class="search-submit" type="button" aria-label="Qidirish">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="navbar-right">
+            <button class="nav-btn" onclick="window.location.href='Bildirishnomalar.html'" aria-label="Bildirishnomalar">
+                <i class="fa-regular fa-bell"></i>
+                <span class="notification-badge" id="nav-notif-count" style="display:none;">0</span>
+            </button>
+            <div class="avatar" tabindex="0" role="button" aria-label="Profil menyusi" onclick="window.location.href='profileS.html'" style="cursor:pointer;">
+                <img id="nav-avatar-img" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" alt="Foydalanuvchi avatar">
+            </div>
+        </div>
+    </header>
+
+    <div class="search-layout">
+        <!-- Filtrlar sidebar -->
+        <aside class="filter-sidebar">
+            <div class="sidebar-header">
+                <h3 class="sidebar-title">FILTRLAR</h3>
+                <button class="clear-filters" id="clear-filters" style="display:none;">
+                    <i class="fa-solid fa-rotate-left"></i> Tozalash
+                </button>
+            </div>
+
+            <form id="filter-form">
+                <div class="filter-group">
+                    <label class="filter-label" for="filter-department">Bo'lim</label>
+                    <div class="select-wrapper">
+                        <select id="filter-department" class="select-field">
+                            <option value="all">Barchasi</option>
+                            <option value="it">IT Department</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="hr">HR</option>
+                            <option value="design">Dizayn</option>
+                            <option value="finance">Moliya</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Vaqt</label>
+                    <div class="time-btn-group">
+                        <button type="button" class="time-btn active" data-time="bugun">Bugun</button>
+                        <button type="button" class="time-btn" data-time="ertaga">Ertaga</button>
+                        <button type="button" class="time-btn" data-time="hafta">Bu hafta</button>
+                        <button type="button" class="time-btn" data-time="oy">Bu oy</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Reyting</label>
+                    <div class="slider-container">
+                        <div class="slider-track" id="slider-track"></div>
+                        <div class="slider-thumb" id="slider-thumb" style="left: 30%;"></div>
+                    </div>
+                    <div class="slider-labels">
+                        <span>3.0+</span>
+                        <span id="rating-value">4.5</span>
+                        <span>5.0</span>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Masofa</label>
+                    <label class="radio-label">
+                        <input type="radio" name="distance" value="500" checked>
+                        <span class="custom-radio"></span>
+                        <span class="radio-text">&lt; 500m</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="distance" value="1000">
+                        <span class="custom-radio"></span>
+                        <span class="radio-text">&lt; 1km</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="distance" value="2000">
+                        <span class="custom-radio"></span>
+                        <span class="radio-text">&lt; 2km</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="distance" value="5000">
+                        <span class="custom-radio"></span>
+                        <span class="radio-text">&lt; 5km</span>
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Tajriba</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="junior">
+                            <span class="custom-checkbox"></span>
+                            <span class="checkbox-text">Junior (0-2 yil)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="mid" checked>
+                            <span class="custom-checkbox"></span>
+                            <span class="checkbox-text">Mid (2-5 yil)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="senior">
+                            <span class="custom-checkbox"></span>
+                            <span class="checkbox-text">Senior (5+ yil)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="apply-filters-btn">
+                    <i class="fa-solid fa-filter"></i> Filtrni qo'llash
+                </button>
+            </form>
+        </aside>
+
+        <!-- Asosiy natijalar -->
+        <main class="results-content">
+            <div class="results-summary">
+                <div class="results-header">
+                    <h2>"<span id="search-keyword-display">Barchasi</span>" bo'yicha qidiruv natijalari</h2>
+                    <p class="subtitle"><span id="results-count">0</span> ta natija topildi</p>
+                </div>
+                <div class="results-controls">
+                    <div class="sort-dropdown">
+                        <button class="sort-btn" id="sort-btn">
+                            <i class="fa-solid fa-arrow-down-wide-short"></i>
+                            <span>Moslik bo'yicha</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="sort-menu" id="sort-menu">
+                            <button class="sort-option active" data-sort="relevance">Moslik bo'yicha</button>
+                            <button class="sort-option" data-sort="rating">Reyting bo'yicha</button>
+                            <button class="sort-option" data-sort="distance">Masofa bo'yicha</button>
+                            <button class="sort-option" data-sort="newest">Eng yangi</button>
+                        </div>
+                    </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid" aria-label="Grid ko'rinish">
+                            <i class="fa-solid fa-grid-2"></i>
+                        </button>
+                        <button class="view-btn" data-view="list" aria-label="List ko'rinish">
+                            <i class="fa-solid fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active filters tags -->
+            <div class="active-filters" id="active-filters"></div>
+
+            <!-- Tablar -->
+            <div class="results-tabs">
+                <button class="tab-link active" data-tab="all">
+                    <span>Hammasi</span>
+                    <span class="tab-count">0</span>
+                </button>
+                <button class="tab-link" data-tab="people">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Odamlar</span>
+                    <span class="tab-count">0</span>
+                </button>
+                <button class="tab-link" data-tab="places">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Joylar</span>
+                    <span class="tab-count">0</span>
+                </button>
+                <button class="tab-link" data-tab="interests">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Qiziqishlar</span>
+                    <span class="tab-count">0</span>
+                </button>
+            </div>
+
+            <!-- Seksiyalar -->
+            <div class="sections-wrapper" id="sections-wrapper">
+
+                <!-- ODAMLAR -->
+                <section class="results-section" data-section="people">
+                    <div class="section-header">
+                        <h3><i class="fa-solid fa-users text-blue"></i> Odamlar</h3>
+                        <a href="#" class="view-all-link" data-section="people">
+                            Hammasini ko'rish <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="grid-row cards-2" id="people-grid"></div>
+                </section>
+
+                <!-- JOYLAR -->
+                <section class="results-section" data-section="places">
+                    <div class="section-header">
+                        <h3><i class="fa-solid fa-location-dot text-blue"></i> Joylar</h3>
+                        <a href="#" class="view-all-link" data-section="places">
+                            Hammasini ko'rish <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="grid-row cards-2" id="places-grid"></div>
+                </section>
+
+                <!-- QIZIQISHLAR -->
+                <section class="results-section" data-section="interests">
+                    <div class="section-header">
+                        <h3><i class="fa-solid fa-folder-tree text-blue"></i> O'xshash qiziqishlar</h3>
+                    </div>
+                    <div class="interests-flex"></div>
+                </section>
+
+            </div>
+
+            <!-- No Results State -->
+            <div class="no-results" id="no-results" style="display:none;">
+                <div class="no-results-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3>Natija topilmadi</h3>
+                <p>"<span id="no-results-query"></span>" bo'yicha hech qanday natija topilmadi.</p>
+                <div class="no-results-suggestions">
+                    <p>Tavsiyalar:</p>
+                    <ul>
+                        <li>Imlo xatolarini tekshiring</li>
+                        <li>Boshqa kalit so'zlardan foydalaning</li>
+                        <li>Filtrlarni olib tashlang</li>
+                    </ul>
+                </div>
+                <button class="clear-search-btn" id="clear-search">
+                    <i class="fa-solid fa-rotate-left"></i> Qidiruvni tozalash
+                </button>
+            </div>
+
+            <!-- Loading Skeleton -->
+            <div class="skeleton-wrapper" id="skeleton-wrapper" style="display:none;">
+                <div class="skeleton-section">
+                    <div class="skeleton-header"></div>
+                    <div class="grid-row cards-2">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <span class="footer-logo"><i class="fa-solid fa-utensils"></i> Birgalikda</span>
+            <p class="copyright">© 2026 Birgalikda. Barcha huquqlar himoyalangan.</p>
+        </div>
+        <div class="footer-links">
+            <a href="Yordam.html">Biz haqimizda</a>
+            <a href="Maxfiylik.html">Maxfiylik siyosati</a>
+            <a href="Yordam.html#faq-section">Foydalanish shartlari</a>
+            <a href="Yordam.html#support-form">Bog'lanish</a>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="details-modal" class="custom-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3 id="modal-title">Joy nomi</h3>
+                <button id="close-modal-btn" class="close-btn" aria-label="Yopish">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image" id="modal-image"></div>
+                <p id="modal-desc">Yuklanmoqda...</p>
+                <div class="modal-meta">
+                    <span><i class="fa-solid fa-clock text-blue"></i> Ish vaqti: 09:00 - 22:00</span>
+                    <span><i class="fa-solid fa-mug-hot text-blue"></i> Tushlik menyusi mavjud</span>
+                    <span><i class="fa-solid fa-phone text-blue"></i> +998 71 123 45 67</span>
+                    <span><i class="fa-solid fa-envelope text-blue"></i> info@Birgalikda.uz</span>
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-btn primary">
+                        <i class="fa-solid fa-calendar-plus"></i> Uchrashuv rejalashtirish
+                    </button>
+                    <button class="modal-btn secondary">
+                        <i class="fa-solid fa-location-dot"></i> Xaritada ko'rish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="Qidiruv.js"></script>
+</body>
+</html>

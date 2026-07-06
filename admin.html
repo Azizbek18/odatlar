@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <script src="auth-guard.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Statistika Boshqaruv Paneli</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="responsive.css?v=2.0">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-top">
+
+                <div class="logo-area">
+                    <h2>Birgalikda</h2>
+                    <span>Boshqaruv paneli</span>
+                </div>
+
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="Asosiy.html"><i class="fa-solid fa-border-all"></i> Asosiy</a></li>
+                    <li class="nav-item"><a href="xarita.html"><i class="fa-solid fa-map-location-dot"></i> Xarita</a></li>
+                    <li class="nav-item"><a href="matchlartarixi.html"><i class="fa-solid fa-trophy"></i> Reyting</a></li>
+                    <li class="nav-item"><a href="takliflar.html"><i class="fa-solid fa-comment-dots"></i> Muloqotlar</a></li>
+                    <li class="nav-item active"><a href="admin.html"><i class="fa-solid fa-chart-simple"></i> Statistika</a></li>
+                    <li class="nav-item"><a href="xarita.html?openSettings=true"><i class="fa-solid fa-gear"></i> Sozlamalar</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-bottom">
+                <button class="btn-advertise" id="btn-advertise"><i class="fa-solid fa-plus"></i> E'lon berish</button>
+                <div class="nav-item footer-link"><a href="Yordam.html"><i class="fa-solid fa-circle-question"></i> Yordam</a></div>
+                <div class="nav-item footer-link logout"><a href="kirish.html"><i class="fa-solid fa-right-from-bracket"></i> Chiqish</a></div>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            
+            <header class="main-header">
+                <div class="date-filter">
+                    <i class="fa-regular fa-calendar"></i>
+                    <select id="dateSelect">
+                        <option value="jan2024">01 Yanvar - 31 Yanvar, 2024</option>
+                        <option value="feb2024">01 Fevral - 29 Fevral, 2024</option>
+                        <option value="mar2024">01 Mart - 31 Mart, 2024</option>
+                    </select>
+                </div>
+                
+                <div class="header-right">
+                    <button class="btn-csv" id="csvExportBtn"><i class="fa-solid fa-download"></i> CSV Eksport</button>
+                    <div class="notification-badge">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="dot"></span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100" alt="Admin avatar" class="admin-avatar">
+                </div>
+            </header>
+
+            <section class="metrics-grid">
+                <div class="metric-card border-blue">
+                    <div class="card-header">
+                        <div class="icon-box blue-bg"><i class="fa-solid fa-users"></i></div>
+                        <span class="badge success">+12% <i class="fa-solid fa-arrow-trend-up"></i></span>
+                    </div>
+                    <p class="card-title">Faol foydalanuvchilar</p>
+                    <h3 class="card-value">2,842</h3>
+                </div>
+
+                <div class="metric-card border-orange">
+                    <div class="card-header">
+                        <div class="icon-box orange-bg"><i class="fa-solid fa-utensils"></i></div>
+                        <span class="badge success">+5% <i class="fa-solid fa-arrow-trend-up"></i></span>
+                    </div>
+                    <p class="card-title">Jami uchrashuvlar</p>
+                    <h3 class="card-value">1,450</h3>
+                </div>
+
+                <div class="metric-card border-purple">
+                    <div class="card-header">
+                        <div class="icon-box purple-bg"><i class="fa-solid fa-star"></i></div>
+                        <span class="badge neutral">0% —</span>
+                    </div>
+                    <p class="card-title">O'rtacha reyting</p>
+                    <h3 class="card-value">4.8</h3>
+                </div>
+            </section>
+
+            <section class="charts-grid">
+                <div class="chart-card line-chart-container">
+                    <div class="chart-header-inline">
+                        <div>
+                            <h4>Uchrashuvlar dinamikasi</h4>
+                            <p class="subtext">Oxirgi 30 kunlik ko'rsatkichlar</p>
+                        </div>
+                        <div class="toggle-buttons">
+                            <button class="toggle-btn active" data-view="daily">Kunlik</button>
+                            <button class="toggle-btn" data-view="weekly">Haftalik</button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card donut-chart-container">
+                    <h4>Foydalanuvchi tarkibi</h4>
+                    <p class="subtext">Talaba va Xodimlar nisbati</p>
+                    <div class="donut-wrapper">
+                        <canvas id="donutChart"></canvas>
+                        <div class="donut-center-text">
+                            <span class="total-num">2.8K</span>
+                            <span class="total-lbl">jami</span>
+                        </div>
+                    </div>
+                    <div class="donut-legend">
+                        <div class="legend-item">
+                            <span class="legend-color student"></span>
+                            <span class="legend-label">Talabalar</span>
+                            <span class="legend-value">65%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color employee"></span>
+                            <span class="legend-label">Xodimlar</span>
+                            <span class="legend-value">35%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bottom-grid">
+                <div class="info-card">
+                    <div class="card-title-header">
+                        <h4>Ommabop teglar</h4>
+                        <i class="fa-solid fa-ellipsis cursor-pointer"></i>
+                    </div>
+                    <div class="tags-list">
+                        <div class="tag-row">
+                            <div class="tag-info">
+                                <span class="tag-name">Python</span>
+                                <span class="tag-count">428 uchrashuv</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress fill-python" style="width: 85%"></div></div>
+                        </div>
+                        <div class="tag-row">
+                            <div class="tag-info">
+                                <span class="tag-name">Design</span>
+                                <span class="tag-count">312 uchrashuv</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress fill-design" style="width: 65%"></div></div>
+                        </div>
+                        <div class="tag-row">
+                            <div class="tag-info">
+                                <span class="tag-name">Marketing</span>
+                                <span class="tag-count">195 uchrashuv</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress fill-marketing" style="width: 45%"></div></div>
+                        </div>
+                        <div class="tag-row">
+                            <div class="tag-info">
+                                <span class="tag-name">Networking</span>
+                                <span class="tag-count">120 uchrashuv</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress fill-networking" style="width: 25%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h4>So'nggi harakatlar</h4>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon success-icon"><i class="fa-regular fa-circle-check"></i></div>
+                            <div class="activity-details">
+                                <h6>Yangi uchrashuv tasdiqlandi</h6>
+                                <p>Anvar va Malik, "Chayxona №1", 13:00</p>
+                                <span class="time-ago">2 daqiqa oldin</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon warning-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                            <div class="activity-details">
+                                <h6>Hisobot: Noto'g'ri joylashuv</h6>
+                                <p>Foydalanuvchi @nodir_dev tomonidan</p>
+                                <span class="time-ago">15 daqiqa oldin</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon info-icon"><i class="fa-solid fa-user-plus"></i></div>
+                            <div class="activity-details">
+                                <h6>Yangi foydalanuvchi ro'yxatdan o'tdi</h6>
+                                <p>Guli, PDP Academy talabasi</p>
+                                <span class="time-ago">45 daqiqa oldin</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-all-activities" id="loadMoreActivities">Barcha harakatlar</button>
+                </div>
+            </section>
+
+            <footer class="dashboard-footer">
+                <div class="footer-left">
+                    <h5>Birgalikda</h5>
+                    <p>© 2026 Birgalikda. Barcha huquqlar himoyalangan.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="Yordam.html">Biz haqimizda</a>
+                    <a href="Maxfiylik.html">Maxfiylik siyosati</a>
+                    <a href="Yordam.html#faq-section">Foydalanish shartlari</a>
+                    <a href="Yordam.html#support-form">Bog'lanish</a>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

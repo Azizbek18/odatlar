@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <script src="auth-guard.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Fikr-mulohaza</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="baholash.css?v=1.1">
+    <link rel="stylesheet" href="responsive.css?v=2.0">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+<body>
+
+    <div id="toast-container"></div>
+
+    <div class="feedback-modal">
+        <header class="modal-header">
+            <h2>Tushlik qanday o'tdi? 🍽️</h2>
+            <button class="btn-close" id="close-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+        </header>
+
+        <!-- Dynamic Profile Summary Card -->
+        <div class="profile-summary-card" id="partner-card">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150&h=150" alt="Partner Image" class="profile-img" id="partner-img">
+            <div class="profile-info">
+                <h3 id="partner-name">Jasur Tashpulatov</h3>
+                <p class="job-text" id="partner-role">Frontend Developer</p>
+                <div class="mini-tags" id="partner-tags">
+                    <span class="m-tag">#Frontend</span>
+                    <span class="m-tag">#Networking</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="rating-stars" id="star-rating">
+            <span class="material-icons star-icon" data-value="1">star</span>
+            <span class="material-icons star-icon" data-value="2">star</span>
+            <span class="material-icons star-icon" data-value="3">star</span>
+            <span class="material-icons star-icon" data-value="4">star</span>
+            <span class="material-icons star-icon empty" data-value="5">star</span>
+        </div>
+        <div class="rating-status-text" id="rating-desc">Yaxshi! 🚀</div>
+
+        <form id="feedback-form" onsubmit="submitFeedback(event)">
+            
+            <div class="input-group">
+                <label>Uchrashuv tajribasi (Tassurotlar)</label>
+                <div class="tags-wrapper" id="tassurot-chips">
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">
+                        <span class="material-icons-outlined">check_circle</span> Vaqtida keldi
+                    </button>
+                    <button type="button" class="tag-btn active" onclick="toggleTag(this)">
+                        <span class="material-icons-outlined">emoji_objects</span> Qiziqarli suhbat
+                    </button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">
+                        <span class="material-icons-outlined">thumb_up</span> Tavsiya qilaman
+                    </button>
+                    <button type="button" class="tag-btn" onclick="toggleTag(this)">
+                        <span class="material-icons-outlined">business_center</span> Kasbiy suhbat
+                    </button>
+                    <button type="button" class="tag-btn danger-tag" onclick="toggleTag(this)">
+                        <span class="material-icons-outlined">schedule</span> Kechikdi
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>AI Muzqaymoqlar (Icebreakers) foydali bo'ldimi?</label>
+                <div class="btn-group-toggle" id="ai-feedback-group">
+                    <button type="button" class="toggle-option" data-value="juda">Juda ham</button>
+                    <button type="button" class="toggle-option active" data-value="ortacha">O'rtacha</button>
+                    <button type="button" class="toggle-option" data-value="yoq">Yo'q</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Sharh qoldirish (ixtiyoriy)</label>
+                <textarea id="comment-text" placeholder="Suhbat haqida batafsilroq yozishingiz mumkin..."></textarea>
+            </div>
+
+
+
+            <button type="submit" class="submit-btn" id="submit-btn">
+                Yuborish <span class="material-icons-outlined">send</span>
+            </button>
+        </form>
+    </div>
+
+    <script src="baholash.js?v=1.1"></script>
+</body>
+</html>

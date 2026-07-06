@@ -104,21 +104,22 @@
         }
 
         .sidebar {
-            width: 280px;
-            background: var(--sidebar-bg, #ffffff);
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-right: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.04);
-            position: fixed;
-            height: 100vh;
-            top: 0;
-            left: 0;
-            z-index: 999;
-            overflow-y: auto;
-            overscroll-behavior: contain;
+            width: 280px !important;
+            background: var(--sidebar-bg, #ffffff) !important;
+            padding: 30px 20px 40px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.04) !important;
+            position: fixed !important;
+            height: 100vh !important;
+            height: 100dvh !important;
+            top: 0 !important;
+            left: 0 !important;
+            z-index: 999 !important;
+            overflow-y: auto !important;
+            overscroll-behavior: contain !important;
         }
 
         .sidebar .logo {
@@ -381,11 +382,14 @@
 
         @media (max-width: 900px) {
             .sidebar {
-                width: min(280px, 85vw);
+                width: min(280px, 85vw) !important;
                 left: 0 !important;
-                transform: translateX(-110%);
-                transition: transform 0.3s ease;
-                z-index: 1000;
+                transform: translateX(-110%) !important;
+                transition: transform 0.3s ease !important;
+                z-index: 1000 !important;
+                justify-content: flex-start !important;
+                gap: 20px !important;
+                padding-bottom: 60px !important;
             }
 
             .sidebar.open,

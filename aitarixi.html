@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <script src="auth-guard.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Statistika & AI Icebreaker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="aitarixi.css">
+    <link rel="stylesheet" href="responsive.css?v=2.0">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+
+<body>
+    <div id="toast-container"></div>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="xarita.html" class="logo" style="display:flex; align-items:center; gap:8px;"><span style="font-size:20px;">🍽️</span> <span style="font-size:16px; font-weight:800; background:linear-gradient(135deg, #0077b6, #005A87); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.4px;">Birgalikda</span></a>
+                <nav class="nav-menu">
+                    <a href="Asosiy.html">Bosh sahifa</a>
+                    <a href="takliflar.html">Muloqotlar</a>
+                    <a href="xarita.html">Xarita</a>
+                    <a href="matchlartarixi.html">Reyting</a>
+                    <a href="admin.html" class="active">Statistika</a>
+                </nav>
+            </div>
+            <div class="nav-right">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="global-search" placeholder="Qidirish...">
+                </div>
+                <div class="nav-icon" id="notif-btn"><i class="fa-regular fa-bell"></i></div>
+                <div class="user-avatar" id="profile-btn" style="cursor:pointer;"><i class="fa-regular fa-user"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon blue-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <div class="metric-info">
+                    <span class="metric-title">Foydali topildi</span>
+                    <h2 class="metric-value">82%</h2>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon gold-icon"><i class="fa-regular fa-star"></i></div>
+                <div class="metric-info">
+                    <span class="metric-title">O'rtacha reyting</span>
+                    <h2 class="metric-value">4.2</h2>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon green-icon"><i class="fa-regular fa-comment-dots"></i></div>
+                <div class="metric-info">
+                    <span class="metric-title">Suhbat boshlanishi</span>
+                    <h2 class="metric-value">34%</h2>
+                </div>
+            </div>
+        </section>
+
+        <div class="content-layout">
+            
+            <div class="left-column">
+                <div class="filter-tabs">
+                    <button class="tab-item active" data-filter="barchasi">Barchasi</button>
+                    <button class="tab-item" data-filter="foydali">Foydali</button>
+                    <button class="tab-item" data-filter="foydasiz">Foydasiz</button>
+                    <button class="tab-item" data-filter="saqlanganlar">Saqlanganlar</button>
+                </div>
+
+                <div class="history-container">
+                    
+                    <div class="history-card" data-status="foydali">
+                        <div class="card-top">
+                            <div class="user-meta">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80" alt="Gulnoza" class="avatar">
+                                <div class="user-details">
+                                    <h3>Gulnoza bilan uchrashuv</h3>
+                                    <p>12 Avgust, 13:15 • Toshkent IT Park</p>
+                                </div>
+                            </div>
+                            <span class="status-badge status-good"><i class="fa-solid fa-thumbs-up"></i> Foydali</span>
+                        </div>
+                        
+                        <div class="ai-suggestion-box">
+                            <span class="ai-tag">AI SUGGESTION</span>
+                            <p class="ai-text">"Sizning oxirgi LinkedIn postingizdagi kiber-xavfsizlik haqidagi fikrlaringiz juda qiziq bo'ldi. O'zbekiston bozoridagi o'sish haqida nima deb o'ylaysiz?"</p>
+                        </div>
+
+                        <div class="card-bottom">
+                            <div class="stars" data-rating="4">
+                                <i class="fa-solid fa-star active"></i>
+                                <i class="fa-solid fa-star active"></i>
+                                <i class="fa-solid fa-star active"></i>
+                                <i class="fa-solid fa-star active"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+                            <button class="btn-save saved"><i class="fa-solid fa-bookmark"></i> Saqlash</button>
+                        </div>
+                    </div>
+
+                    <div class="history-card" data-status="foydali">
+                        <div class="card-top">
+                            <div class="user-meta">
+                                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&auto=format&fit=crop&q=80" alt="Bekzod" class="avatar">
+                                <div class="user-details">
+                                    <h3>Bekzod bilan uchrashuv</h3>
+                                    <p>10 Avgust, 12:45 • GroundZero</p>
+                                </div>
+                            </div>
+                            <span class="status-badge status-neutral"><i class="fa-regular fa-face-meh"></i> O'rtacha</span>
+                        </div>
+                        
+                        <div class="ai-suggestion-box">
+                            <p class="ai-text">"Bugungi ob-havo haqida nima deysiz? Tushlik uchun juda issiq emasmi?"</p>
+                        </div>
+
+                        <div class="card-bottom">
+                            <div class="stars" data-rating="2">
+                                <i class="fa-solid fa-star active"></i>
+                                <i class="fa-solid fa-star active"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+                            <button class="btn-save"><i class="fa-regular fa-bookmark"></i> Saqlash</button>
+                        </div>
+                    </div>
+
+                    <div class="history-card" data-status="foydasiz">
+                        <div class="card-top">
+                            <div class="user-meta">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80" alt="Jasur" class="avatar">
+                                <div class="user-details">
+                                    <h3>Jasur bilan uchrashuv</h3>
+                                    <p>08 Avgust, 13:00 • FeedUp</p>
+                                </div>
+                            </div>
+                            <span class="status-badge status-bad"><i class="fa-solid fa-thumbs-down"></i> Foydasiz</span>
+                        </div>
+                        
+                        <div class="ai-suggestion-box">
+                            <p class="ai-text">"Sizning kompaniyangizdagi ish haqi miqdori menda katta qiziqish uyg'otdi. Bu haqda gaplasha olamizmi?"</p>
+                        </div>
+
+                        <div class="feedback-area">
+                            <label class="feedback-label">Nega foydasiz bo'ldi?</label>
+                            <textarea class="feedback-input" placeholder="Fikringizni qoldiring (masalan: juda shaxsiy savol, mavzuga aloqasiz...)"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="pagination">
+                    <button class="page-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="page-num active">2</button>
+                    <button class="page-num">3</button>
+                    <span class="page-dots">...</span>
+                    <button class="page-num">12</button>
+                    <button class="page-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <aside class="right-column">
+                
+                <div class="sidebar-widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <i class="fa-solid fa-bookmark"></i> Saqlanganlar
+                        </div>
+                        <span class="widget-count">12 TA</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="saved-item">
+                            <p class="saved-text">"Loyihangizdagi UI dizayn yondashuvi menga yoqdi..."</p>
+                            <span class="saved-date"><i class="fa-regular fa-calendar"></i> 15 iyul</span>
+                        </div>
+                        <div class="saved-item">
+                            <p class="saved-text">"Siz o'qigan oxirgi kitob kasbiy faoliyatingizga qanday ta'sir qildi?"</p>
+                            <span class="saved-date"><i class="fa-regular fa-calendar"></i> 12 iyul</span>
+                        </div>
+                        <button class="btn-view-all">Barchasini ko'rish</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-widget tip-widget">
+                    <div class="widget-content">
+                        <p class="tip-text">"Keyingi safar suhbatdoshning hobbilari haqida so'rash muloqotni 15% tezroq 'isishi'ga yordam berishi mumkin."</p>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h4>Birgalikda</h4>
+                <p>Biznes va do'stona aloqalarni tushlik ustida mustahkamlang.</p>
+            </div>
+            <div class="footer-links">
+                <a href="Yordam.html" id="footer-about">Biz haqimizda</a>
+                <a href="Maxfiylik.html" id="footer-privacy">Maxfiylik siyosati</a>
+                <a href="Yordam.html#faq-section" id="footer-terms">Foydalanish shartlari</a>
+                <a href="Yordam.html#support-form" id="footer-contact">Bog'lanish</a>
+            </div>
+            <div class="footer-copy">
+                <p>&copy; 2026 Birgalikda. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="aitarixi.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <script src="auth-guard.js"></script>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Match Tarixi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="matchlartarixi.css">
+    <link rel="stylesheet" href="responsive.css?v=2.0">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="xarita.html" class="logo" style="display:flex; align-items:center; gap:8px;"><span style="font-size:20px;">🍽️</span> <span style="font-size:16px; font-weight:800; background:linear-gradient(135deg, #0077b6, #005A87); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.4px;">Birgalikda</span></a>
+                <nav class="nav-menu">
+                    <a href="Asosiy.html">Bosh sahifa</a>
+                    <a href="takliflar.html">Muloqotlar</a>
+                    <a href="xarita.html">Xarita</a>
+                    <a href="matchlartarixi.html" class="active">Reyting</a>
+                </nav>
+            </div>
+            <div class="nav-right">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="nav-search" placeholder="Match qidirish...">
+                </div>
+                <div class="nav-icon alert-btn" id="notif-btn">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                <div class="user-profile" id="profile-btn" style="cursor:pointer;">
+                    <i class="fa-regular fa-user user-icon"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        
+        <section class="hero-banner">
+            <div class="hero-text">
+                <h2><i class="fa-solid fa-handshake hero-title-icon"></i> Match tarixi</h2>
+                <p>Sizning professional tarmoq kengayishi va tushlik davomidagi suhbatlaringiz sarhisobi.</p>
+            </div>
+            <button class="btn-download" id="download-report-btn">
+                <i class="fa-solid fa-download"></i> Hisobotni yuklash
+            </button>
+        </section>
+
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <span class="metric-label">JAMI MATCHLAR</span>
+                <div class="metric-value-wrapper">
+                    <span class="metric-num">0</span>
+                    <span class="metric-trend up"><i class="fa-solid fa-arrow-trend-up"></i> 0%</span>
+                </div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">O'RTACHA REYTING</span>
+                <div class="metric-value-wrapper">
+                    <span class="metric-num">0.0</span>
+                    <span class="metric-star"><i class="fa-solid fa-star"></i></span>
+                </div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">IJOBIY TAASSUROT</span>
+                <div class="metric-value-wrapper">
+                    <span class="metric-num">0%</span>
+                    <span class="metric-emoji"><i class="fa-regular fa-face-smile"></i></span>
+                </div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">LINKEDIN CONNECTS</span>
+                <div class="metric-value-wrapper">
+                    <span class="metric-num">0</span>
+                    <span class="metric-link"><i class="fa-solid fa-link"></i></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="controls-panel">
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-filter="hammasi">Hammasi</button>
+                <button class="tab-btn" data-filter="shu-oy">Shu oy</button>
+                <button class="tab-btn" data-filter="5-yulduzli">5 yulduzli</button>
+            </div>
+            <div class="sort-wrapper">
+                <span class="sort-label">Saralash:</span>
+                <div class="select-container">
+                    <select id="sort-select">
+                        <option value="eng-yangi">Eng yangi</option>
+                        <option value="eng-eski">Eng eski</option>
+                        <option value="reyting-yuqori">Reyting: Yuqori</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="match-list" id="match-container">
+            <!-- Dinamik matchlar JavaScript orqali yuklanadi -->
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <h4>Birgalikda</h4>
+                <p>Professional tanishuvlar va mazali tushliklar markazi.</p>
+            </div>
+            <div class="footer-center">
+                <a href="Yordam.html" id="footer-about">Biz haqimizda</a>
+                <a href="Maxfiylik.html" id="footer-privacy">Maxfiylik siyosati</a>
+                <a href="Yordam.html#faq-section" id="footer-terms">Foydalanish shartlari</a>
+                <a href="Yordam.html#support-form" id="footer-contact">Bog'lanish</a>
+            </div>
+            <div class="footer-right">
+                <p>&copy; 2026 Birgalikda. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="./matchlartarixi.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Maxfiylik</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Maxfiylik.css">
+    <link rel="shortcut icon" href="images/settings.png" type="image/x-icon">
+    <link rel="stylesheet" href="responsive.css?v=2.0">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo" style="display:flex; align-items:center; gap:8px;"><span style="font-size:22px;">🍽️</span> <span style="font-size:18px; font-weight:800; background:linear-gradient(135deg, #0077b6, #005A87); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.4px;">Birgalikda</span></div>
+        <div class="nav-actions">
+            <button class="nav-btn" type="button" onclick="window.location.href='Bildirishnomalar.html'">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </button>
+            <div class="avatar" onclick="window.location.href='profileS.html'" style="cursor:pointer;">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                    alt="Avatar">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="main-header">
+            <h1>Sozlamalar</h1>
+            <p>Ilovani xohishingizga mos ravishda sozlang</p>
+        </div>
+
+        <section class="card">
+            <div class="card-title">
+                <i class="fa-solid fa-utensils text-blue"></i>
+                <h2>Lunch Sozlamalari</h2>
+            </div>
+
+            <div class="form-group">
+                <label class="section-label">Lunch vaqti oralig'i</label>
+                <div class="time-range">
+                    <input type="text" id="lunch-start" class="input-field">
+                    <span class="range-separator">dan</span>
+                    <input type="text" id="lunch-end" class="input-field">
+                </div>
+            </div>
+
+            <div class="format-grid">
+                <button type="button" data-value="remote" class="format-btn">
+                    <span class="btn-title">Masofaviy</span>
+                    <span class="btn-desc">Onlayn uchrashuv</span>
+                </button>
+                <button type="button" data-value="live" class="format-btn">
+                    <span class="btn-title">Jonli</span>
+                    <span class="btn-desc">Ofis/Kafeda (In-person)</span>
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label class="section-label">Tuzilish uslubi</label>
+                <div class="style-tags" id="style-container">
+                    <button type="button" data-value="professional" class="tag-btn">Professional</button>
+                    <button type="button" data-value="casual" class="tag-btn">Erkin/Hovliqma</button>
+                    <button type="button" data-value="classroom" class="tag-btn">Darsxona</button>
+                    <button type="button" data-value="quick" class="tag-btn">Tezkor</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-title">
+                <i class="fa-regular fa-bell text-blue"></i>
+                <h2>Bildirishnoma Sozlamalari</h2>
+            </div>
+
+            <div class="toggle-list">
+                <div class="toggle-item">
+                    <div class="item-left">
+                        <div class="icon-wrapper bg-blue-light text-blue">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>Yangi Matchlar</h4>
+                            <p>Sizga mos sherik topilganida</p>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="notify-matches">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-item">
+                    <div class="item-left">
+                        <div class="icon-wrapper bg-orange-light text-orange">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Eslatma ogohlantirishlari</h4>
+                            <p>Lunch vaqtini o'tkazib yubormaslik uchun</p>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="notify-reminders">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-title">
+                <i class="fa-solid fa-lock text-blue"></i>
+                <h2>Maxfiylik</h2>
+            </div>
+
+            <div class="form-group">
+                <label class="section-label">Profil ko'rinishi</label>
+                <select id="profile-visibility" class="select-field">
+                    <option value="public">Barchaga ochiq</option>
+                    <option value="friends">Faqat do'stlarimga</option>
+                    <option value="private">Hech kimga (Yopiq)</option>
+                </select>
+            </div>
+
+            <div class="linked-account">
+                <div class="account-left">
+                    <div class="icon-wrapper bg-linkedin text-white">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </div>
+                    <div>
+                        <h4>LinkedIn profili</h4>
+                        <p id="linkedin-status">Bog'langan</p>
+                    </div>
+                </div>
+                <button type="button" id="linkedin-btn" class="unlink-btn">Uzish</button>
+            </div>
+        </section>
+
+        <section class="card card-danger">
+            <div class="card-title text-red">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h2>Xavfli Zona</h2>
+            </div>
+
+            <div class="danger-actions">
+                <button type="button" id="btn-freeze" class="btn-secondary-danger">Hisobni vaqtincha muzlatish</button>
+                <button type="button" id="btn-delete" class="btn-primary-danger">Hisobni butunlay o'chirish</button>
+            </div>
+
+            <div id="toast-message" class="toast hidden"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="Yordam.html">Biz haqimizda</a>
+            <a href="Maxfiylik.html">Maxfiylik siyosati</a>
+            <a href="Yordam.html#support-form">Bog'lanish</a>
+        </div>
+        <p class="copyright">© 2026 Birgalikda. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <script src="Maxfiylik.js"></script>
+</body>
+
+</html>

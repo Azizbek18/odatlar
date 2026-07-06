@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Yordam Markazi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Asosiy.css?v=1.4">
+    <link rel="stylesheet" href="Yordam.css?v=1.4">
+    <link rel="shortcut icon" href="images/headset.png" type="image/x-icon">
+    <link rel="stylesheet" href="responsive.css?v=1.4">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+
+<body>
+
+    <aside class="side-navigation">
+        <div class="side-logo">
+            <span class="side-logo-icon">🍽️</span>
+            <span class="side-logo-text">Birgalikda</span>
+        </div>
+        <nav>
+            <a class="birinchisi" href="Asosiy.html">
+                <div class="container"><img src="images/Icon.svg" alt="Asosiy"></div>
+                <div class="container-2">Asosiy</div>
+            </a>
+            <a class="ikkinchisi" href="xarita.html">
+                <div class="container"><img src="images/Icon (1).svg" alt="Xarita"></div>
+                <div class="container-2">Xarita</div>
+            </a>
+            <a class="uchinchisi" href="Asosiy.html#leaders-list">
+                <div class="container"><img src="images/Icon (2).svg" alt="Reyting"></div>
+                <div class="container-2">Reyting</div>
+            </a>
+            <a class="beshinchisi" href="statistika.html">
+                <div class="container"><img src="images/Icon (4).svg" alt="Statistika"></div>
+                <div class="container-2">Statistika</div>
+            </a>
+            <a class="oltinchisi" href="Sozlamalar.html" id="sozlamalar-link">
+                <div class="container"><img src="images/Icon (5).svg" alt="Sozlamalar"></div>
+                <div class="container-2">Sozlamalar</div>
+            </a>
+            <a class="yettinchisi" href="takliflar.html">
+                <div class="container"><img src="images/Icon (6).svg" alt="Takliflar"></div>
+                <div class="container-2">Takliflar</div>
+            </a>
+        </nav>
+        <div class="margin-announce-box">
+            <button type="button" class="btn-announce ripple" id="btn-announce-lunch">
+                <i class="fa-solid fa-plus"></i>
+                <span>E'lon qo'shish</span>
+            </button>
+        </div>
+        <div class="container-0">
+            <a href="Yordam.html" id="yordam-link" class="is-active">
+                <div class="container"><img src="images/Icon (7).svg" alt="Yordam"></div>
+                <div class="container-2">Yordam</div>
+            </a>
+            <a href="kirish.html" id="logout-link">
+                <div class="container"><img src="images/Icon (8).svg" alt="Chiqish"></div>
+                <div class="container-2">Chiqish</div>
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="help-container">
+            <div class="help-banner">
+                <h2>Yordam markazi</h2>
+                <p>Sizga qanday yordam bera olamiz?</p>
+            </div>
+
+            <div class="support-channels">
+                <div class="channel-card">
+                    <i class="fa-solid fa-circle-question text-blue"></i>
+                    <h3>FAQ</h3>
+                    <p>Ko'p beriladigan savollar</p>
+                </div>
+                <div class="channel-card">
+                    <i class="fa-solid fa-headset text-blue"></i>
+                    <h3>Jonli Chat</h3>
+                    <p>Operator bilan bog'lanish</p>
+                </div>
+                <div class="channel-card">
+                    <i class="fa-brands fa-telegram text-blue"></i>
+                    <h3>Telegram Bot</h3>
+                    <p>@Birgalikda_support_bot</p>
+                </div>
+            </div>
+
+            <section class="card">
+                <div class="form-header">
+                    <h3>Murojaat qoldirish</h3>
+                    <p>Fikringiz biz uchun muhim. Xatolik haqida xabar bering yoki takliflarni yozing.</p>
+                </div>
+
+                <form id="support-form" class="support-form">
+                    <div class="form-group">
+                        <label class="section-label">Toifani tanlang</label>
+                        <div class="category-grid" id="category-container">
+                            <button type="button" class="cat-btn active" data-category="Xatolik">
+                                <i class="fa-solid fa-bug"></i> Xatolik
+                            </button>
+                            <button type="button" class="cat-btn" data-category="Taklif">
+                                <i class="fa-solid fa-lightbulb"></i> Taklif
+                            </button>
+                            <button type="button" class="cat-btn" data-category="Reyting">
+                                <i class="fa-solid fa-star"></i> Reyting
+                            </button>
+                            <button type="button" class="cat-btn" data-category="Match muammo">
+                                <i class="fa-solid fa-user-xmark"></i> Match muammo
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="section-label">Ilovadan qanchalik mamnunsiz?</label>
+                        <div class="star-rating" id="star-container">
+                            <i class="fa-regular fa-star" data-rating="1"></i>
+                            <i class="fa-regular fa-star" data-rating="2"></i>
+                            <i class="fa-regular fa-star" data-rating="3"></i>
+                            <i class="fa-regular fa-star" data-rating="4"></i>
+                            <i class="fa-regular fa-star" data-rating="5"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="section-label">Xabaringiz</label>
+                        <textarea id="message-text" class="textarea-field" placeholder="Batafsil ma'lumot qoldiring..."
+                            required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="section-label">Screenshot (Ixtiyoriy)</label>
+                        <div class="upload-zone" id="upload-zone">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <p id="upload-text">Faylni shu yerga tashlang yoki yuklang</p>
+                            <input type="file" id="file-input" class="hidden-file" accept="image/*">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Yuborish</button>
+                </form>
+                <div id="toast-message" class="toast hidden"></div>
+            </section>
+
+            <section class="card" id="tickets-section">
+                <div class="section-header-row">
+                    <h3>Mening so'rovlarim</h3>
+                    <a href="#tickets-section" class="view-all">Hammasi <i class="fa-solid fa-chevron-right"></i></a>
+                </div>
+
+                <div class="tickets-list" id="tickets-list">
+                    <div class="ticket-item">
+                        <div class="ticket-left">
+                            <div class="icon-circle bg-green-light text-green"><i class="fa-solid fa-check"></i></div>
+                            <div>
+                                <h4>Tugma ishlamayapti</h4>
+                                <p>2-Iyun, 2026</p>
+                            </div>
+                        </div>
+                        <span class="status-badge badge-success">Yopilgan</span>
+                    </div>
+
+                    <div class="ticket-item">
+                        <div class="ticket-left">
+                            <div class="icon-circle bg-orange-light text-orange"><i class="fa-solid fa-spinner"></i>
+                            </div>
+                            <div>
+                                <h4>Match topilmadi</h4>
+                                <p>1-Iyun, 2026</p>
+                            </div>
+                        </div>
+                        <span class="status-badge badge-warning">Jarayonda</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card" id="faq-section">
+                <h3>Ko'p beriladigan savollar</h3>
+
+                <div class="accordion-list">
+                    <div class="accordion-item">
+                        <button type="button" class="accordion-trigger">
+                            <span>Birgalikda qanday ishlaydi?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Birgalikda siz ko'rsatgan vaqt oralig'i va qiziqishlaringizga mos keladigan professional
+                                yoki erkin tushlik sheriklarini sun'iy intellekt yordamida avtomatik ravishda aniqlaydi
+                                va sizga taklif qiladi.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button type="button" class="accordion-trigger">
+                            <span>Xavfsizlik qanday ta'minlanadi?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Barcha foydalanuvchilar majburiy ravishda LinkedIn profili yoki boshqa ijtimoiy tarmoqlar
+                                orqali tekshiriladi (verifikatsiya qilinadi). Shubhali profillar va shikoyat tushgan
+                                foydalanuvchilar darhol bloklanadi.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button type="button" class="accordion-trigger">
+                            <span>Tushlik bekor bo'lsa nima qilish kerak?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Agar rejalaringiz o'zgarib qolsa, uchrashuv boshlanishidan kamida 30 daqiqa oldin ilova
+                                orqali bildirishnoma yuborib bekor qilishingiz mumkin. Bu sherigingiz vaqtini hurmat
+                                qilish uchun muhim.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <script src="Yordam.js"></script>
+    <script src="sidebar.js?v=1.4"></script>
+</body>
+
+</html>

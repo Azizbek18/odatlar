@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=2.0">
+    <script src="auth-guard.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Streak & Statistika</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="Asosiy.css?v=1.4">
+    <link rel="stylesheet" href="statistika.css?v=1.4">
+    <link rel="shortcut icon" href="images/Streak.png" type="image/x-icon">
+    <link rel="stylesheet" href="responsive.css?v=1.4">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+
+<body>
+
+    <aside class="side-navigation">
+        <div class="side-logo">
+            <span class="side-logo-icon">🍽️</span>
+            <span class="side-logo-text">Birgalikda</span>
+        </div>
+        <nav>
+            <a class="birinchisi" href="Asosiy.html">
+                <div class="container">
+                    <img src="images/Icon.svg" alt="Asosiy">
+                </div>
+                <div class="container-2">Asosiy</div>
+            </a>
+            <a class="ikkinchisi" href="xarita.html">
+                <div class="container">
+                    <img src="images/Icon (1).svg" alt="Xarita">
+                </div>
+                <div class="container-2">Xarita</div>
+            </a>
+            <a class="uchinchisi" href="Asosiy.html#leaders-list">
+                <div class="container">
+                    <img src="images/Icon (2).svg" alt="Reyting">
+                </div>
+                <div class="container-2">Reyting</div>
+            </a>
+            <a class="beshinchisi is-active" href="statistika.html">
+                <div class="container">
+                    <img src="images/Icon (4).svg" alt="Statistika">
+                </div>
+                <div class="container-2">Statistika</div>
+            </a>
+            <a class="oltinchisi" href="Sozlamalar.html" id="sozlamalar-link">
+                <div class="container">
+                    <img src="images/Icon (5).svg" alt="Sozlamalar">
+                </div>
+                <div class="container-2">Sozlamalar</div>
+            </a>
+            <a class="yettinchisi" href="takliflar.html">
+                <div class="container">
+                    <img src="images/Icon (6).svg" alt="Takliflar">
+                </div>
+                <div class="container-2">Takliflar</div>
+            </a>
+        </nav>
+        <div class="margin-announce-box">
+            <button type="button" class="btn-announce ripple" id="btn-announce-lunch">
+                <i class="fa-solid fa-plus"></i>
+                <span>E'lon qo'shish</span>
+            </button>
+        </div>
+        <div class="container-0">
+            <a href="Yordam.html" id="yordam-link">
+                <div class="container">
+                    <img src="images/Icon (7).svg" alt="Yordam">
+                </div>
+                <div class="container-2">Yordam</div>
+            </a>
+            <a href="kirish.html" id="logout-link">
+                <div class="container">
+                    <img src="images/Icon (8).svg" alt="Chiqish">
+                </div>
+                <div class="container-2">Chiqish</div>
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="main-container">
+            <div class="streak-banner">
+                <div class="banner-left">
+                    <h1><i class="fa-solid fa-fire"></i> Streak & Statistika</h1>
+                    <p>Sizning faolligingiz va ijtimoiy natijalaringiz.</p>
+                </div>
+                <div class="banner-right">
+                    <span class="streak-count">23 kun 🔥</span>
+                    <span class="record-badge">Eng yaxshi rekord!</span>
+                </div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:12px; margin:18px 0 24px;">
+                <a href="admin.html" class="sub-nav-badge-blue">Admin statistikasi</a>
+                <a href="aitarixi.html" class="sub-nav-badge-cyan">AI tahlil tarixi</a>
+                <a href="matchlartarixi.html" class="sub-nav-badge-orange">Matchlar tarixi</a>
+            </div>
+
+
+            <div class="filter-wrapper">
+                <div class="filter-tabs">
+                    <button class="tab-btn">Hafta</button>
+                    <button class="tab-btn active">Oy</button>
+                    <button class="tab-btn">Hammasi</button>
+                </div>
+                <div class="date-indicator">
+                    <i class="fa-regular fa-calendar"></i> 1-21 Dekabr, 2026
+                </div>
+            </div>
+
+            <div class="stat-bento-grid">
+
+                <div class="bento-col-left">
+                    <div class="bento-card">
+                        <div class="card-header-flex">
+                            <h3 class="card-title">Streak Jarayoni</h3>
+                            <div class="streak-milestones">
+                                <span><i class="fa-solid fa-seedling"></i> Start</span>
+                                <span class="active-fire"><i class="fa-solid fa-fire"></i> Hot</span>
+                                <span><i class="fa-solid fa-star"></i> Star</span>
+                                <span><i class="fa-solid fa-trophy"></i> Champ</span>
+                                <span><i class="fa-solid fa-crown"></i> King</span>
+                            </div>
+                        </div>
+                        <p class="sub-text" style="margin-top: -10px; margin-bottom: 15px;">Keyingi mukofotgacha 7 kun
+                            qoldi</p>
+
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill"></div>
+                        </div>
+
+                        <h4 class="section-sub-title"
+                            style="margin-top: 25px; font-size: 14px; font-weight: 600; margin-bottom: 10px;">Oxirgi 12
+                            haftalik faollik</h4>
+                        <div class="activity-grid" id="activityGrid"></div>
+
+                        <div class="grid-legend">
+                            <span>Kam</span>
+                            <div class="legend-box lvl-0"></div>
+                            <div class="legend-box lvl-1"></div>
+                            <div class="legend-box lvl-2"></div>
+                            <div class="legend-box lvl-3"></div>
+                            <div class="legend-box lvl-4"></div>
+                            <span>Ko'p</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bento-col-right">
+                    <div class="mini-stats-grid">
+                        <div class="mini-card">
+                            <div class="mini-icon" style="color: #0070f3;"><i class="fa-solid fa-utensils"></i></div>
+                            <div><span>Jami tushliklar</span>
+                                <p>142</p>
+                            </div>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-icon" style="color: #e28743;"><i class="fa-solid fa-users"></i></div>
+                            <div><span>Yangi tanishlar</span>
+                                <p>86</p>
+                            </div>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-icon" style="color: #10b981;"><i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <div><span>Qabul darajasi</span>
+                                <p>94%</p>
+                            </div>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-icon" style="color: #ffb400;"><i class="fa-solid fa-star"></i></div>
+                            <div><span>O'rtacha reyting</span>
+                                <p>4.9</p>
+                            </div>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-icon" style="color: #3b82f6;"><i class="fa-regular fa-comments"></i></div>
+                            <div><span>Suhbat soatlari</span>
+                                <p>28s</p>
+                            </div>
+                        </div>
+                        <div class="mini-card">
+                            <div class="mini-icon" style="color: #8b5cf6;"><i class="fa-solid fa-trophy"></i></div>
+                            <div><span>Yutuqlar</span>
+                                <p>12</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bento-card" style="margin-top: 25px;">
+                        <h3 class="card-title">Hamkor tashkilotlar</h3>
+                        <div class="doughnut-wrapper">
+                            <div class="chart-box-doughnut">
+                                <canvas id="doughnutChart"></canvas>
+                                <div class="doughnut-center-text">
+                                    <h3>12</h3>
+                                    <p>Kompaniyalar</p>
+                                </div>
+                            </div>
+                            <div class="doughnut-legend-list">
+                                <div class="legend-item"><span class="dot" style="background: #0070f3;"></span> IT Park
+                                    <span class="val">45%</span></div>
+                                <div class="legend-item"><span class="dot" style="background: #ff5a5f;"></span> EPAM
+                                    Systems <span class="val">20%</span></div>
+                                <div class="legend-item"><span class="dot" style="background: #cbd5e1;"></span> Boshqa
+                                    <span class="val">35%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-card wide-chart-card">
+                <h3 class="card-title">Haftalik uchrashuvlar dinamikasi</h3>
+                <div class="chart-container">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+
+            <div class="lower-grid">
+                <div class="bento-card animate-card">
+                    <h3 class="card-title">Eng faol vaqtlar</h3>
+                    <div class="time-activity-list">
+                        <div class="time-row">
+                            <div class="time-label">12:00 - 13:00</div>
+                            <div class="track-bar">
+                                <div class="fill-bar" style="width: 90%;"></div>
+                            </div>
+                            <div class="count-label">48 marta</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time-label">13:00 - 14:00</div>
+                            <div class="track-bar">
+                                <div class="fill-bar" style="width: 65%;"></div>
+                            </div>
+                            <div class="count-label">32 marta</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time-label">11:00 - 12:00</div>
+                            <div class="track-bar">
+                                <div class="fill-bar" style="width: 30%;"></div>
+                            </div>
+                            <div class="count-label">14 marta</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bento-card animate-card">
+                    <h3 class="card-title">Yutuqlar xronologiyasi</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon" style="background: #e0f2fe; color: #0369a1;"><i
+                                    class="fa-solid fa-medal"></i></div>
+                            <div class="timeline-details">
+                                <h4>"Hafta Qahramoni" unvoni</h4>
+                                <p>7 kun davomida uzluksiz faollik uchrashuvlari.</p>
+                                <span>Aprel, 14:20</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon" style="background: #dcfce7; color: #15803d;"><i
+                                    class="fa-solid fa-handshake"></i></div>
+                            <div class="timeline-details">
+                                <h4>"Ijtimoiy Magnat"</h4>
+                                <p>50 ta har xil soha vakillari bilan tanishuv.</p>
+                                <span>12-fevral</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon" style="background: #ffedd5; color: #c2410c;"><i
+                                    class="fa-solid fa-fire-flame-curved"></i></div>
+                            <div class="timeline-details">
+                                <h4>Birinchi Rekord</h4>
+                                <p>Uchrashuvlar soni bo'yicha TOP 10% ga kirdingiz.</p>
+                                <span>3-Yanvar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="statistika.js"></script>
+    <script src="sidebar.js?v=1.4"></script>
+</body>
+
+</html>

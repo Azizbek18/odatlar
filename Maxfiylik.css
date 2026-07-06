@@ -1,0 +1,230 @@
+@import url("mobile-300.css");
+/* -------------------------------------------------------------
+   Maxfiylik.css - Haqiqiy Silliqlik va Taktil Effektlar
+------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #F8FAFC;
+    color: #1E293B;
+    padding-bottom: 3rem;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #E2E8F0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+.logo { font-size: 1.25rem; font-weight: 700; color: #0284C7; }
+.nav-actions { display: flex; align-items: center; gap: 1rem; }
+
+.nav-btn {
+    position: relative; padding: 0.5rem; background: none; border: none;
+    color: #64748B; border-radius: 50%; cursor: pointer; font-size: 1.15rem;
+    transition: background 0.2s, transform 0.2s;
+}
+.nav-btn:hover { background-color: #F1F5F9; transform: scale(1.05); }
+
+.badge {
+    position: absolute; top: 6px; right: 6px; width: 8px; height: 8px;
+    background-color: #EF4444; border-radius: 50%;
+}
+.avatar { width: 2rem; height: 2rem; border-radius: 50%; overflow: hidden; border: 1px solid #E2E8F0; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Container */
+.container {
+    max-width: 42rem; margin: 2rem auto 0 auto; padding: 0 1rem;
+    display: flex; flex-direction: column; gap: 2rem;
+}
+.main-header h1 { font-size: 1.5rem; font-weight: 700; color: #0F172A; }
+.main-header p { font-size: 0.875rem; color: #64748B; margin-top: 0.25rem; }
+
+/* Cards */
+.card {
+    background-color: #ffffff; border-radius: 1rem; padding: 1.5rem;
+    border: 1px solid #E2E8F0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    display: flex; flex-direction: column; gap: 1.25rem;
+    transition: box-shadow 0.3s ease;
+}
+.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+
+.card-title { display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; color: #0F172A; }
+.card-title h2 { font-size: 1rem; font-weight: 600; }
+
+.text-blue { color: #0284C7; }
+.text-orange { color: #EA580C; }
+.text-red { color: #B91C1C; }
+.text-white { color: #ffffff; }
+.bg-blue-light { background-color: #F0F9FF; }
+.bg-orange-light { background-color: #FFF7ED; }
+.bg-linkedin { background-color: #0A66C2; }
+
+/* Inputs */
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.section-label { font-size: 0.75rem; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.time-range { display: flex; align-items: center; gap: 0.75rem; }
+.input-field {
+    width: 100%; max-width: 10rem; padding: 0.625rem 1rem;
+    background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 0.75rem;
+    font-size: 0.875rem; outline: none; transition: all 0.2s ease;
+}
+.input-field:focus { border-color: #0284C7; background-color: #ffffff; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1); }
+.range-separator { font-size: 0.875rem; color: #94A3B8; }
+
+/* Format Grid */
+.format-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.format-btn {
+    display: flex; flex-direction: column; align-items: flex-start; padding: 1rem;
+    border-radius: 0.75rem; border: 1px solid #E2E8F0; background-color: #ffffff;
+    text-align: left; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.format-btn:hover { background-color: #F8FAFC; transform: translateY(-1px); }
+.format-btn.active { border-color: #0284C7; border-width: 2px; background-color: #F0F9FF; }
+.btn-title { font-size: 0.75rem; font-weight: 600; color: #334155; }
+.format-btn.active .btn-title { color: #0284C7; }
+.btn-desc { font-size: 0.75rem; color: #94A3B8; margin-top: 0.25rem; }
+
+/* Tags */
+.style-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag-btn {
+    padding: 0.375rem 1rem; border-radius: 9999px; font-size: 0.75rem;
+    font-weight: 500; border: none; background-color: #F1F5F9; color: #475569;
+    cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.tag-btn:hover { background-color: #E2E8F0; }
+.tag-btn.active { background-color: #0284C7; color: #ffffff; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2); }
+
+/* Switch Toggle (Elastik o'tish bilan) */
+.toggle-list { display: flex; flex-direction: column; gap: 1rem; }
+.toggle-item { display: flex; justify-content: space-between; align-items: center; }
+.item-left { display: flex; gap: 0.75rem; align-items: center; }
+.icon-wrapper { width: 2rem; height: 2rem; display: flex; justify-content: center; align-items: center; border-radius: 0.5rem; font-size: 0.875rem; }
+.item-left h4 { font-size: 0.875rem; font-weight: 500; color: #1E293B; }
+.item-left p { font-size: 0.75rem; color: #94A3B8; }
+
+.switch { position: relative; display: inline-block; width: 36px; height: 20px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #CBD5E1; border-radius: 20px;
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slider:before {
+    position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px;
+    background-color: white; border-radius: 50%;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); /* Elastik sakrash effekti */
+}
+input:checked + .slider { background-color: #0284C7; }
+input:checked + .slider:before { transform: translateX(16px); }
+
+/* Select Field */
+.select-field {
+    width: 100%; padding: 0.625rem 1rem; background-color: #F8FAFC;
+    border: 1px solid #E2E8F0; border-radius: 0.75rem; font-size: 0.875rem;
+    outline: none; cursor: pointer; transition: all 0.2s;
+}
+.select-field:focus { border-color: #0284C7; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1); }
+
+/* LinkedIn */
+.linked-account { display: flex; justify-content: space-between; align-items: center; padding: 0.875rem; background-color: #F8FAFC; border-radius: 0.75rem; border: 1px solid #E2E8F0; }
+.account-left { display: flex; align-items: center; gap: 0.75rem; }
+.unlink-btn { background: none; border: none; font-size: 0.75rem; font-weight: 500; cursor: pointer; transition: color 0.2s; }
+.unlink-btn.connect { color: #0284C7; }
+.unlink-btn.disconnect { color: #EF4444; }
+.unlink-btn:hover { text-decoration: underline; }
+
+/* Danger Zone */
+.card-danger { background-color: rgba(254, 242, 242, 0.5); border-color: #FEE2E2; }
+.danger-actions { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.btn-primary-danger, .btn-secondary-danger {
+    width: 100%; padding: 0.75rem; border-radius: 0.75rem; font-size: 0.875rem;
+    font-weight: 500; cursor: pointer; transition: all 0.2s ease;
+}
+.btn-primary-danger { background-color: #DC2626; color: white; border: none; }
+.btn-primary-danger:hover { background-color: #B91C1C; }
+.btn-primary-danger:active { transform: scale(0.98); animation: shake 0.2s ease; }
+
+.btn-secondary-danger { background-color: #ffffff; color: #DC2626; border: 1px solid #FCA5A5; }
+.btn-secondary-danger:hover { background-color: #FEF2F2; }
+.btn-secondary-danger:active { transform: scale(0.98); }
+
+/* Toast */
+.toast { text-align: center; font-size: 0.75rem; font-weight: 500; padding: 0.5rem; border-radius: 0.5rem; margin-top: 0.5rem; animation: fadeInUp 0.2s ease forwards; }
+.toast.hidden { display: none; }
+.toast.success { background-color: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
+.toast.info { background-color: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; }
+.toast.danger { background-color: #FEF2F2; color: #991B1B; border: 1px solid #FEE2E2; }
+
+/* Footer */
+.footer { margin-top: 4rem; text-align: center; }
+.footer-links { display: flex; justify-content: center; gap: 1rem; margin-bottom: 0.5rem; }
+.footer-links a { font-size: 0.75rem; color: #94A3B8; text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: #0284C7; }
+.copyright { font-size: 0.75rem; color: #94A3B8; }
+
+/* --- PREMIUM ANIMATSIYALAR BLOKI (Maxfiylik.css uchun) --- */
+@keyframes shakeAlert {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+@keyframes toastPopUp {
+    from { opacity: 0; transform: translate(-50%, 15px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Switcher (Slider) Elastik sakrash effekti */
+.slider:before {
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.format-btn, .tag-btn {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.format-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.tag-btn:active, .format-btn:active {
+    transform: scale(0.97);
+}
+
+/* Xavfli zona taktil effektlari */
+.btn-primary-danger:active {
+    animation: shakeAlert 0.2s ease;
+}
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    animation: toastPopUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
