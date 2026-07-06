@@ -933,7 +933,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       .color-picker {
-        display: flex; gap: 12px;
+        display: flex; gap: 12px; flex-wrap: wrap;
       }
       .color-option {
         width: 44px; height: 44px; border-radius: 14px;

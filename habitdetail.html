@@ -117,11 +117,13 @@
             <span class="legend-dot dark"></span> Ko'p
           </div>
         </div>
-        <div class="heatmap" id="heatmap"></div>
-        <div class="heatmap-months">
-          <span>Avgust</span>
-          <span>Sentabr</span>
-          <span>Oktabr</span>
+        <div class="heatmap-scroll-wrapper" style="overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; padding-bottom: 6px;">
+          <div class="heatmap" id="heatmap" style="min-width: 320px;"></div>
+          <div class="heatmap-months" style="min-width: 320px; display: flex; justify-content: space-between;">
+            <span>Avgust</span>
+            <span>Sentabr</span>
+            <span>Oktabr</span>
+          </div>
         </div>
       </section>
 
