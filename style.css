@@ -1288,15 +1288,34 @@ img {
 @media (max-width: 868px) {
   .navbar {
     padding: 16px var(--landing-gutter-sm);
+    gap: 12px;
   }
 
-  .nav-links,
-  .nav-right {
+  .nav-links {
     display: none;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .nav-right .btn-kirish {
+    padding: 9px 16px;
+    border-radius: 13px;
+    font-size: 13px;
+    border-bottom-width: 3px;
+    box-shadow:
+      0 3px 0 0 #4a00a3,
+      0 5px 14px -4px rgba(112, 0, 255, 0.32);
+    white-space: nowrap;
   }
 
   .menu-toggle {
     display: flex;
+    flex-shrink: 0;
   }
 }
 
@@ -1310,6 +1329,25 @@ img {
     margin-top: 10px;
     padding: 34px 20px;
     border-radius: 22px;
+  }
+
+  .navbar {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .nav-left img {
+    height: 26px;
+  }
+
+  .nav-right .btn-kirish {
+    padding: 8px 13px;
+    font-size: 12.5px;
+  }
+
+  .menu-toggle {
+    width: 28px;
+    height: 22px;
   }
 
   .hero-title {
@@ -1355,6 +1393,27 @@ img {
 
   .toast {
     max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar {
+    gap: 8px;
+  }
+
+  .nav-left img {
+    height: 24px;
+  }
+
+  .nav-right .btn-kirish {
+    padding: 7px 10px;
+    font-size: 12px;
+    border-width: 2px;
+    border-bottom-width: 3px;
+  }
+
+  .menu-toggle {
+    width: 26px;
   }
 }
 
