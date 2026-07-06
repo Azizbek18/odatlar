@@ -2,6 +2,68 @@
 //  Streak.uz - shared sidebar, active navigation and state
 // ========================================================
 
+(function ensureFontAwesome() {
+    const FA_ID = 'streak-fontawesome-cdn';
+    const FA_HREF = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+    const FA_FALLBACK_ID = 'streak-fontawesome-jsdelivr';
+    const FA_FALLBACK_HREF = 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css';
+
+    function hasFontAwesomeLink() {
+        return Array.from(document.styleSheets || []).some(sheet => {
+            try {
+                return String(sheet.href || '').includes('font-awesome') || String(sheet.href || '').includes('fontawesome');
+            } catch (_) {
+                return false;
+            }
+        }) || !!document.querySelector('link[href*="font-awesome"], link[href*="fontawesome"]');
+    }
+
+    if (!hasFontAwesomeLink()) {
+        const link = document.createElement('link');
+        link.id = FA_ID;
+        link.rel = 'stylesheet';
+        link.href = FA_HREF;
+        link.crossOrigin = 'anonymous';
+        document.head.appendChild(link);
+    }
+
+    function addFallbackLink() {
+        if (document.getElementById(FA_FALLBACK_ID)) return;
+        const fallback = document.createElement('link');
+        fallback.id = FA_FALLBACK_ID;
+        fallback.rel = 'stylesheet';
+        fallback.href = FA_FALLBACK_HREF;
+        fallback.crossOrigin = 'anonymous';
+        document.head.appendChild(fallback);
+    }
+
+    window.addEventListener('load', () => {
+        window.setTimeout(() => {
+            const fontsReady = !document.fonts || document.fonts.check('900 16px "Font Awesome 6 Free"');
+            if (!fontsReady) addFallbackLink();
+        }, 700);
+    });
+
+    if (!document.getElementById('streak-fontawesome-guard')) {
+        const style = document.createElement('style');
+        style.id = 'streak-fontawesome-guard';
+        style.textContent = `
+            .fa, .fa-solid, .fa-regular, .fa-brands {
+                font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", "Font Awesome 5 Free", Arial, sans-serif;
+                font-style: normal;
+                line-height: 1;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            .fa-solid, .fas { font-weight: 900; }
+            .fa-regular, .far { font-weight: 400; }
+            .fa-brands, .fab { font-weight: 400; }
+        `;
+        document.head.appendChild(style);
+    }
+})();
+
 (function injectSidebarStyles() {
     if (document.getElementById('sidebar-shared-styles')) return;
 
@@ -318,10 +380,56 @@
             }
         }
 
-        [data-theme="dark"] body {
-            background: #121214 !important;
+        /* STREAK GLOBAL DARK MODE SURFACE FIX */
+        [data-theme="dark"] {
+            --primary: #8b5cf6;
+            --primary-dark: #5b21b6;
+            --primary-light: #2d1f52;
+            --bg-color: #0f1117;
+            --page-bg: #0f1117;
+            --card-bg: #171923;
+            --surface: #171923;
+            --surface-soft: #111827;
+            --surface-elevated: #1f2330;
+            --white: #171923;
+            --text-main: #f4f6fb;
+            --text-dark: #f4f6fb;
+            --text-primary: #f4f6fb;
+            --text: #f4f6fb;
+            --text-light: #a6adbb;
+            --text-muted: #99a2b4;
+            --border-light: #2e3446;
+            --border-mid: #3a4258;
+            --border-color: #2e3446;
+            --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.28);
+        }
+
+        [data-theme="dark"] body,
+        [data-theme="dark"] .app,
+        [data-theme="dark"] .page,
+        [data-theme="dark"] .main,
+        [data-theme="dark"] .main-content,
+        [data-theme="dark"] .main-container,
+        [data-theme="dark"] .dashboard-container-fullscreen,
+        [data-theme="dark"] .content,
+        [data-theme="dark"] .content-section,
+        [data-theme="dark"] .dashboard-content,
+        [data-theme="dark"] .settings-content,
+        [data-theme="dark"] .reports-content,
+        [data-theme="dark"] .lessons-content,
+        [data-theme="dark"] .friends-content {
+            background: #0f1117 !important;
             color: #e5e7eb !important;
         }
+
+        [data-theme="dark"] body::before,
+        [data-theme="dark"] body::after,
+        [data-theme="dark"] .app::before,
+        [data-theme="dark"] .main::before,
+        [data-theme="dark"] .main-content::before {
+            background-color: transparent !important;
+        }
+
         [data-theme="dark"] .sidebar {
             background: #1a1a1e !important;
             border-right-color: #2b2b30 !important;
@@ -338,7 +446,51 @@
         [data-theme="dark"] .stat-card,
         [data-theme="dark"] .creative-card,
         [data-theme="dark"] .achieve-card,
-        [data-theme="dark"] .list-row {
+        [data-theme="dark"] .list-row,
+        [data-theme="dark"] .bento-card,
+        [data-theme="dark"] .content-card,
+        [data-theme="dark"] .ai-card,
+        [data-theme="dark"] .habit-card,
+        [data-theme="dark"] .task-card,
+        [data-theme="dark"] .progress-card,
+        [data-theme="dark"] .adapt-card,
+        [data-theme="dark"] .insight-card,
+        [data-theme="dark"] .schedule-card,
+        [data-theme="dark"] .course-card,
+        [data-theme="dark"] .featured-card,
+        [data-theme="dark"] .my-course-card,
+        [data-theme="dark"] .profile-card,
+        [data-theme="dark"] .user-profile-card,
+        [data-theme="dark"] .settings-card,
+        [data-theme="dark"] .settings-panel,
+        [data-theme="dark"] .settings-header,
+        [data-theme="dark"] .settings-item,
+        [data-theme="dark"] .report-card,
+        [data-theme="dark"] .chart-card,
+        [data-theme="dark"] .metric-card,
+        [data-theme="dark"] .stats-card,
+        [data-theme="dark"] .achievement-card,
+        [data-theme="dark"] .badge-item,
+        [data-theme="dark"] .leaderboard-card,
+        [data-theme="dark"] .flashcard,
+        [data-theme="dark"] .deck-card,
+        [data-theme="dark"] .group-card,
+        [data-theme="dark"] .friend-modal-card,
+        [data-theme="dark"] .modal,
+        [data-theme="dark"] .modal-content,
+        [data-theme="dark"] .modal-card,
+        [data-theme="dark"] .app-modal-box,
+        [data-theme="dark"] .tabs,
+        [data-theme="dark"] .search-box,
+        [data-theme="dark"] .time-filter,
+        [data-theme="dark"] .filter-tabs,
+        [data-theme="dark"] .info-alert,
+        [data-theme="dark"] .motivate-box,
+        [data-theme="dark"] .task-quote,
+        [data-theme="dark"] .group-desc,
+        [data-theme="dark"] .progress-track,
+        [data-theme="dark"] .timeline-item,
+        [data-theme="dark"] .empty-state {
             background: #1a1a1e !important;
             border-color: #2b2b30 !important;
             color: #e5e7eb !important;
@@ -352,6 +504,99 @@
         [data-theme="dark"] .main,
         [data-theme="dark"] .main-content,
         [data-theme="dark"] .main-container {
+            color: #e5e7eb !important;
+        }
+
+        [data-theme="dark"] h1,
+        [data-theme="dark"] h2,
+        [data-theme="dark"] h3,
+        [data-theme="dark"] h4,
+        [data-theme="dark"] h5,
+        [data-theme="dark"] h6,
+        [data-theme="dark"] .title,
+        [data-theme="dark"] .section-title,
+        [data-theme="dark"] .card-title,
+        [data-theme="dark"] .stat-value,
+        [data-theme="dark"] .profile-name,
+        [data-theme="dark"] .course-title,
+        [data-theme="dark"] .lesson-title {
+            color: #f4f6fb !important;
+        }
+
+        [data-theme="dark"] p,
+        [data-theme="dark"] span,
+        [data-theme="dark"] label,
+        [data-theme="dark"] small,
+        [data-theme="dark"] .subtitle,
+        [data-theme="dark"] .muted,
+        [data-theme="dark"] .card-desc,
+        [data-theme="dark"] .section-subtitle,
+        [data-theme="dark"] .stat-label,
+        [data-theme="dark"] .profile-email,
+        [data-theme="dark"] .course-desc,
+        [data-theme="dark"] .lesson-desc {
+            color: #a6adbb !important;
+        }
+
+        [data-theme="dark"] input,
+        [data-theme="dark"] textarea,
+        [data-theme="dark"] select,
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .search-input,
+        [data-theme="dark"] .settings-search {
+            background: #111827 !important;
+            border-color: #2e3446 !important;
+            color: #f4f6fb !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
+        }
+
+        [data-theme="dark"] input::placeholder,
+        [data-theme="dark"] textarea::placeholder {
+            color: #7d8798 !important;
+        }
+
+        [data-theme="dark"] .tag,
+        [data-theme="dark"] .pill,
+        [data-theme="dark"] .badge,
+        [data-theme="dark"] .chip,
+        [data-theme="dark"] .meta-pill,
+        [data-theme="dark"] .lesson-meta,
+        [data-theme="dark"] .course-meta,
+        [data-theme="dark"] .status-pill {
+            background: #111827 !important;
+            border-color: #333b50 !important;
+            color: #c7d2fe !important;
+        }
+
+        [data-theme="dark"] .progress-bar,
+        [data-theme="dark"] .progress-line,
+        [data-theme="dark"] .progress-bg {
+            background: #293044 !important;
+        }
+
+        [data-theme="dark"] .tab-btn:not(.active),
+        [data-theme="dark"] .filter-btn:not(.active),
+        [data-theme="dark"] .secondary-btn,
+        [data-theme="dark"] .outline-btn {
+            background: #171923 !important;
+            border-color: #2e3446 !important;
+            color: #cbd5e1 !important;
+        }
+
+        [data-theme="dark"] table,
+        [data-theme="dark"] th,
+        [data-theme="dark"] td {
+            background-color: transparent !important;
+            color: #e5e7eb !important;
+            border-color: #2e3446 !important;
+        }
+
+        [data-theme="dark"] .glass,
+        [data-theme="dark"] .glass-card,
+        [data-theme="dark"] .white-card,
+        [data-theme="dark"] .surface-card {
+            background: rgba(26, 26, 30, 0.92) !important;
+            border-color: rgba(167, 139, 250, 0.16) !important;
             color: #e5e7eb !important;
         }
 

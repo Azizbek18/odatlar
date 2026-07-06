@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <script src="theme-detector.js"></script>
+    <link rel="stylesheet" href="theme.css?v=20260706-darkfix1">
+    <script src="auth-guard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birgalikda - Profil Sozlamalari</title>
+    <!-- FontAwesome ikonkalari -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tashqi CSS fayli -->
+    <link rel="stylesheet" href="profileS.css?v=20260706-avatarfix1">
+    <link rel="shortcut icon" href="images/profile%20settings.png" type="image/x-icon">
+    <link rel="stylesheet" href="responsive.css?v=1.4">
+    <link rel="stylesheet" href="mobile-300.css?v=1.0">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Birgalikda</div>
+        <nav>
+            <a href="Asosiy.html">Bosh sahifa</a>
+            <a href="xarita.html">Xarita</a>
+            <a href="Asosiy.html#leaders-list">Reyting</a>
+            <a href="profileS.html" class="active">Profil</a>
+        </nav>
+        <div class="header-icons">
+            <i class="fa-regular fa-bell" onclick="window.location.href='Bildirishnomalar.html'" style="cursor:pointer;"></i>
+            <i class="fa-regular fa-user-circle"></i>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="main-container">
+
+        <!-- HERO & PROFILE CARD -->
+        <div class="profile-hero"></div>
+        <div class="profile-card">
+            <div class="profile-main-info">
+                <!-- Rasm yuklash tugmasi -->
+                <div class="avatar-area" id="avatar-container">
+                    <i class="fa-solid fa-user" id="avatar-icon"></i>
+                    <span id="avatar-letters" style="display:none;">ZT</span>
+                    <img id="avatar-img" src="" style="display:none;" alt="Avatar">
+                    <div class="avatar-overlay" id="change-avatar-btn">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                </div>
+                <!-- Input rasm -->
+                <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+
+                <div class="profile-meta">
+                    <div class="name-wrapper">
+                        <span class="profile-name" id="display-name">Foydalanuvchi</span>
+                        <i class="fa-solid fa-circle-check verified-badge"></i>
+                    </div>
+                    <div class="profile-headline" id="display-headline">
+                        Kasb / Ma'lumot
+                    </div>
+                </div>
+
+                <button class="btn-edit-profile" id="edit-toggle-btn">
+                    <i class="fa-regular fa-pen-to-square"></i> Profilni tahrirlash
+                </button>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h5>Matchlar</h5>
+                    <p class="stat-match">0</p>
+                </div>
+                <div class="stat-item">
+                    <h5>Streak</h5>
+                    <p class="stat-streak"><i class="fa-solid fa-fire"></i> 0</p>
+                </div>
+                <div class="stat-item">
+                    <h5>Rating</h5>
+                    <p class="stat-rating"><i class="fa-solid fa-star"></i> 4.8</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BENTO GRID SYSTEM -->
+        <div class="bento-grid">
+
+            <!-- LEFT COLUMN -->
+            <div class="left-col">
+                <!-- Yutuqlar -->
+                <div class="bento-card">
+                    <div class="card-title" style="color: #0070f3;"><i class="fa-solid fa-trophy"></i> Yutuqlar</div>
+                    <div class="icon-badges">
+                        <div class="icon-badge"><i class="fa-regular fa-lightbulb"></i></div>
+                        <div class="icon-badge"><i class="fa-solid fa-seedling"></i></div>
+                        <div class="icon-badge"><i class="fa-regular fa-comments"></i></div>
+                    </div>
+                </div>
+
+                <!-- Qiziqishlar -->
+                <div class="bento-card">
+                    <div class="card-title" style="color: #4f46e5;"><i class="fa-solid fa-heart"></i> Qiziqishlar</div>
+                    <div class="tags-container" id="profile-interests-container">
+                        <span class="tag">Networking</span>
+                    </div>
+                </div>
+
+                <!-- Menu parchalari -->
+                <div class="bento-card">
+                    <ul class="menu-list">
+                        <li class="menu-item" onclick="window.location.href='Bildirishnomalar.html'">
+                            <span><i class="fa-regular fa-bell"></i> Bildirishnomalar</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </li>
+                        <li class="menu-item" onclick="window.location.href='Maxfiylik.html'">
+                            <span><i class="fa-solid fa-lock"></i> Maxfiylik</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </li>
+                        <li class="menu-item" style="color: #b45309;" onclick="window.location.href='Premuim.html'">
+                            <span><i class="fa-solid fa-crown"></i> Premium</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </li>
+                        <li class="menu-item logout" onclick="localStorage.removeItem('sb-doboqtivghcdcoowoxmh-auth-token'); window.location.href='kirish.html';">
+                            <span><i class="fa-solid fa-arrow-right-from-bracket"></i> Chiqish</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="right-col">
+                <div class="bento-card">
+                    <div class="card-title"><i class="fa-regular fa-user"></i> Ma'lumotlar</div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>To'liq ism</label>
+                            <input type="text" id="input-name" value="" placeholder="Ismingizni kiriting" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Rol / Kasb</label>
+                            <input type="text" id="input-roles" value="" placeholder="Kasblarni vergul bilan ajrating" disabled>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Qiziqishlar (Vergul bilan ajrating)</label>
+                            <input type="text" id="input-interests" value="" placeholder="Qiziqishlaringizni kiriting" disabled>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Bio</label>
+                            <textarea id="input-bio" rows="3" placeholder="Suhbatdoshlar uchun o'zingiz haqingizda qisqacha yozing" disabled></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Tushlik afzalliklari -->
+                    <div class="card-title"
+                        style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                        <i class="fa-solid fa-utensils"></i> Tushlik afzalliklari
+                    </div>
+                    <div class="pref-grid">
+                        <div class="pref-item">
+                            <span><i class="fa-regular fa-clock"></i> Vaqt</span>
+                            <p>13:00 — 14:00</p>
+                        </div>
+                        <div class="pref-item">
+                            <span><i class="fa-solid fa-location-dot"></i> Joylashuv</span>
+                            <p>Toshkent shahri</p>
+                        </div>
+                        <div class="pref-item">
+                            <span><i class="fa-solid fa-mug-saucer"></i> Uslub</span>
+                            <p>Professional / Kofe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="profileS.js?v=20260706-avatarfix1"></script>
+    <script src="sidebar.js?v=1.4"></script>
+</body>
+</html>

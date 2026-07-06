@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="friends.css" />
+  <link rel="stylesheet" href="friends.css?v=20260706-icons1" />
 </head>
 <body>
   <div class="mobile-header">
@@ -19,9 +19,10 @@
       <span></span>
     </button>
     <div class="mobile-logo">Streak.uz</div>
-    <div class="mobile-user-avatar">
-      <img src="https://i.pravatar.cc/150?img=11" alt="user" class="user-avatar" />
-    </div>
+    <a class="mobile-user-avatar topbar-profile" href="profil.html" aria-label="Profilga o'tish">
+      <i class="fa-solid fa-user topbar-avatar-icon" aria-hidden="true"></i>
+      <img src="" alt="Profil rasmi" class="user-avatar topbar-avatar-img" hidden />
+    </a>
   </div>
 
   <aside class="sidebar">
@@ -59,11 +60,21 @@
     <div class="topbar">
       <div></div>
       <div class="topbar-actions">
-        <button class="icon-btn" aria-label="Bildirishnomalar">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <button class="icon-btn" id="notificationBtn" type="button" aria-label="Bildirishnomalar" aria-expanded="false">
+          <i class="fa-regular fa-bell"></i>
           <span class="icon-dot"></span>
         </button>
-        <img src="https://i.pravatar.cc/150?img=11" alt="user" class="topbar-avatar" />
+        <a class="topbar-profile" href="profil.html" aria-label="Profilga o'tish">
+          <i class="fa-solid fa-user topbar-avatar-icon" aria-hidden="true"></i>
+          <img src="" alt="Profil rasmi" class="topbar-avatar topbar-avatar-img" hidden />
+        </a>
+        <div class="notification-popover" id="notificationPopover" role="status" aria-hidden="true">
+          <div class="notification-popover-title">
+            <i class="fa-solid fa-bell"></i>
+            Bildirishnomalar
+          </div>
+          <p>Hozircha yangi bildirishnoma yo'q.</p>
+        </div>
       </div>
     </div>
 
@@ -74,17 +85,17 @@
       </div>
       <div class="hero-stats">
         <div class="stat-card">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <i class="fa-solid fa-user-group stat-icon"></i>
           <div class="stat-num">12</div>
           <div class="stat-label">Guruhlar</div>
         </div>
         <div class="stat-card stat-card-highlight">
-          <span class="stat-emoji">рџЏ†</span>
+          <i class="fa-solid fa-trophy stat-icon"></i>
           <div class="stat-num">42</div>
           <div class="stat-label">Eng yuqori streak</div>
         </div>
         <div class="stat-card">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+          <i class="fa-solid fa-user-plus stat-icon"></i>
           <div class="stat-num">8</div>
           <div class="stat-label">Takliflar</div>
         </div>
@@ -97,88 +108,41 @@
       <button class="tab-btn" data-tab="invites">Invites</button>
     </div>
 
-    <div class="friends-grid">
-
-      <!-- ACTIVE -->
-      <div class="friend-card">
-        <div class="friend-head">
-          <div class="avatar-wrap">
-            <img src="https://i.pravatar.cc/150?img=25" alt="Madina Odilova" class="friend-avatar" />
-            <span class="status-dot online"></span>
-          </div>
-          <div class="friend-name-wrap">
-            <div class="friend-name">Madina Odilova</div>
-            <div class="friend-streak">рџ”Ґ 15 Kun</div>
-          </div>
-          <span class="badge badge-active">ACTIVE</span>
-        </div>
-        <div class="friend-progress">
-          <div class="progress-label-row">
-            <span>рџ’§ Suv ichish</span>
-            <span class="progress-pct">85%</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill purple" style="width: 85%;"></div>
-          </div>
-        </div>
-        <div class="friend-tags">
-          <span class="ftag ftag-kitob">рџ“љ Kitob</span>
-          <span class="ftag ftag-sport">рџЏѓ Sport</span>
-        </div>
-      </div>
-
-      <!-- AT-RISK -->
-      <div class="friend-card">
-        <div class="friend-head">
-          <div class="avatar-wrap">
-            <img src="https://i.pravatar.cc/150?img=14" alt="Javohir K." class="friend-avatar" />
-            <span class="status-dot warning"></span>
-          </div>
-          <div class="friend-name-wrap">
-            <div class="friend-name">Javohir K.</div>
-            <div class="friend-streak warning-text">рџ”Ґ 7 Kun</div>
-          </div>
-          <span class="badge badge-risk">AT-RISK</span>
-        </div>
-        <div class="friend-progress">
-          <div class="progress-label-row">
-            <span>рџ§ Meditatsiya</span>
-            <span class="progress-pct">40%</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill orange" style="width: 40%;"></div>
-          </div>
-        </div>
-        <button class="nudge-btn">Nudge Friend</button>
-      </div>
-
-      <!-- BROKEN -->
-      <div class="friend-card friend-card-broken">
-        <div class="friend-head">
-          <div class="avatar-wrap">
-            <img src="https://i.pravatar.cc/150?img=33" alt="Zilola" class="friend-avatar grayscale" />
-            <span class="status-dot offline"></span>
-          </div>
-          <div class="friend-name-wrap">
-            <div class="friend-name">Zilola</div>
-            <div class="friend-streak muted-text">рџ’¤ 0 Kun</div>
-          </div>
-          <span class="badge badge-broken">BROKEN</span>
-        </div>
-        <div class="motivate-box">
-          Zilola bilan streak uzildi. Uni motivatsiya qiling!
-        </div>
-      </div>
-
-    </div>
+    <div class="friends-grid" aria-live="polite"></div>
   </main>
 
-  <button class="fab" aria-label="Yangi do'st qo'shish">
+  <button class="fab" id="openFriendModal" aria-label="Yangi do'st qo'shish">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
   </button>
 
+  <div class="friend-modal" id="friendModal" aria-hidden="true">
+    <div class="friend-modal-backdrop" data-close-friend-modal></div>
+    <form class="friend-modal-card" id="friendInviteForm" novalidate>
+      <button type="button" class="friend-modal-close" data-close-friend-modal aria-label="Yopish">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="friend-modal-icon">
+        <i class="fa-solid fa-user-plus"></i>
+      </div>
+      <h2>Do'st qo'shish</h2>
+      <p>Do'stingiz ro'yxatdan o'tgan email manzilini kiriting.</p>
+      <label class="friend-modal-field">
+        <span>Email manzil</span>
+        <input type="email" id="friendEmailInput" placeholder="friend@example.com" autocomplete="email" required>
+      </label>
+      <div class="friend-modal-message" id="friendModalMessage" role="status"></div>
+      <div class="friend-modal-actions">
+        <button type="button" class="friend-modal-secondary" data-close-friend-modal>Bekor qilish</button>
+        <button type="submit" class="friend-modal-primary" id="friendInviteSubmit">
+          <i class="fa-solid fa-plus"></i>
+          Qo'shish
+        </button>
+      </div>
+    </form>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="sidebar-sync.js?v=20260704-avatar2"></script>
-  <script src="friends.js"></script>
+  <script src="sidebar-sync.js?v=20260706-darkfix1"></script>
+  <script src="friends.js?v=20260706-icons1"></script>
 </body>
 </html>

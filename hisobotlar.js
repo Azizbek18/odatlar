@@ -59,7 +59,8 @@ function initChart(labels, dataValues) {
     
     // Gradient fon yaratish
     const gradient = ctx.createLinearGradient(0, 0, 0, 150);
-    gradient.addColorStop(0, 'rgba(108, 34, 166, 0.25)');
+    gradient.addColorStop(0, 'rgba(112, 0, 255, 0.22)');
+    gradient.addColorStop(0.55, 'rgba(59, 130, 246, 0.08)');
     gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
     if (streakChart) {
@@ -72,9 +73,12 @@ function initChart(labels, dataValues) {
             labels: labels,
             datasets: [{
                 data: dataValues,
-                borderColor: '#7B2CBF',
+                borderColor: '#7000ff',
                 borderWidth: 4,
-                pointBackgroundColor: '#7B2CBF',
+                pointBackgroundColor: '#7000ff',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 3,
+                pointRadius: 5,
                 pointHoverRadius: 6,
                 fill: true,
                 backgroundColor: gradient,
@@ -86,7 +90,7 @@ function initChart(labels, dataValues) {
             maintainAspectRatio: false,
             plugins: { legend: { display: false } },
             scales: {
-                x: { grid: { display: false }, ticks: { color: '#888', font: { family: 'Inter' } } },
+                x: { grid: { display: false }, ticks: { color: '#67748a', font: { family: 'Nunito', weight: '800' } } },
                 y: { display: false, grid: { display: false } }
             }
         }

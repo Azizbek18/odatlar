@@ -570,3 +570,232 @@ button{font-family:inherit;cursor:pointer;border:none;}
   .courses-grid{grid-template-columns:1fr 1fr;}
   .my-courses-grid{grid-template-columns:1fr;}
 }
+
+/* FRIENDS-STYLE LESSON INNER DESIGN OVERRIDES */
+:root {
+  --surface:#ffffff;
+  --surface-soft:#fbfaff;
+  --border-light:#e8e5ff;
+  --border-mid:#d4d0ff;
+  --border-heavy:#b0a8e8;
+  --primary:#7000ff;
+  --primary-strong:#5900cc;
+  --primary-deep:#3c0987;
+  --primary-soft:#f3edff;
+  --text-main:#0f1b33;
+  --text-light:#67748a;
+  --shadow-color:rgba(112,0,255,.09);
+}
+
+body {
+  background: linear-gradient(180deg, #f4f6ff 0%, #ffffff 58%, #f7f4ff 100%);
+  color: var(--text-main);
+}
+
+.main {
+  background: transparent;
+}
+
+.hero-banner {
+  min-height: 184px;
+  background: linear-gradient(110deg, #7000ff 0%, #5900cc 50%, #4f46e5 100%);
+  border: 3px solid var(--primary-strong);
+  border-bottom: 6px solid var(--primary-deep);
+  border-radius: 24px;
+  box-shadow: 0 6px 0 var(--primary-deep), 0 18px 36px -10px rgba(112,0,255,.32);
+}
+
+.hero-banner::before {
+  top: 18px;
+  right: 28px;
+  width: 138px;
+  height: 118px;
+  border-radius: 8px;
+  background-image: radial-gradient(circle, rgba(255,255,255,.12) 2px, transparent 2px);
+  background-size: 16px 16px;
+  background-color: transparent;
+}
+
+.hero-banner::after {
+  display: none;
+}
+
+.hero-banner h2 {
+  font-size: clamp(30px, 3.6vw, 44px);
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.hero-banner p {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.pill,
+.featured-card,
+.beginner-section,
+.course-card,
+.prog-card,
+.my-course-card {
+  border: 3px solid var(--border-light);
+  border-bottom: 5px solid var(--border-mid);
+  box-shadow: 0 4px 0 var(--border-mid), 0 8px 24px -8px var(--shadow-color);
+}
+
+.pill {
+  background: var(--surface);
+  color: var(--text-main);
+  border-radius: 18px;
+}
+
+.pill.active {
+  background: linear-gradient(180deg, #8b00ff, #6200dd);
+  color: #fff;
+  border-color: #8b5cf6;
+  border-bottom-color: var(--primary-deep);
+  box-shadow: 0 4px 0 var(--primary-deep), 0 12px 24px -12px rgba(112,0,255,.45);
+}
+
+.section-title .sparkle,
+.section-title .see-all,
+.badge-ai,
+.beginner-label,
+.course-meta .lessons,
+.progress-pct {
+  color: var(--primary);
+}
+
+.featured-card,
+.beginner-section,
+.course-card,
+.prog-card,
+.my-course-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border-radius: 20px;
+}
+
+.featured-card::before,
+.beginner-section::before,
+.course-card::before,
+.prog-card::before,
+.my-course-card::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 44px;
+  height: 34px;
+  background-image: radial-gradient(circle, rgba(112,0,255,.06) 1.5px, transparent 1.5px);
+  background-size: 10px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.featured-card > *,
+.beginner-section > *,
+.course-card > *,
+.prog-card > *,
+.my-course-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.featured-card:hover,
+.course-card:hover,
+.prog-card:hover,
+.my-course-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 var(--border-mid), 0 16px 32px -8px rgba(112,0,255,.15);
+}
+
+.featured-thumb,
+.course-thumb,
+.prog-thumb,
+.my-course-thumb {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.featured-card .featured-thumb,
+.prog-thumb {
+  margin: 18px 18px 0;
+}
+
+.course-thumb {
+  margin: 14px 14px 0;
+}
+
+.badge-ai,
+.beginner-label,
+.course-meta span,
+.progress-label,
+.progress-pct {
+  background: var(--primary-soft);
+  border: 2px solid var(--border-light);
+  border-bottom: 4px solid var(--border-mid);
+  border-radius: 999px;
+  box-shadow: 0 2px 0 rgba(176,168,232,.25);
+  font-weight: 900;
+}
+
+.badge-ai,
+.beginner-label {
+  padding: 8px 12px;
+}
+
+.course-meta {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.course-meta span,
+.progress-label,
+.progress-pct {
+  padding: 6px 10px;
+  color: var(--text-light);
+}
+
+.btn-primary,
+.btn-outline,
+.btn-sm,
+.btn-continue {
+  border-radius: 16px;
+  font-family: inherit;
+  font-weight: 900;
+}
+
+.btn-primary,
+.btn-sm {
+  background: linear-gradient(180deg, #8b00ff, #6200dd);
+  border: 2px solid #8b5cf6;
+  border-bottom: 5px solid var(--primary-deep);
+  box-shadow: 0 4px 0 var(--primary-deep), 0 12px 24px -12px rgba(112,0,255,.45);
+}
+
+.btn-outline,
+.btn-continue {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 2px solid var(--border-light);
+  border-bottom: 4px solid var(--border-mid);
+  box-shadow: 0 3px 0 var(--border-mid);
+}
+
+.progress-bar {
+  background: var(--surface-soft);
+  border: 2px solid var(--border-light);
+  border-bottom: 3px solid var(--border-mid);
+  box-shadow: none;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, var(--primary), #9d6bff);
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.12);
+}
+
+.beginner-section {
+  background: linear-gradient(135deg, #ffffff 0%, #fbfaff 58%, #f3edff 100%);
+}

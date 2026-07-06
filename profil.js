@@ -100,6 +100,50 @@ document.addEventListener('DOMContentLoaded', () => {
     return str;
   }
 
+  function isUsableAvatar(src) {
+    return Boolean(src && !String(src).includes('Foydalanuvchi rasmi'));
+  }
+
+  function setProfileAvatar(src) {
+    const avatarWrap = document.querySelector('.profile-avatar-wrap') || document.querySelector('.avatar-3d');
+    if (!avatarWrap) return;
+
+    let icon = avatarWrap.querySelector('.profile-avatar-icon');
+    let img = avatarWrap.querySelector('.profile-avatar-img');
+
+    if (!icon) {
+      icon = document.createElement('i');
+      icon.className = 'fa-solid fa-user profile-avatar-icon';
+      avatarWrap.prepend(icon);
+    }
+
+    if (!img) {
+      img = document.createElement('img');
+      img.className = 'profile-avatar-img';
+      img.alt = 'Profil rasmi';
+      img.hidden = true;
+      avatarWrap.appendChild(img);
+    }
+
+    function showIcon() {
+      img.hidden = true;
+      img.removeAttribute('src');
+      icon.hidden = false;
+    }
+
+    if (!isUsableAvatar(src)) {
+      showIcon();
+      return;
+    }
+
+    img.onload = () => {
+      img.hidden = false;
+      icon.hidden = true;
+    };
+    img.onerror = showIcon;
+    img.src = src;
+  }
+
   // ─── 1. TILNI QO'LLASH ────────────────────────────────────────────
   function applyLanguage(lang) {
     currentLang = lang;
@@ -160,8 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
           bioEl.dataset.custom = 'true';
         }
 
-        const initials = getInitials(profile.full_name);
-        if (avatar3d) avatar3d.textContent = initials;
+        setProfileAvatar(profile.avatar_url);
 
         const firstName = profile.full_name.split(' ')[0] || profile.full_name;
         if (welcomeGreeting) {
@@ -443,6 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ─── ISHGA TUSHIRISH ──────────────────────────────────────────────
   applyLanguage(currentLang);
+  setProfileAvatar(currentUser.avatar_url);
   loadUserProfile();
 
   console.log('✅ Streak.uz Profil sahifasi yuklandi.');

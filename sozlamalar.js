@@ -335,6 +335,42 @@ document.addEventListener('DOMContentLoaded', () => {
     return str;
   }
 
+  function isUsableAvatar(src) {
+    const value = String(src || '').trim();
+    if (!value) return false;
+    return ![
+      'Foydalanuvchi rasmi',
+      'pravatar.cc',
+      'avatar',
+      'default',
+      'placeholder'
+    ].some(token => value.toLowerCase().includes(token.toLowerCase()));
+  }
+
+  function setSettingsAvatar(src) {
+    const settingsAvatar = document.getElementById('settings-avatar');
+    const settingsAvatarIcon = document.getElementById('settings-avatar-icon');
+    if (!settingsAvatar) return;
+
+    function showIcon() {
+      settingsAvatar.hidden = true;
+      settingsAvatar.removeAttribute('src');
+      if (settingsAvatarIcon) settingsAvatarIcon.hidden = false;
+    }
+
+    if (!isUsableAvatar(src)) {
+      showIcon();
+      return;
+    }
+
+    settingsAvatar.onload = () => {
+      settingsAvatar.hidden = false;
+      if (settingsAvatarIcon) settingsAvatarIcon.hidden = true;
+    };
+    settingsAvatar.onerror = showIcon;
+    settingsAvatar.src = src;
+  }
+
   // ─── 1. TILNI QO'LLASH ────────────────────────────────────────────
   function applyLanguage(lang) {
     currentLang = lang;
@@ -457,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (settingsStreak) settingsStreak.textContent = profile.streak || 0;
         if (settingsLevel) settingsLevel.textContent = profile.level || 1;
         if (settingsHabits) settingsHabits.textContent = profile.habits_count || 0;
-        if (settingsAvatar && profile.avatar_url) settingsAvatar.src = profile.avatar_url;
+        setSettingsAvatar(profile.avatar_url);
       }
     } catch (err) {
       console.error("Profile load failed:", err);
@@ -621,7 +657,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function openPersonalModal() {
     const currentName = userProfile?.full_name || currentUser?.full_name || '';
     const currentBio  = userProfile?.bio || '';
-    const currentAvatar = userProfile?.avatar_url || 'rasmlar/Foydalanuvchi rasmi (1).png';
+    const currentAvatar = userProfile?.avatar_url || '';
+    const hasCurrentAvatar = isUsableAvatar(currentAvatar);
 
     const modal = buildModal('personal-modal', `
       <div class="app-modal-header">
@@ -630,7 +667,10 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <div class="app-modal-body">
         <div class="avatar-upload-wrap">
-          <img src="${currentAvatar}" alt="avatar" id="avatar-preview" class="avatar-preview">
+          <div id="avatar-preview-fallback" class="avatar-preview-fallback" ${hasCurrentAvatar ? 'hidden' : ''}>
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <img src="${hasCurrentAvatar ? currentAvatar : ''}" alt="avatar" id="avatar-preview" class="avatar-preview" ${hasCurrentAvatar ? '' : 'hidden'}>
           <label for="avatar-input" class="avatar-upload-btn">
             <i class="fa-solid fa-camera"></i>
           </label>
@@ -664,6 +704,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!file) return;
       const reader = new FileReader();
       reader.onload = (ev) => {
+        const fallback = modal.querySelector('#avatar-preview-fallback');
+        if (fallback) fallback.hidden = true;
+        avatarPreview.hidden = false;
         avatarPreview.src = ev.target.result;
         newAvatarDataUrl = ev.target.result;
       };
@@ -717,8 +760,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const settingsUserName = document.getElementById('settings-user-name');
       if (settingsUserName) settingsUserName.textContent = newName;
-      const settingsAvatar = document.getElementById('settings-avatar');
-      if (settingsAvatar && newAvatarDataUrl) settingsAvatar.src = newAvatarDataUrl;
+      if (newAvatarDataUrl) setSettingsAvatar(newAvatarDataUrl);
 
       closeModal(modal);
       showToast(t('toast_profile_updated'), 'success');
@@ -1804,6 +1846,16 @@ document.addEventListener('DOMContentLoaded', () => {
         border: 3px solid var(--card-bg);
         box-shadow: 0 6px 16px rgba(112,0,255,0.25);
       }
+      .avatar-preview-fallback {
+        width: 90px; height: 90px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        background: linear-gradient(135deg, #7000ff, #9d6bff);
+        color: white; font-size: 38px;
+        border: 3px solid var(--card-bg);
+        box-shadow: 0 6px 16px rgba(112,0,255,0.25);
+      }
+      .avatar-preview[hidden],
+      .avatar-preview-fallback[hidden] { display: none !important; }
       .avatar-upload-btn {
         position: absolute; bottom: 0; right: 0;
         width: 30px; height: 30px; border-radius: 50%;

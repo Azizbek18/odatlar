@@ -98,6 +98,90 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   let localHabits = [];
+  const todayKey = getLocalDateKey();
+  const streakCountKey = `streak_count_${currentUser.id}`;
+  const streakLastDoneKey = `streak_last_full_done_date_${currentUser.id}`;
+  const streakRewardKey = `streak_rewarded_${currentUser.id}_${todayKey}`;
+  let currentStreakDays = parseInt(localStorage.getItem(streakCountKey) || currentUser.streak || '0', 10);
+  let lastFullDoneDate = localStorage.getItem(streakLastDoneKey) || '';
+
+  function getLocalDateKey(date = new Date()) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  function getPreviousDateKey(dateKey) {
+    const [year, month, day] = dateKey.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
+    date.setDate(date.getDate() - 1);
+    return getLocalDateKey(date);
+  }
+
+  function parseHabitMeta(habit) {
+    const meta = { desc: '', color: 'purple', time: '—', is_done: false, last_done_date: '', done_dates: [] };
+    try {
+      if (habit.description && (habit.description.startsWith('{') || habit.description.startsWith('['))) {
+        Object.assign(meta, JSON.parse(habit.description));
+      } else {
+        meta.desc = habit.description || '';
+      }
+    } catch(e) {
+      meta.desc = habit.description || '';
+    }
+    if (!Array.isArray(meta.done_dates)) meta.done_dates = [];
+    return meta;
+  }
+
+  function isHabitDoneToday(meta) {
+    return meta.is_done === true && meta.last_done_date === todayKey;
+  }
+
+  function normalizeHabitForToday(habit) {
+    const meta = parseHabitMeta(habit);
+    const shouldReset = meta.is_done === true && meta.last_done_date !== todayKey;
+    if (shouldReset) {
+      meta.is_done = false;
+      habit.description = JSON.stringify(meta);
+    }
+    return { meta, shouldReset };
+  }
+
+  function updateStreakUI() {
+    const streakValue = Number.isFinite(currentStreakDays) ? currentStreakDays : 0;
+    const topbarStreak = document.getElementById('topbar-streak');
+    if (topbarStreak) topbarStreak.textContent = streakValue;
+
+    const sidebarStreakText = document.getElementById('sidebar-streak-text');
+    if (sidebarStreakText) {
+      sidebarStreakText.textContent = `${streakValue} kunlik streak`;
+      sidebarStreakText.dataset.days = streakValue;
+    }
+  }
+
+  async function persistStreak() {
+    localStorage.setItem(streakCountKey, currentStreakDays);
+    localStorage.setItem(streakLastDoneKey, lastFullDoneDate);
+    currentUser.streak = currentStreakDays;
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    updateStreakUI();
+
+    try {
+      await sb.from('profiles').update({ streak: currentStreakDays }).eq('id', currentUser.id);
+    } catch(err) {
+      console.error("Streak sync failed:", err);
+    }
+  }
+
+  async function markAllHabitsDoneForToday() {
+    if (lastFullDoneDate === todayKey) return;
+    currentStreakDays = lastFullDoneDate === getPreviousDateKey(todayKey)
+      ? currentStreakDays + 1
+      : 1;
+    lastFullDoneDate = todayKey;
+    await persistStreak();
+  }
 
   // Update streak progress count dynamically
   function updateStreakProgress() {
@@ -107,11 +191,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setRingProgress(doneCount, total);
 
     if (doneCount === total && total > 0) {
-      setTimeout(() => {
-        showToast('🎉 Tabriklaymiz! Bugungi barcha odatlar bajarildi!', 'success', 4500);
-        launchConfetti();
-        addXp(50); // Bonus XP
-      }, 600);
+      markAllHabitsDoneForToday();
+      if (localStorage.getItem(streakRewardKey) !== 'true') {
+        localStorage.setItem(streakRewardKey, 'true');
+        setTimeout(() => {
+          showToast('🎉 Tabriklaymiz! Bugungi barcha odatlar bajarildi!', 'success', 4500);
+          launchConfetti();
+          addXp(50); // Bonus XP
+        }, 600);
+      }
     }
   }
 
@@ -120,18 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.habits-grid');
     if (!grid) return;
 
-    let meta = { desc: '', color: 'purple', time: '—', is_done: false };
-    try {
-      if (habit.description && (habit.description.startsWith('{') || habit.description.startsWith('['))) {
-        meta = JSON.parse(habit.description);
-      } else {
-        meta.desc = habit.description || '';
-      }
-    } catch(e) {
-      meta.desc = habit.description || '';
-    }
-
-    const isDone = meta.is_done;
+    const { meta } = normalizeHabitForToday(habit);
+    const isDone = isHabitDoneToday(meta);
     const color = meta.color || 'purple';
     const time = meta.time || '—';
     const desc = meta.desc || '';
@@ -220,13 +298,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // DB Updates
     const habit = localHabits.find(h => h.id === habitId);
     if (habit) {
-      let meta = { desc: '', color: 'purple', time: '—', is_done: false };
-      try {
-        meta = JSON.parse(habit.description);
-      } catch(e) {
-        meta.desc = habit.description || '';
-      }
+      const meta = parseHabitMeta(habit);
       meta.is_done = true;
+      meta.last_done_date = todayKey;
+      if (!meta.done_dates.includes(todayKey)) meta.done_dates.push(todayKey);
       habit.description = JSON.stringify(meta);
 
       try {
@@ -256,10 +331,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!data || data.length === 0) {
         // Seed default habits
         const defaultHabits = [
-          { title: "Ingliz tili", description: JSON.stringify({ desc: "Lug'at yodlash", color: "purple", time: "15 min", is_done: true }), icon: "⭐" },
-          { title: "Dasturlash", description: JSON.stringify({ desc: "JavaScript o'rganish", color: "blue", time: "2 soat", is_done: false }), icon: "💻" },
-          { title: "Sport", description: JSON.stringify({ desc: "Yugurish", color: "green", time: "30 min", is_done: false }), icon: "🏃" },
-          { title: "Kitob mutolaasi", description: JSON.stringify({ desc: "\"Atomic Habits\"", color: "orange", time: "20 bet", is_done: true }), icon: "📚" }
+          { title: "Ingliz tili", description: JSON.stringify({ desc: "Lug'at yodlash", color: "purple", time: "15 min", is_done: false, last_done_date: '', done_dates: [] }), icon: "⭐" },
+          { title: "Dasturlash", description: JSON.stringify({ desc: "JavaScript o'rganish", color: "blue", time: "2 soat", is_done: false, last_done_date: '', done_dates: [] }), icon: "💻" },
+          { title: "Sport", description: JSON.stringify({ desc: "Yugurish", color: "green", time: "30 min", is_done: false, last_done_date: '', done_dates: [] }), icon: "🏃" },
+          { title: "Kitob mutolaasi", description: JSON.stringify({ desc: "\"Atomic Habits\"", color: "orange", time: "20 bet", is_done: false, last_done_date: '', done_dates: [] }), icon: "📚" }
         ].map(h => ({ ...h, user_id: currentUser.id }));
 
         const { data: seeded, error: seedError } = await sb.from('habits').insert(defaultHabits).select();
@@ -269,8 +344,18 @@ document.addEventListener('DOMContentLoaded', () => {
         localHabits = data;
       }
 
+      const resetUpdates = [];
+      localHabits.forEach(habit => {
+        const { shouldReset } = normalizeHabitForToday(habit);
+        if (shouldReset) {
+          resetUpdates.push(sb.from('habits').update({ description: habit.description }).eq('id', habit.id));
+        }
+      });
+      if (resetUpdates.length) await Promise.allSettled(resetUpdates);
+
       localHabits.forEach(renderHabitCard);
       updateStreakProgress();
+      updateStreakUI();
 
     } catch(err) {
       console.error("Load habits failed:", err);
@@ -291,7 +376,14 @@ document.addEventListener('DOMContentLoaded', () => {
           currentGems = profile.gems;
           localStorage.setItem('streak_gems', currentGems);
         }
+        if (profile.streak !== undefined && profile.streak !== null) {
+          currentStreakDays = parseInt(localStorage.getItem(streakCountKey) || profile.streak || '0', 10);
+          localStorage.setItem(streakCountKey, currentStreakDays);
+          currentUser.streak = currentStreakDays;
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        }
         updateXpDisplay();
+        updateStreakUI();
       }
     } catch(e) {}
   }
@@ -513,7 +605,9 @@ document.addEventListener('DOMContentLoaded', () => {
           desc: desc,
           color: selectedColor,
           time: time || '—',
-          is_done: false
+          is_done: false,
+          last_done_date: '',
+          done_dates: []
         };
 
         const newHabit = {

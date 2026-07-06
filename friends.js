@@ -50,6 +50,71 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+function isUsableAvatar(src) {
+  if (!src || typeof src !== 'string') return false;
+  const value = src.trim();
+  if (!value) return false;
+  const blocked = ['foydalanuvchi rasmi', 'pravatar.cc', 'placeholder', 'default', 'avatar'];
+  return !blocked.some(part => value.toLowerCase().includes(part));
+}
+
+function setCurrentUserAvatar(src) {
+  document.querySelectorAll('.topbar-profile, .mobile-user-avatar').forEach(link => {
+    const img = link.querySelector('.topbar-avatar-img, img.user-avatar');
+    const icon = link.querySelector('.topbar-avatar-icon');
+    if (!img || !icon) return;
+
+    if (!isUsableAvatar(src)) {
+      img.hidden = true;
+      img.removeAttribute('src');
+      icon.hidden = false;
+      return;
+    }
+
+    img.onload = () => {
+      img.hidden = false;
+      icon.hidden = true;
+    };
+    img.onerror = () => {
+      img.hidden = true;
+      img.removeAttribute('src');
+      icon.hidden = false;
+    };
+    img.src = src;
+  });
+}
+
+function initTopbarActions() {
+  setCurrentUserAvatar(currentUser?.avatar_url);
+
+  const notificationBtn = document.getElementById('notificationBtn');
+  const notificationPopover = document.getElementById('notificationPopover');
+  notificationBtn?.addEventListener('click', event => {
+    event.stopPropagation();
+    const isOpen = notificationPopover?.classList.toggle('is-open');
+    notificationPopover?.setAttribute('aria-hidden', String(!isOpen));
+    notificationBtn.setAttribute('aria-expanded', String(!!isOpen));
+  });
+
+  document.addEventListener('click', event => {
+    if (!notificationPopover?.classList.contains('is-open')) return;
+    if (notificationPopover.contains(event.target) || notificationBtn?.contains(event.target)) return;
+    notificationPopover.classList.remove('is-open');
+    notificationPopover.setAttribute('aria-hidden', 'true');
+    notificationBtn?.setAttribute('aria-expanded', 'false');
+  });
+}
+
+async function loadCurrentProfileChrome() {
+  if (!currentUserId) return;
+  try {
+    const profiles = await supaFetch(`profiles?select=avatar_url&id=eq.${currentUserId}&limit=1`);
+    setCurrentUserAvatar(profiles?.[0]?.avatar_url);
+  } catch (err) {
+    console.warn('Profil rasmi yuklanmadi:', err);
+  }
+}
+
 const AVATARS = Array.from({ length: 70 }, (_, i) => `https://i.pravatar.cc/150?img=${i + 1}`);
 
 // ─── Card renderers ─────────────────────────────────────────
@@ -67,7 +132,7 @@ function renderActive(p) {
         </div>
         <div class="friend-name-wrap">
           <div class="friend-name">${escapeHtml(p.full_name)}</div>
-          <div class="friend-streak">🔥 ${p.streak} Kun</div>
+          <div class="friend-streak"><i class="fa-solid fa-fire"></i> ${p.streak} Kun</div>
         </div>
         <span class="badge badge-active">ACTIVE</span>
       </div>
@@ -94,7 +159,7 @@ function renderRisk(p) {
         </div>
         <div class="friend-name-wrap">
           <div class="friend-name">${escapeHtml(p.full_name)}</div>
-          <div class="friend-streak warning-text">🔥 ${p.streak} Kun</div>
+          <div class="friend-streak warning-text"><i class="fa-solid fa-fire"></i> ${p.streak} Kun</div>
         </div>
         <span class="badge badge-risk">AT-RISK</span>
       </div>
@@ -122,7 +187,7 @@ function renderBroken(p) {
         </div>
         <div class="friend-name-wrap">
           <div class="friend-name">${escapeHtml(p.full_name)}</div>
-          <div class="friend-streak muted-text">💤 0 Kun</div>
+          <div class="friend-streak muted-text"><i class="fa-solid fa-bed"></i> 0 Kun</div>
         </div>
         <span class="badge badge-broken">BROKEN</span>
       </div>
@@ -169,7 +234,7 @@ async function loadFriends() {
     if (!friendships.length) {
       grid.innerHTML = `
         <div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--muted);">
-          <div style="font-size:32px;margin-bottom:12px;">👥</div>
+          <div style="font-size:32px;margin-bottom:12px;"><i class="fa-solid fa-user-group"></i></div>
           <div style="font-weight:700;font-size:15px;">Do'stlar topilmadi</div>
           <div style="font-size:13px;margin-top:6px;">Birinchi bo'lib do'st qo'shing! (Email orqali)</div>
         </div>`;
@@ -215,10 +280,10 @@ async function loadFriends() {
       // Map tags from array of strings (e.g. ["Coding", "Sport"]) to CSS ftag objects
       const rawTags = Array.isArray(p.tags) ? p.tags : [];
       const tags = rawTags.map(tag => {
-        if (tag === 'Kitob') return { label: '📚 Kitob', cls: 'ftag-kitob' };
-        if (tag === 'Sport') return { label: '🏃 Sport', cls: 'ftag-sport' };
-        if (tag === 'Coding') return { label: '💻 Coding', cls: 'ftag-sport' };
-        return { label: `⭐ ${tag}`, cls: 'ftag-sport' };
+        if (tag === 'Kitob') return { label: 'Kitob', cls: 'ftag-kitob' };
+        if (tag === 'Sport') return { label: 'Sport', cls: 'ftag-sport' };
+        if (tag === 'Coding') return { label: 'Coding', cls: 'ftag-sport' };
+        return { label: tag, cls: 'ftag-sport' };
       });
       
       const avatar = p.avatar_url || AVATARS[idx % AVATARS.length];
@@ -253,7 +318,7 @@ async function loadFriends() {
     // Nudge button events
     grid.querySelectorAll('.nudge-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        btn.textContent = '✅ Nudged!';
+        btn.textContent = 'Yuborildi!';
         btn.disabled = true;
         btn.style.opacity = '0.7';
       });
@@ -263,7 +328,7 @@ async function loadFriends() {
     console.error('Friends yuklanmadi:', err);
     grid.innerHTML = `
       <div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--muted);">
-        <div style="font-size:32px;margin-bottom:12px;">⚠️</div>
+        <div style="font-size:32px;margin-bottom:12px;"><i class="fa-solid fa-triangle-exclamation"></i></div>
         <div style="font-weight:700;">Xatolik yuz berdi</div>
         <div style="font-size:13px;margin-top:6px;">${err.message}</div>
         <button onclick="loadFriends()" style="margin-top:16px;padding:9px 22px;border-radius:10px;border:none;background:var(--primary);color:#fff;font-weight:700;cursor:pointer;">Qayta urinish</button>
@@ -310,7 +375,7 @@ async function loadGroups() {
     if (!memberships.length) {
       grid.innerHTML = `
         <div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--muted);">
-          <div style="font-size:32px;margin-bottom:12px;">👥</div>
+          <div style="font-size:32px;margin-bottom:12px;"><i class="fa-solid fa-user-group"></i></div>
           <div style="font-weight:700;font-size:15px;">Guruhlar topilmadi</div>
         </div>`;
       return;
@@ -342,7 +407,7 @@ async function loadGroups() {
         <div class="friend-card group-card" data-id="${group.id}">
           <div class="friend-head">
             <div class="avatar-wrap">
-              <div class="group-avatar-icon">👥</div>
+              <div class="group-avatar-icon"><i class="fa-solid fa-user-group"></i></div>
             </div>
             <div class="friend-name-wrap">
               <div class="friend-name">${escapeHtml(group.name)}</div>
@@ -368,7 +433,7 @@ async function loadGroups() {
     console.error('Guruhlar yuklanmadi:', err);
     grid.innerHTML = `
       <div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--muted);">
-        <div style="font-size:32px;margin-bottom:12px;">⚠️</div>
+        <div style="font-size:32px;margin-bottom:12px;"><i class="fa-solid fa-triangle-exclamation"></i></div>
         <div style="font-weight:700;">Guruhlarni yuklashda xatolik</div>
         <div style="font-size:13px;margin-top:6px;">${err.message}</div>
       </div>`;
@@ -376,13 +441,121 @@ async function loadGroups() {
 }
 
 // ─── Load & render invites ───────────────────────────────────
+function renderGroupCardSafe(group, members = []) {
+  const membersHTML = members.map(m => {
+    const profile = m.profiles || m.profile || {};
+    const name = profile.full_name || m.full_name || 'Foydalanuvchi';
+    const role = m.role === 'admin' ? '<i class="fa-solid fa-crown"></i> Admin' : "A'zo";
+    return `
+      <div class="group-member-item">
+        <span class="member-avatar-mini">${escapeHtml(getInitials(name))}</span>
+        <div class="member-info-mini">
+          <span class="member-name">${escapeHtml(name)}</span>
+          <span class="member-role">${role}</span>
+        </div>
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="friend-card group-card" data-id="${escapeHtml(group.id)}">
+      <div class="friend-head">
+        <div class="avatar-wrap">
+          <div class="group-avatar-icon"><i class="fa-solid fa-user-group"></i></div>
+        </div>
+        <div class="friend-name-wrap">
+          <div class="friend-name">${escapeHtml(group.name)}</div>
+          <div class="friend-streak">${members.length} a'zo</div>
+        </div>
+        <span class="badge badge-active">JAMOA</span>
+      </div>
+      <div class="group-desc">${escapeHtml(group.description) || "Guruh tavsifi yo'q."}</div>
+      <div class="group-members-list">
+        <h4 class="members-title">A'zolar</h4>
+        <div class="members-sub-grid">
+          ${membersHTML || '<div class="group-empty-note">Hali a&apos;zolar qo&apos;shilmagan</div>'}
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderDemoGroupsSafe(showNotice = false) {
+  const demoGroups = [
+    {
+      id: 'demo-focus',
+      name: 'Fokus Chempionlari',
+      description: "Odatlarni birgalikda kuzatib, har kuni kichik g'alabalarni yig'amiz.",
+      members: [
+        { full_name: currentUser?.full_name || currentUser?.name || 'Siz', role: 'admin' },
+        { full_name: 'Madina Odilova', role: 'member' },
+        { full_name: 'Javohir K.', role: 'member' }
+      ]
+    },
+    {
+      id: 'demo-english',
+      name: 'English Sprint',
+      description: 'Har kuni 20 daqiqa ingliz tili: vocabulary, listening va speaking.',
+      members: [
+        { full_name: 'Zilola', role: 'admin' },
+        { full_name: 'Azizbek', role: 'member' }
+      ]
+    }
+  ];
+
+  const notice = showNotice ? `
+    <div class="groups-demo-notice">
+      <i class="fa-solid fa-circle-info"></i>
+      Guruhlar demo rejimda ko'rsatilmoqda. Supabase RLS sozlamasi guruh yozish/o'qishga ruxsat bermadi.
+    </div>` : '';
+
+  return notice + demoGroups.map(group => renderGroupCardSafe(group, group.members)).join('');
+}
+
+loadGroups = async function loadGroupsSafe() {
+  const grid = document.querySelector('.friends-grid');
+  if (!grid) return;
+
+  grid.innerHTML = renderSkeletons(3);
+
+  try {
+    const memberships = await supaFetch(`group_members?select=group_id,role&user_id=eq.${currentUserId}`);
+
+    if (!memberships.length) {
+      grid.innerHTML = renderDemoGroupsSafe(false);
+      updateStats(2, 42, 0);
+      return;
+    }
+
+    const groupIds = memberships.map(m => m.group_id).filter(Boolean);
+    if (!groupIds.length) {
+      grid.innerHTML = renderDemoGroupsSafe(false);
+      updateStats(2, 42, 0);
+      return;
+    }
+
+    const groups = await supaFetch(`groups?select=id,name,description&id=in.(${groupIds.join(',')})`);
+    const groupsHTML = [];
+
+    for (const group of groups) {
+      const members = await supaFetch(`group_members?select=role,profiles(id,full_name)&group_id=eq.${group.id}`);
+      groupsHTML.push(renderGroupCardSafe(group, members));
+    }
+
+    grid.innerHTML = groupsHTML.join('') || renderDemoGroupsSafe(false);
+    updateStats(groupsHTML.length || 2, 42, 0);
+  } catch (err) {
+    console.warn('Groups fallback ishladi:', err);
+    grid.innerHTML = renderDemoGroupsSafe(true);
+    updateStats(2, 42, 0);
+  }
+};
+
 async function loadInvites() {
   const grid = document.querySelector('.friends-grid');
   if (!grid) return;
 
   grid.innerHTML = `
     <div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--muted);">
-      <div style="font-size:32px;margin-bottom:12px;">✉️</div>
+      <div style="font-size:32px;margin-bottom:12px;"><i class="fa-solid fa-envelope-open-text"></i></div>
       <div style="font-weight:700;font-size:15px;">Taklifnomalar topilmadi</div>
       <div style="font-size:13px;margin-top:6px;">Sizda HTML/CSS orqali yuborilgan yangi taklifnomalar mavjud emas.</div>
     </div>`;
@@ -391,7 +564,7 @@ async function loadInvites() {
 function updateStats(active = 0, topStreak = 0, invites = 0) {
   const statNums = document.querySelectorAll('.stat-num');
   if (statNums[0]) statNums[0].textContent = active;
-  if (statNums[1]) statNums[1].textContent = topStreak || '—';
+  if (statNums[1]) statNums[1].textContent = topStreak || '-';
   if (statNums[2]) statNums[2].textContent = invites;
 }
 
@@ -478,6 +651,32 @@ style.textContent = `
     color: #6b7280;
     font-weight: 500;
   }
+  .groups-demo-notice {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 4px;
+    padding: 12px 16px;
+    border: 3px solid #e8e5ff;
+    border-bottom: 5px solid #d4d0ff;
+    border-radius: 16px;
+    background: #fbfaff;
+    color: #5900cc;
+    font-size: 13px;
+    font-weight: 900;
+    box-shadow: 0 4px 0 #d4d0ff, 0 12px 24px -14px rgba(112, 0, 255, .24);
+  }
+  .group-empty-note {
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #fbfaff;
+    color: #67748a;
+    font-size: 12px;
+    font-weight: 800;
+  }
 `;
 document.head.appendChild(style);
 
@@ -533,7 +732,7 @@ document.querySelector('.fab')?.addEventListener('click', async () => {
       }])
     });
 
-    alert(`${friendProfile.full_name} do'stlar ro'yxatiga muvaffaqiyatli qo'shildi! 🎉`);
+    alert(`${friendProfile.full_name} do'stlar ro'yxatiga muvaffaqiyatli qo'shildi!`);
     
     // Refresh list if current tab is friends
     const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
@@ -548,6 +747,115 @@ document.querySelector('.fab')?.addEventListener('click', async () => {
 });
 
 // ─── Mobile sidebar ──────────────────────────────────────────
+const friendModal = document.getElementById('friendModal');
+const friendInviteForm = document.getElementById('friendInviteForm');
+const friendEmailInput = document.getElementById('friendEmailInput');
+const friendModalMessage = document.getElementById('friendModalMessage');
+const friendInviteSubmit = document.getElementById('friendInviteSubmit');
+
+function setFriendModalMessage(message = '', type = '') {
+  if (!friendModalMessage) return;
+  friendModalMessage.textContent = message;
+  friendModalMessage.classList.toggle('is-error', type === 'error');
+  friendModalMessage.classList.toggle('is-success', type === 'success');
+}
+
+function openFriendModal() {
+  friendModal?.classList.add('is-open');
+  friendModal?.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  setFriendModalMessage('');
+  friendInviteForm?.reset();
+  setTimeout(() => friendEmailInput?.focus(), 80);
+}
+
+function closeFriendModal() {
+  friendModal?.classList.remove('is-open');
+  friendModal?.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  setFriendModalMessage('');
+  if (friendInviteSubmit) friendInviteSubmit.disabled = false;
+}
+
+document.querySelector('.fab')?.addEventListener('click', event => {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  openFriendModal();
+}, true);
+
+document.querySelectorAll('[data-close-friend-modal]').forEach(el => {
+  el.addEventListener('click', closeFriendModal);
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && friendModal?.classList.contains('is-open')) {
+    closeFriendModal();
+  }
+});
+
+friendInviteForm?.addEventListener('submit', async event => {
+  event.preventDefault();
+  const cleanEmail = friendEmailInput?.value.trim().toLowerCase();
+
+  if (!cleanEmail) {
+    setFriendModalMessage('Email manzilini kiriting.', 'error');
+    return;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+    setFriendModalMessage("Email formati noto'g'ri.", 'error');
+    return;
+  }
+
+  if (friendInviteSubmit) friendInviteSubmit.disabled = true;
+  setFriendModalMessage('Tekshirilmoqda...');
+
+  try {
+    const profiles = await supaFetch(`profiles?select=id,full_name&email=eq.${encodeURIComponent(cleanEmail)}`);
+
+    if (!profiles.length) {
+      setFriendModalMessage("Bunday email bilan ro'yxatdan o'tgan foydalanuvchi topilmadi.", 'error');
+      return;
+    }
+
+    const friendProfile = profiles[0];
+
+    if (friendProfile.id === currentUserId) {
+      setFriendModalMessage("O'zingizni do'st qilib qo'sha olmaysiz.", 'error');
+      return;
+    }
+
+    const existing = await supaFetch(`friendships?select=id&user_id=eq.${currentUserId}&friend_id=eq.${friendProfile.id}`);
+    if (existing.length) {
+      setFriendModalMessage("Bu foydalanuvchi bilan allaqachon do'st bo'lgansiz.", 'error');
+      return;
+    }
+
+    await supaFetch('friendships', {
+      method: 'POST',
+      body: JSON.stringify([{
+        user_id: currentUserId,
+        friend_id: friendProfile.id,
+        status: 'active'
+      }])
+    });
+
+    setFriendModalMessage(`${friendProfile.full_name} do'stlar ro'yxatiga qo'shildi!`, 'success');
+
+    const activeTab = document.querySelector('.tab-btn.active')?.dataset.tab;
+    if (activeTab === 'friends') {
+      await loadFriends();
+    }
+
+    setTimeout(closeFriendModal, 900);
+  } catch(err) {
+    console.error("Do'st qo'shishda xatolik:", err);
+    setFriendModalMessage("Do'st qo'shilmadi. Ruxsat yoki internet sozlamalarini tekshiring.", 'error');
+  } finally {
+    if (friendInviteSubmit) friendInviteSubmit.disabled = false;
+  }
+});
+
 const menuToggle    = document.getElementById('menuToggle');
 const sidebar       = document.querySelector('.sidebar');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -559,4 +867,6 @@ menuToggle?.addEventListener('click', () => sidebar?.classList.contains('active'
 sidebarOverlay?.addEventListener('click', closeSidebar);
 
 // ─── Init ────────────────────────────────────────────────────
+initTopbarActions();
+loadCurrentProfileChrome();
 loadFriends();

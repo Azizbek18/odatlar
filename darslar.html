@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Streak.uz - Darslar</title>
-<link rel="stylesheet" href="darslar.css">
+<link rel="stylesheet" href="darslar.css?v=20260706-designfix1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -56,7 +56,7 @@
 <main class="main">
 
   <div class="hero-banner">
-    <div class="hero-icon">рџЋ“</div>
+    <div class="hero-icon"><i class="fa-solid fa-graduation-cap"></i></div>
     <div class="hero-text">
       <h2>Darslar</h2>
       <p>O'zingizga mos kursni tanlang va o'qishda davom eting</p>
@@ -65,7 +65,7 @@
 
   <div class="search-row">
     <div class="search-box">
-      <span>рџ”Ќ</span>
+      <span><i class="fa-solid fa-magnifying-glass"></i></span>
       <input type="text" id="searchInput" placeholder="Kurslarni qidirish...">
     </div>
     <div class="filter-pills">
@@ -78,25 +78,25 @@
   <div class="content-grid">
     <div class="left-col">
 
-      <div class="section-title"><span><span class="sparkle">вњ¦</span>Sizuchun tavsiya</span></div>
+      <div class="section-title"><span><span class="sparkle"><i class="fa-solid fa-wand-magic-sparkles"></i></span>Siz uchun tavsiya</span></div>
       <div class="featured-card">
         <div class="featured-thumb">
           <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop" alt="BBC English">
         </div>
         <div class="featured-body">
           <div class="badge-row">
-            <span class="badge-match">вњ¦ 94% AI Match</span>
+            <span class="badge-match"><i class="fa-solid fa-wand-magic-sparkles"></i> 94% AI Match</span>
             <span style="font-size:11px;color:var(--text-muted);font-weight:600;">PREMIUM AI CHOICE</span>
           </div>
           <h3>BBC Learning English:<br>Master Fluency</h3>
           <p>Ushbu kurs sizning darajangiz va qiziqishlaringizga asoslanib AI tomonidan tanlandi</p>
           <div class="meta-row">
-            <span>рџ“¶ B2 Upper-Intermediate</span>
-            <span>вЏ± 24 soat</span>
+            <span><i class="fa-solid fa-signal"></i> B2 Upper-Intermediate</span>
+            <span><i class="fa-regular fa-clock"></i> 24 soat</span>
           </div>
           <div class="featured-actions">
             <button class="btn-primary" data-course="BBC Learning English: Master Fluency">Darsni boshlash</button>
-            <button class="bookmark-btn" data-bookmark="bbc-fluency">рџ”–</button>
+            <button class="bookmark-btn" data-bookmark="bbc-fluency" aria-label="Saqlash"><i class="fa-regular fa-bookmark"></i></button>
           </div>
         </div>
       </div>
@@ -108,11 +108,11 @@
             <span class="thumb-tag">FREE</span>
           </div>
           <div class="course-body">
-            <div class="course-cat">A1-AZODARAJA</div>
+            <div class="course-cat">A1-A2 DARAJA</div>
             <div class="course-title">Grammar Essentials</div>
             <div class="course-stats">
-              <span>рџ‘¤ 1.2k talaba</span>
-              <span>в­ђ 4.8</span>
+              <span><i class="fa-solid fa-user-group"></i> 1.2k talaba</span>
+              <span><i class="fa-solid fa-star"></i> 4.8</span>
             </div>
             <button class="btn-secondary" data-course="Grammar Essentials">Kursni ko'rish</button>
           </div>
@@ -122,11 +122,11 @@
             <span class="thumb-tag pro">PRO</span>
           </div>
           <div class="course-body">
-            <div class="course-cat">B2-CIDARAJA</div>
+            <div class="course-cat">B2-C1 DARAJA</div>
             <div class="course-title">IELTS Preparation 8.0+</div>
             <div class="course-stats">
-              <span>рџ‘¤ 850 talaba</span>
-              <span>в­ђ 4.9</span>
+              <span><i class="fa-solid fa-user-group"></i> 850 talaba</span>
+              <span><i class="fa-solid fa-star"></i> 4.9</span>
             </div>
             <button class="btn-secondary" data-course="IELTS Preparation 8.0+">Kursni ko'rish</button>
           </div>
@@ -143,8 +143,8 @@
             <div class="course-cat">BOSHLANG'ICH</div>
             <div class="course-title">JavaScript Asoslari</div>
             <div class="course-stats">
-              <span>вЏ± 12 soat</span>
-              <span>рџ“љ 45 dars</span>
+              <span><i class="fa-regular fa-clock"></i> 12 soat</span>
+              <span><i class="fa-solid fa-book-open"></i> 45 dars</span>
             </div>
             <button class="btn-secondary" data-course="JavaScript Asoslari">Kursni ko'rish</button>
           </div>
@@ -157,15 +157,15 @@
             <div class="course-cat">O'RTA DARAJA</div>
             <div class="course-title">React Advanced Patterns</div>
             <div class="course-stats">
-              <span>вЏ± 18 soat</span>
-              <span>рџ“љ 62 dars</span>
+              <span><i class="fa-regular fa-clock"></i> 18 soat</span>
+              <span><i class="fa-solid fa-book-open"></i> 62 dars</span>
             </div>
             <button class="btn-secondary" data-course="React Advanced Patterns">Kursni ko'rish</button>
           </div>
         </div>
       </div>
 
-      <p class="no-results" id="noResults" style="display:none;">Hech qanday kurs topilmadi рџ•</p>
+      <p class="no-results" id="noResults" style="display:none;">Hech qanday kurs topilmadi</p>
 
     </div>
 
@@ -187,7 +187,7 @@
       </div>
 
       <div class="streak-panel">
-        <div class="streak-top">рџ”Ґ <span id="streakCount">12</span> kunlik Streak!</div>
+        <div class="streak-top"><i class="fa-solid fa-fire"></i> <span id="streakCount">12</span> kunlik Streak!</div>
         <p>Agar siz 30 kun har kuni o'rganishni davom ettirsangiz, barcha Pro kurslari 1 oyga bepul ochiladi!</p>
         <div class="streak-progress"><div class="streak-progress-fill" id="streakFill" style="width:40%"></div></div>
         <div class="streak-days"><span id="streakDaysLabel">12/30</span></div>
@@ -195,14 +195,14 @@
       </div>
 
       <div class="panel">
-        <div class="activity-top">рџ’¬ Bugungi faollik</div>
+        <div class="activity-top"><i class="fa-solid fa-comments"></i> Bugungi faollik</div>
         <div class="avatars">
           <div class="avatar" style="background-image:url('https://i.pravatar.cc/40?img=1')"></div>
           <div class="avatar" style="background-image:url('https://i.pravatar.cc/40?img=2')"></div>
           <div class="avatar" style="background-image:url('https://i.pravatar.cc/40?img=3')"></div>
           <div class="avatar more">+2</div>
         </div>
-        <p>Sizbirga yana 4.231 ta odam bilan birga ushbu dars vaqtini birga o'qiyapsiz.</p>
+        <p>Siz yana 4.231 ta odam bilan birga ushbu dars vaqtida o'qiyapsiz.</p>
       </div>
     </div>
   </div>
@@ -211,7 +211,7 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="sidebar-sync.js?v=20260704-avatar2"></script>
-<script src="darslar.js"></script>
+<script src="sidebar-sync.js?v=20260706-darkfix1"></script>
+<script src="darslar.js?v=20260706-designfix1"></script>
 </body>
 </html>
