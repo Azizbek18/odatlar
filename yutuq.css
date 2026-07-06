@@ -920,3 +920,21 @@ body {
     flex-wrap: wrap;
   }
 }
+
+@media (max-width: 900px) {
+  .main-content {
+    padding: 20px 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 16px 12px !important;
+  }
+  .achievements-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .achieve-card {
+    padding: 16px 14px !important;
+  }
+}
