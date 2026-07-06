@@ -1590,4 +1590,18 @@ img {
         font-size: 12px !important;
         margin: 0 !important;
     }
+
+    .content-card {
+        padding: 16px !important;
+    }
+
+    .schedule-item {
+        flex-wrap: wrap !important;
+        row-gap: 8px !important;
+    }
+
+    .schedule-bar-area {
+        flex-basis: 100% !important;
+        width: 100% !important;
+    }
 }
