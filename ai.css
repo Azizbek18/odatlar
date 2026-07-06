@@ -961,3 +961,51 @@ main,
     width: 100%;
   }
 }
+
+/* MOBILE AI TASK META CHIP FIX */
+@media (max-width: 700px) {
+  .task-card {
+    padding: 18px 20px;
+  }
+
+  .task-bottom {
+    gap: 14px;
+  }
+
+  .task-meta {
+    flex: 0 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .task-meta span {
+    width: 100%;
+    min-width: 0;
+    min-height: 34px;
+    max-height: 40px;
+    padding: 7px 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1;
+    font-size: 11px;
+    border-radius: 14px;
+    box-shadow: 0 2px 0 rgba(176, 168, 232, .35), 0 8px 16px -14px rgba(112, 0, 255, .24);
+  }
+}
+
+@media (max-width: 390px) {
+  .task-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .task-card .task-meta span:first-child {
+    grid-column: span 2;
+  }
+}

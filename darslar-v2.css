@@ -799,3 +799,289 @@ body {
 .beginner-section {
   background: linear-gradient(135deg, #ffffff 0%, #fbfaff 58%, #f3edff 100%);
 }
+
+/* RESPONSIVE LESSON SECTION FIX */
+@media (max-width: 1180px) {
+  .main {
+    padding: 24px;
+  }
+
+  .courses-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .main {
+    width: calc(100% - 280px);
+  }
+
+  .featured-card {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.1fr);
+  }
+
+  .featured-thumb {
+    width: auto;
+  }
+
+  .courses-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .my-courses-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    display: block;
+  }
+
+  .mobile-header {
+    display: flex !important;
+    height: 64px;
+  }
+
+  .main {
+    width: 100%;
+    margin-left: 0 !important;
+    padding: 84px 18px 32px !important;
+  }
+
+  .hero-banner {
+    min-height: auto;
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .hero-banner h2 {
+    font-size: 32px;
+  }
+
+  .hero-banner p {
+    font-size: 14px;
+    line-height: 1.45;
+    margin-top: 0;
+  }
+
+  .filter-pills {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .pill {
+    min-height: 50px;
+    width: 100%;
+    padding: 10px 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .section-title {
+    gap: 10px;
+    line-height: 1.25;
+  }
+
+  .featured-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .featured-card .featured-thumb,
+  .featured-thumb {
+    width: auto;
+    min-height: 220px;
+    margin: 16px 16px 0;
+  }
+
+  .featured-body {
+    padding: 20px;
+  }
+
+  .featured-actions,
+  .prog-actions,
+  .badge-row,
+  .course-meta {
+    flex-wrap: wrap;
+  }
+
+  .beginner-section {
+    padding: 20px;
+  }
+
+  .course-card,
+  .prog-card,
+  .my-course-card,
+  .featured-card,
+  .beginner-section {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .main {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .hero-banner {
+    padding: 20px;
+    gap: 12px;
+  }
+
+  .hero-banner::before {
+    right: -18px;
+    width: 112px;
+    height: 112px;
+    opacity: 0.72;
+  }
+
+  .hero-banner h2 {
+    font-size: 28px;
+  }
+
+  .filter-pills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-title {
+    align-items: flex-start;
+    font-size: 18px;
+  }
+
+  .section-title .see-all {
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .courses-grid,
+  .my-courses-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .course-thumb,
+  .prog-thumb {
+    height: 180px;
+  }
+
+  .featured-card .featured-thumb,
+  .featured-thumb {
+    min-height: 190px;
+  }
+
+  .course-title,
+  .my-course-info h4 {
+    font-size: 17px;
+  }
+
+  .btn-primary,
+  .btn-outline,
+  .btn-sm,
+  .btn-continue {
+    min-height: 50px;
+  }
+
+  .featured-actions,
+  .prog-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .main {
+    padding-top: 78px !important;
+  }
+
+  .mobile-header {
+    padding: 12px 14px;
+  }
+
+  .mobile-logo {
+    font-size: 18px;
+  }
+
+  .hero-banner {
+    border-radius: 20px;
+  }
+
+  .hero-banner h2 {
+    font-size: 26px;
+  }
+
+  .hero-banner p {
+    font-size: 13px;
+  }
+
+  .filter-pills {
+    grid-template-columns: 1fr;
+  }
+
+  .pill {
+    min-height: 48px;
+  }
+
+  .featured-card .featured-thumb,
+  .featured-thumb,
+  .course-thumb,
+  .prog-thumb {
+    height: 160px;
+    min-height: 160px;
+  }
+
+  .featured-body h3,
+  .prog-body h3 {
+    font-size: 20px;
+  }
+
+  .featured-body,
+  .prog-body,
+  .course-body,
+  .my-course-bottom {
+    padding: 18px;
+  }
+
+  .beginner-section {
+    padding: 18px;
+  }
+
+  .my-course-top {
+    padding: 18px 18px 0;
+    gap: 12px;
+  }
+
+  .my-course-thumb {
+    width: 68px;
+    height: 68px;
+  }
+
+  .progress-row,
+  .my-course-top {
+    align-items: flex-start;
+  }
+
+  .progress-row {
+    gap: 10px;
+  }
+
+  .progress-label,
+  .progress-pct,
+  .course-meta span {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}

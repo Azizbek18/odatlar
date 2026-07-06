@@ -947,3 +947,320 @@ body {
     margin: 18px 18px 0;
   }
 }
+
+/* RESPONSIVE LESSONS LAYOUT FIX */
+@media (max-width: 1180px) {
+  .main {
+    padding: 24px;
+  }
+
+  .content-grid {
+    grid-template-columns: minmax(0, 1fr) 270px;
+    gap: 22px;
+  }
+
+  .featured-thumb {
+    width: 210px;
+  }
+
+  .course-stats {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .right-col {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .panel,
+  .streak-panel {
+    min-width: 0;
+    height: 100%;
+  }
+
+  .mycourse-top {
+    gap: 10px;
+  }
+
+  .mycourse-top span:first-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 900px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body {
+    display: block;
+  }
+
+  .mobile-header {
+    display: flex !important;
+    height: 64px;
+  }
+
+  .main {
+    width: 100%;
+    margin-left: 0 !important;
+    padding: 84px 18px 32px !important;
+  }
+
+  .hero-banner {
+    min-height: auto;
+    padding: 24px;
+    align-items: flex-start;
+  }
+
+  .hero-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+  }
+
+  .hero-text h2 {
+    font-size: 30px;
+  }
+
+  .hero-text p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .search-row {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .search-box {
+    width: 100%;
+    min-height: 54px;
+    border-radius: 18px;
+  }
+
+  .filter-pills {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .pill {
+    min-height: 50px;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .featured-card {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .featured-card .featured-thumb {
+    width: auto;
+    height: 220px;
+    margin: 16px 16px 0;
+  }
+
+  .featured-body {
+    padding: 18px;
+  }
+
+  .badge-row,
+  .meta-row,
+  .featured-actions {
+    flex-wrap: wrap;
+  }
+
+  .featured-body h3 {
+    font-size: 22px;
+  }
+
+  .courses-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .course-card {
+    min-width: 0;
+  }
+
+  .right-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .main {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .hero-banner {
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .hero-banner::before {
+    right: -18px;
+    width: 110px;
+    height: 110px;
+    opacity: 0.7;
+  }
+
+  .hero-text h2 {
+    font-size: 28px;
+  }
+
+  .section-title {
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .section-title .see-all {
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .courses-row {
+    grid-template-columns: 1fr;
+  }
+
+  .course-thumb {
+    height: 180px;
+  }
+
+  .course-title {
+    font-size: 18px;
+  }
+
+  .featured-card .featured-thumb {
+    height: 190px;
+  }
+
+  .featured-actions {
+    display: grid;
+    grid-template-columns: 1fr 52px;
+    gap: 12px;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-tiny,
+  .btn-white {
+    min-height: 50px;
+  }
+
+  .bookmark-btn {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (max-width: 520px) {
+  .main {
+    padding-top: 78px !important;
+  }
+
+  .mobile-header {
+    padding: 12px 14px;
+  }
+
+  .hero-banner {
+    gap: 12px;
+  }
+
+  .hero-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 22px;
+  }
+
+  .hero-text h2 {
+    font-size: 26px;
+  }
+
+  .hero-text p {
+    font-size: 13px;
+  }
+
+  .filter-pills {
+    grid-template-columns: 1fr;
+  }
+
+  .pill {
+    justify-content: center;
+  }
+
+  .featured-card .featured-thumb,
+  .course-thumb {
+    height: 160px;
+  }
+
+  .badge-row {
+    align-items: flex-start;
+  }
+
+  .badge-row > span:last-child {
+    width: 100%;
+  }
+
+  .meta-row {
+    gap: 10px;
+  }
+
+  .meta-row span,
+  .course-stats span {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .featured-body h3 {
+    font-size: 20px;
+  }
+
+  .featured-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .bookmark-btn {
+    width: 100%;
+  }
+
+  .panel,
+  .streak-panel {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .panel-title {
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .panel-title .tag {
+    flex-shrink: 0;
+  }
+
+  .toast {
+    bottom: 18px;
+    max-width: calc(100vw - 28px);
+  }
+}

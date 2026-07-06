@@ -342,6 +342,7 @@
         @media (max-width: 900px) {
             .sidebar {
                 width: min(280px, 85vw);
+                left: 0 !important;
                 transform: translateX(-110%);
                 transition: transform 0.3s ease;
                 z-index: 1000;
@@ -350,7 +351,8 @@
             .sidebar.open,
             .sidebar.active,
             body.sidebar-open .sidebar {
-                transform: translateX(0);
+                left: 0 !important;
+                transform: translateX(0) !important;
             }
 
             .sidebar-close {
@@ -855,36 +857,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function bindSidebarChrome() {
         const sidebar = document.querySelector('.sidebar');
-        const backdrop = document.querySelector('.sidebar-backdrop') || document.querySelector('.sidebar-overlay') || document.getElementById('sidebarOverlay');
-        const menuToggle = document.querySelector('.menu-toggle') || document.getElementById('menuToggle');
-        const closeBtn = document.querySelector('.sidebar-close');
+        const getBackdrops = () => Array.from(document.querySelectorAll('.sidebar-backdrop, .sidebar-overlay, #sidebarOverlay'));
+        const getMenuToggles = () => Array.from(document.querySelectorAll('.menu-toggle, .global-menu-toggle, #menuToggle'));
+        const getCloseButtons = () => Array.from(document.querySelectorAll('.sidebar-close'));
 
         function openSidebarGlobal() {
             sidebar?.classList.add('open', 'active');
-            backdrop?.classList.add('show', 'active');
-            menuToggle?.classList.add('active');
+            if (sidebar) {
+                sidebar.style.left = '0';
+                sidebar.style.transform = 'translateX(0)';
+            }
+            getBackdrops().forEach(backdrop => backdrop.classList.add('show', 'active'));
+            getMenuToggles().forEach(toggle => {
+                toggle.classList.add('active');
+                toggle.setAttribute('aria-expanded', 'true');
+            });
             document.body.classList.add('sidebar-open');
             document.body.style.overflow = 'hidden';
         }
 
         function closeSidebarGlobal() {
             sidebar?.classList.remove('open', 'active');
-            backdrop?.classList.remove('show', 'active');
-            menuToggle?.classList.remove('active');
+            if (sidebar) {
+                sidebar.style.left = '';
+                sidebar.style.transform = '';
+            }
+            getBackdrops().forEach(backdrop => backdrop.classList.remove('show', 'active'));
+            getMenuToggles().forEach(toggle => {
+                toggle.classList.remove('active');
+                toggle.setAttribute('aria-expanded', 'false');
+            });
             document.body.classList.remove('sidebar-open');
             document.body.style.overflow = '';
         }
 
-        menuToggle?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = sidebar?.classList.contains('open') || sidebar?.classList.contains('active');
-            isOpen ? closeSidebarGlobal() : openSidebarGlobal();
+        getMenuToggles().forEach(toggle => {
+            if (toggle.dataset.sidebarSyncBound === 'true') return;
+            toggle.dataset.sidebarSyncBound = 'true';
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const isOpen = document.body.classList.contains('sidebar-open') || sidebar?.classList.contains('open') || sidebar?.classList.contains('active');
+                isOpen ? closeSidebarGlobal() : openSidebarGlobal();
+            }, true);
         });
-        closeBtn?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            closeSidebarGlobal();
+
+        getCloseButtons().forEach(closeBtn => {
+            if (closeBtn.dataset.sidebarSyncBound === 'true') return;
+            closeBtn.dataset.sidebarSyncBound = 'true';
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeSidebarGlobal();
+            }, true);
         });
-        backdrop?.addEventListener('click', closeSidebarGlobal);
+
+        getBackdrops().forEach(backdrop => {
+            if (backdrop.dataset.sidebarSyncBound === 'true') return;
+            backdrop.dataset.sidebarSyncBound = 'true';
+            backdrop.addEventListener('click', closeSidebarGlobal);
+        });
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') closeSidebarGlobal();
         });

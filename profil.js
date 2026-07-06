@@ -101,7 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function isUsableAvatar(src) {
-    return Boolean(src && !String(src).includes('Foydalanuvchi rasmi'));
+    if (!src || typeof src !== 'string') return false;
+    const value = src.trim();
+    if (!value) return false;
+    const blocked = ['foydalanuvchi rasmi', 'pravatar.cc', 'placeholder', 'default', 'avatar'];
+    return !blocked.some(part => value.toLowerCase().includes(part));
   }
 
   function setProfileAvatar(src) {
@@ -142,6 +146,32 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     img.onerror = showIcon;
     img.src = src;
+  }
+
+  function setTopbarAvatar(src) {
+    document.querySelectorAll('.topbar-profile').forEach(link => {
+      const img = link.querySelector('.topbar-avatar-img');
+      const icon = link.querySelector('.topbar-avatar-icon');
+      if (!img || !icon) return;
+
+      if (!isUsableAvatar(src)) {
+        img.hidden = true;
+        img.removeAttribute('src');
+        icon.hidden = false;
+        return;
+      }
+
+      img.onload = () => {
+        img.hidden = false;
+        icon.hidden = true;
+      };
+      img.onerror = () => {
+        img.hidden = true;
+        img.removeAttribute('src');
+        icon.hidden = false;
+      };
+      img.src = src;
+    });
   }
 
   // ─── 1. TILNI QO'LLASH ────────────────────────────────────────────
@@ -205,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         setProfileAvatar(profile.avatar_url);
+        setTopbarAvatar(profile.avatar_url);
 
         const firstName = profile.full_name.split(' ')[0] || profile.full_name;
         if (welcomeGreeting) {
@@ -218,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
           sidebarStreakText.dataset.days = streak;
         }
 
-        if (sidebarAvatar && profile.avatar_url) {
+        if (sidebarAvatar && isUsableAvatar(profile.avatar_url)) {
           sidebarAvatar.src = profile.avatar_url;
         }
 
@@ -331,6 +362,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (menuToggle)   menuToggle.addEventListener('click', openSidebar);
   if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
   if (backdrop)     backdrop.addEventListener('click', closeSidebar);
+
+  document.querySelectorAll('.notification-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      showToast("Hozircha yangi bildirishnoma yo'q.", 'info');
+    });
+  });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeSidebar();
@@ -487,6 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ─── ISHGA TUSHIRISH ──────────────────────────────────────────────
   applyLanguage(currentLang);
   setProfileAvatar(currentUser.avatar_url);
+  setTopbarAvatar(currentUser.avatar_url);
   loadUserProfile();
 
   console.log('✅ Streak.uz Profil sahifasi yuklandi.');

@@ -7,6 +7,75 @@
 const menuToggle = document.getElementById("menuToggle");
 const sidebar = document.querySelector(".sidebar");
 const overlay = document.getElementById("sidebarOverlay");
+const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+
+function isUsableAvatar(src) {
+  if (!src || typeof src !== "string") return false;
+  const value = src.trim();
+  if (!value) return false;
+  const blocked = ["foydalanuvchi rasmi", "pravatar.cc", "placeholder", "default", "avatar"];
+  return !blocked.some(part => value.toLowerCase().includes(part));
+}
+
+function setTopbarAvatar(src) {
+  document.querySelectorAll(".topbar-profile").forEach(link => {
+    const img = link.querySelector(".topbar-avatar-img");
+    const icon = link.querySelector(".topbar-avatar-icon");
+    if (!img || !icon) return;
+
+    if (!isUsableAvatar(src)) {
+      img.hidden = true;
+      img.removeAttribute("src");
+      icon.hidden = false;
+      return;
+    }
+
+    img.onload = () => {
+      img.hidden = false;
+      icon.hidden = true;
+    };
+    img.onerror = () => {
+      img.hidden = true;
+      img.removeAttribute("src");
+      icon.hidden = false;
+    };
+    img.src = src;
+  });
+}
+
+function initHeaderActions() {
+  setTopbarAvatar(currentUser?.avatar_url);
+
+  document.querySelectorAll(".notification-btn").forEach(btn => {
+    btn.addEventListener("click", event => {
+      event.stopPropagation();
+      const actions = btn.closest(".topbar-actions");
+      const popover = actions?.querySelector(".notification-popover");
+      if (!popover) {
+        showFcModal({
+          icon: "fa-bell",
+          title: "Bildirishnomalar",
+          text: "Hozircha yangi bildirishnoma yo'q."
+        });
+        return;
+      }
+      const isOpen = popover.classList.toggle("is-open");
+      popover.setAttribute("aria-hidden", String(!isOpen));
+      btn.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
+
+  document.addEventListener("click", event => {
+    document.querySelectorAll(".notification-popover.is-open").forEach(popover => {
+      if (popover.contains(event.target)) return;
+      const btn = popover.closest(".topbar-actions")?.querySelector(".notification-btn");
+      if (btn?.contains(event.target)) return;
+      popover.classList.remove("is-open");
+      popover.setAttribute("aria-hidden", "true");
+      btn?.setAttribute("aria-expanded", "false");
+    });
+  });
+}
 
 menuToggle?.addEventListener("click", () => {
   menuToggle.classList.toggle("active");
@@ -19,6 +88,8 @@ overlay?.addEventListener("click", () => {
   sidebar.classList.remove("active");
   overlay.classList.remove("active");
 });
+
+initHeaderActions();
 
 // ---- Demo karta ma'lumotlari (har bir to'plam uchun) ----
 const demoCardSets = {

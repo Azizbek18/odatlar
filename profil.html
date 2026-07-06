@@ -10,11 +10,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="profil.css">
+    <link rel="stylesheet" href="profil.css?v=20260706-mobilefix1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
+
+    <div class="mobile-header">
+        <button class="menu-toggle" type="button" aria-label="Menyuni ochish">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="mobile-logo">Streak.uz</div>
+        <div class="mobile-header-actions">
+            <button class="icon-btn notification-btn" type="button" aria-label="Bildirishnomalar" aria-expanded="false">
+                <i class="fa-regular fa-bell"></i>
+                <span class="icon-dot"></span>
+            </button>
+            <a class="topbar-profile" href="profil.html" aria-label="Profilga o'tish">
+                <i class="fa-solid fa-user topbar-avatar-icon" aria-hidden="true"></i>
+                <img src="" alt="Profil rasmi" class="topbar-avatar topbar-avatar-img" hidden>
+            </a>
+        </div>
+    </div>
 
     <div class="sidebar">
         <button class="sidebar-close" aria-label="Yopish">
@@ -150,8 +169,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="sidebar-sync.js?v=20260706-darkfix1"></script>
-    <script src="profil.js?v=20260706-avatarfix1"></script>
+    <script src="sidebar-sync.js?v=20260706-togglefix1"></script>
+    <script src="profil.js?v=20260706-headerfix1"></script>
 </body>
 
 </html>

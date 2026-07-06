@@ -1638,3 +1638,31 @@ img {
     flex-direction: column-reverse;
   }
 }
+
+/* Mobile topbar should only show the fixed app header. */
+@media (max-width: 900px) {
+  .main-content > .topbar,
+  .topbar-actions {
+    display: none !important;
+  }
+
+  .mobile-header {
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    padding: 0 20px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    z-index: 10000 !important;
+  }
+
+  .mobile-header .topbar-profile {
+    display: inline-flex !important;
+  }
+}

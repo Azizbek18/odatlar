@@ -6,6 +6,41 @@
 const menuToggle = document.getElementById("menuToggle");
 const sidebar = document.querySelector(".sidebar");
 const overlay = document.getElementById("sidebarOverlay");
+const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+
+function isUsableAvatar(src) {
+  if (!src || typeof src !== "string") return false;
+  const value = src.trim();
+  if (!value) return false;
+  const blocked = ["foydalanuvchi rasmi", "pravatar.cc", "placeholder", "default", "avatar"];
+  return !blocked.some(part => value.toLowerCase().includes(part));
+}
+
+function setTopbarAvatar(src) {
+  document.querySelectorAll(".topbar-profile").forEach(link => {
+    const img = link.querySelector(".topbar-avatar-img");
+    const icon = link.querySelector(".topbar-avatar-icon");
+    if (!img || !icon) return;
+
+    if (!isUsableAvatar(src)) {
+      img.hidden = true;
+      img.removeAttribute("src");
+      icon.hidden = false;
+      return;
+    }
+
+    img.onload = () => {
+      img.hidden = false;
+      icon.hidden = true;
+    };
+    img.onerror = () => {
+      img.hidden = true;
+      img.removeAttribute("src");
+      icon.hidden = false;
+    };
+    img.src = src;
+  });
+}
 
 menuToggle?.addEventListener("click", () => {
   menuToggle.classList.toggle("active");
@@ -187,4 +222,16 @@ document.querySelector(".btn-add-habit")?.addEventListener("click", () => {
 // ---- FAB tugmasi ----
 document.querySelector(".fab")?.addEventListener("click", () => {
   generateBtn?.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+setTopbarAvatar(currentUser?.avatar_url);
+
+document.querySelectorAll(".notification-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    showGenModal({
+      icon: "fa-bell",
+      title: "Bildirishnomalar",
+      text: "Hozircha yangi bildirishnoma yo'q."
+    });
+  });
 });
