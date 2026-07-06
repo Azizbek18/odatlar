@@ -725,6 +725,8 @@ img {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .friend-card {
@@ -1401,11 +1403,24 @@ img {
   }
 
   .friends-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .tabs {
     width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    padding: 10px 16px;
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 }
 

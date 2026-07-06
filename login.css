@@ -794,7 +794,8 @@ body {
 
   .ong-tomon {
     padding: 24px;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   .kichik-matn {

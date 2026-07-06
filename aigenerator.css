@@ -1015,6 +1015,19 @@
 
         .topbar-tabs {
             width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .topbar-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .topbar-tab {
+            padding: 10px 16px;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .topbar {
