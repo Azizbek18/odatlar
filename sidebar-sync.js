@@ -324,6 +324,46 @@
             flex: 0 0 auto !important;
         }
 
+        .toastify,
+        .toastify.on,
+        .toastify-right,
+        .toastify-left,
+        .toastify-top,
+        .Toastify,
+        .Toastify__toast-container,
+        #toast-container,
+        .toast-container,
+        .toast-notification,
+        .toast {
+            position: fixed !important;
+            z-index: 2147483647 !important;
+        }
+
+        .toastify,
+        .toastify.on,
+        .toastify-top,
+        .Toastify__toast-container--top-right,
+        .Toastify__toast-container--top-left,
+        .Toastify__toast-container--top-center,
+        #toast-container,
+        .toast-container,
+        .toast-notification,
+        .toast {
+            top: max(14px, env(safe-area-inset-top)) !important;
+            bottom: auto !important;
+        }
+
+        #toast-container,
+        .toast-container {
+            pointer-events: none !important;
+        }
+
+        #toast-container > *,
+        .toast-container > *,
+        .toastify {
+            pointer-events: auto !important;
+        }
+
         .btn-add-habit i {
             width: 20px !important;
             height: 20px !important;

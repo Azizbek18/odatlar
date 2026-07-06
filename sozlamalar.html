@@ -5,13 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sozlamalar</title>
-    <link rel="stylesheet" href="sozlamalar.css">
+    <link rel="stylesheet" href="sozlamalar.css?v=20260706-modalfix1">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
+
+    <div class="mobile-header">
+        <button class="menu-toggle" id="menuToggle" aria-label="Menyuni ochish">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="mobile-logo">Streak.uz</div>
+        <a class="mobile-user-avatar topbar-profile" href="profil.html" aria-label="Profilga o'tish">
+            <i class="fa-solid fa-user topbar-avatar-icon" aria-hidden="true"></i>
+        </a>
+    </div>
 
     <div class="sidebar">
         <button class="sidebar-close" aria-label="Yopish">
@@ -400,7 +412,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="sidebar-sync.js?v=20260706-togglefix1"></script>
+    <script src="sidebar-sync.js?v=20260706-toastfix1"></script>
     <script src="sozlamalar.js?v=20260706-avatarfix1"></script>
 </body>
 

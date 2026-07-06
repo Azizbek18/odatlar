@@ -72,6 +72,12 @@ body {
     radial-gradient(circle at 90% 85%, rgba(255, 157, 46, 0.04) 0px, transparent 50%);
 }
 
+:root {
+  --landing-gutter: clamp(28px, 6vw, 112px);
+  --landing-gutter-sm: clamp(18px, 5vw, 44px);
+  --landing-section-gap: clamp(72px, 9vw, 128px);
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -114,7 +120,7 @@ img {
   justify-content: space-between;
   width: 100%;
   margin: 0;
-  padding: 20px 48px;
+  padding: 24px var(--landing-gutter) 20px;
   position: relative;
   z-index: 100;
   transition: all 0.3s ease;
@@ -216,13 +222,14 @@ img {
   border: 3px solid #e8e5ff;
   border-bottom: 5px solid #d4d0ff;
   border-radius: 24px;
-  width: calc(100% - 48px);
-  margin: 10px auto 80px;
-  padding: 56px 64px;
+  width: calc(100% - (var(--landing-gutter) * 2));
+  max-width: 1320px;
+  margin: 18px auto var(--landing-section-gap);
+  padding: clamp(54px, 6vw, 86px) clamp(42px, 6vw, 92px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 48px;
+  gap: clamp(44px, 7vw, 96px);
   box-shadow:
     0 6px 0 0 #d4d0ff,
     0 12px 40px -8px rgba(112, 0, 255, 0.1);
@@ -482,9 +489,10 @@ img {
    FEATURES SECTION
    =================================== */
 .features-section {
-  width: 100%;
-  margin: 0 auto 90px;
-  padding: 0 48px;
+  width: calc(100% - (var(--landing-gutter) * 2));
+  max-width: 1320px;
+  margin: 0 auto var(--landing-section-gap);
+  padding: 0;
 }
 
 .features-grid {
@@ -593,9 +601,10 @@ img {
    HOW IT WORKS SECTION
    =================================== */
 .how-section {
-  width: 100%;
-  margin: 0 auto 90px;
-  padding: 0 48px;
+  width: calc(100% - (var(--landing-gutter) * 2));
+  max-width: 1320px;
+  margin: 0 auto var(--landing-section-gap);
+  padding: 0;
 }
 
 .steps-grid {
@@ -691,13 +700,14 @@ img {
    CTA SECTION
    =================================== */
 .cta-section {
-  width: calc(100% - 96px);
-  margin: 0 auto 70px;
+  width: calc(100% - (var(--landing-gutter) * 2));
+  max-width: 1320px;
+  margin: 0 auto clamp(64px, 7vw, 96px);
   background: linear-gradient(110deg, #7000ff 0%, #5900cc 100%);
   border: 3px solid #5900cc;
   border-bottom: 5px solid #4a00a3;
   border-radius: 24px;
-  padding: 56px 32px;
+  padding: clamp(54px, 7vw, 88px) clamp(28px, 5vw, 72px);
   text-align: center;
   color: #fff;
   box-shadow:
@@ -788,9 +798,10 @@ img {
    FOOTER
    =================================== */
 .footer {
-  width: 100%;
+  width: calc(100% - (var(--landing-gutter) * 2));
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 40px 48px 50px;
+  padding: clamp(42px, 5vw, 64px) 0 clamp(50px, 6vw, 76px);
   text-align: center;
 }
 
@@ -1236,8 +1247,17 @@ img {
 @media (max-width: 1024px) {
   .hero {
     flex-direction: column;
-    padding: 40px 32px;
+    width: calc(100% - (var(--landing-gutter-sm) * 2));
+    padding: 44px clamp(24px, 5vw, 42px);
     text-align: center;
+    gap: 38px;
+  }
+
+  .features-section,
+  .how-section,
+  .cta-section,
+  .footer {
+    width: calc(100% - (var(--landing-gutter-sm) * 2));
   }
 
   .hero-left {
@@ -1267,7 +1287,7 @@ img {
 
 @media (max-width: 868px) {
   .navbar {
-    padding: 16px 24px;
+    padding: 16px var(--landing-gutter-sm);
   }
 
   .nav-links,
@@ -1281,6 +1301,17 @@ img {
 }
 
 @media (max-width: 640px) {
+  :root {
+    --landing-section-gap: 64px;
+  }
+
+  .hero {
+    width: calc(100% - 28px);
+    margin-top: 10px;
+    padding: 34px 20px;
+    border-radius: 22px;
+  }
+
   .hero-title {
     font-size: 32px;
   }
@@ -1297,6 +1328,23 @@ img {
 
   .cta-title {
     font-size: 24px;
+  }
+
+  .features-section,
+  .how-section,
+  .cta-section,
+  .footer {
+    width: calc(100% - 28px);
+  }
+
+  .features-grid,
+  .steps-grid {
+    gap: 16px;
+  }
+
+  .feature-card,
+  .step-card {
+    padding: 22px;
   }
 
   .toast-container {
